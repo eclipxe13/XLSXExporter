@@ -1,0 +1,11 @@
+{
+    "name": "eclipxe/xlsxexporter",
+    "description": "Description of project XLSXExporter.",
+    "authors": [
+        {
+            "name": "Carlos C Soto",
+            "email": "eclipxe13@gmail.com"
+        }
+    ],
+    "require": {}
+}
