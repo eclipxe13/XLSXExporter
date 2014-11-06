@@ -143,9 +143,10 @@ class Style
         return $this->styleindex;
     }
 
-    public function asXML()
+    public function asXML($xfid = null)
     {
         return '<xf'
+            .((null !== $xfid) ? ' xfId="'.$xfid.'"' : '')
             .' numFmtId="'.$this->format->getIndex().'"'
             .' fontId="'.$this->font->getIndex().'"'
             .' borderId="'.$this->border->getIndex().'"'

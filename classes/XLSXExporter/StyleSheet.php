@@ -80,9 +80,13 @@ class StyleSheet
 
     protected function xmlCellXfs()
     {
+        $i = -1;
         return '<cellXfs count="'.count($this->styles).'">'
-            .array_reduce(range(0, count($this->styles) - 1), function($r, $i) {
-                return $r.'<xf xfId="'.$i.'"/>';
+            .array_reduce($this->styles, function($r, Style $style) use (&$i) {
+//                if (!$style->hasValues()) return $r;
+                $i = $i + 1;
+                return $r.$style->asXML($i);
+
             })
             .'</cellXfs>'
         ;
