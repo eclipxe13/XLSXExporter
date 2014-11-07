@@ -140,10 +140,6 @@ class WorkSheetWriter
     public static function tsToExcelDate($ts)
     {
         $utc = static::tsToUTCParts($ts);
-        echo print_r([
-            "function" => "tsToExcelDate($ts)",
-            "utc" => $utc,
-        ], true), "\n";
         $delta = ($utc[0] == 1900) && ($utc[1] <= 2) ? -1 : 0;
         return (int) (25569 + $delta + (($ts + $utc[6]) / 86400));
     }
