@@ -16,7 +16,7 @@ class WorkSheetWriter
     protected $rowscount;
     protected $colscount;
 
-    public function createSheet($filename, $colscount, $rowscount, $initialcol = 1, $initialrow = 1)
+    public function createSheet($filename, $colscount = 1024, $rowscount = 1048575, $initialcol = 1, $initialrow = 1)
     {
         $this->initialrow = $initialrow;
         $this->initialcol = $initialcol;
@@ -112,9 +112,9 @@ class WorkSheetWriter
     }
 
     /**
-     * This function was posted by ircmaxell at stackoverflow
+     * This function was posted by Anthony Ferrara (ircmaxell) at stackoverflow
      * http://stackoverflow.com/questions/3302857/algorithm-to-get-the-excel-like-column-name-of-a-number
-     * The licence is consider as public domain
+     * The licence of this is considered as public domain
      * @author ircmaxell http://stackoverflow.com/users/338665/ircmaxell
      * @param integer $num base zero index
      * @return string
