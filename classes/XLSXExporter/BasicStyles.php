@@ -12,41 +12,43 @@ class BasicStyles {
 
     public static function defaultStyle($fontname = "Calibri", $fontsize = 11)
     {
-        $s = new Style();
-        $s->setFormat(Styles\Format::standarFormat(0));
-        $s->getFont()->setValues([
-            "name" => $fontname,
-            "size" => $fontsize
+        return new Style([
+            "font" => [
+                "name" => $fontname,
+                "size" => $fontsize,
+                "color" => "000000",
+            ],
+            "fill" => [
+                "pattern" => Styles\Fill::NONE
+            ],
+            "alignment" => [
+                "vertical" => Styles\Alignment::VERTICAL_BOTTOM,
+                "horizontal" => Styles\Alignment::HORIZONTAL_GENERAL,
+            ],
         ]);
-        $s->getAlignment()->setValues([
-            "vertical" => Styles\Alignment::VERTICAL_BOTTOM,
-            "horizontal" => Styles\Alignment::HORIZONTAL_GENERAL,
+    }
+
+    public static function defaultHeader($fontname = "Calibri", $fontsize = 11)
+    {
+        return new Style([
+            "font" => [
+                "name" => $fontname,
+                "size" => $fontsize,
+                "bold" => true,
+            ],
+            "fill" => [
+                "color" => "B8B8E5",
+                "pattern" => Styles\Fill::SOLID
+            ],
+            "alignment" => [
+                "horizontal" => Styles\Alignment::HORIZONTAL_CENTER,
+            ],
         ]);
-        $s->getFill()->setValues([
-            "pattern" => Styles\Fill::NONE,
-        ]);
-        return $s;
     }
 
     public static function withStdFormat($format)
     {
         return (new Style())->setFormat(Styles\Format::standarFormat($format));
-    }
-
-    public static function defaultHeader()
-    {
-        $s = new Style();
-        $s->getFont()->setValues([
-            "bold" => true
-        ]);
-        $s->getFill()->setValues([
-            "color" => "ccccff",
-            "pattern" => Styles\Fill::SOLID
-        ]);
-        $s->getAlignment()->setValues([
-            "horizontal" => Styles\Alignment::HORIZONTAL_CENTER,
-        ]);
-        return $s;
     }
 
 }
