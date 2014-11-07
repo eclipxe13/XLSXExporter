@@ -96,9 +96,9 @@ abstract class AbstractStyle
 
     public static function utilCastColor($value, $exceptionText)
     {
-        $color = strtolower(ltrim($value, "#"));
-        if (strlen($color) == 6) $color = "ff".$color;
-        if (!preg_match("/[0-9a-f]{8}/", $color)) {
+        $color = strtoupper(ltrim($value, "#"));
+        if (strlen($color) == 6) $color = "FF".$color;
+        if (!preg_match("/[0-9A-F]{8}/", $color)) {
             throw new XLSXException($exceptionText);
         }
         return $color;
