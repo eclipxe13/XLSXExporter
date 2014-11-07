@@ -20,7 +20,23 @@ class StyleSheet
                 throw new XLSXException("Error creating the stylesheet, received an invalid style object");
             }
         }
-        $this->styles = $styles;
+        // mandatory styles
+        $this->styles = array_merge([
+            new Style([
+                "fill" => [
+                    "pattern" => Styles\Fill::NONE
+                ],
+                "alignment" => [
+                    "horizontal" => Styles\Alignment::HORIZONTAL_GENERAL,
+                    "vertical" => Styles\Alignment::VERTICAL_BOTTOM
+                ],
+            ]),
+            new Style([
+                "fill" => [
+                    "pattern" => Styles\Fill::GRAY125
+                ]
+            ]),
+        ], $styles);
     }
 
     protected function processAddToArray($name, Styles\AbstractStyle $generic)
