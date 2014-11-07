@@ -31,13 +31,26 @@ class Style
     /** @var Border */
     protected $border;
 
-    public function __construct()
+    public function __construct($arrayStyles = null)
     {
         $this->format = new Format();
         $this->font = new Font();
         $this->fill = new Fill();
         $this->alignment = new Alignment();
         $this->border = new Border();
+        if (is_array($arrayStyles) and count($arrayStyles)) {
+            $this->setFromArray($arrayStyles);
+        }
+    }
+
+    public function setFromArray(array $array)
+    {
+        $keys = ["format", "font", "fill", "alignment", "border"];
+        foreach($keys as $key) {
+            if (array_key_exists($key, $array) and is_array($array[$key])) {
+                $this->$key->setValues($array[$key]);
+            }
+        }
     }
 
     /**
