@@ -39,10 +39,10 @@ class Font extends AbstractStyle
         // Excel requires the child elements to be in the following sequence:
         // b, i, strike, condense, extend, outline, shadow, u, vertAlign, sz, color, name, family, charset, scheme
         return '<font>'
-            .(($this->bold) ? '<b/>' : '')
-            .(($this->italic) ? '<i/>' : '')
-            .(($this->strike) ? '<strike/>' : '')
-            .(($this->underline) ? '<u val="'.$this->underline.'"/>' : '')
+            .'<b val="'.(($this->bold) ? '1' : '0').'" />'
+            .'<i val="'.(($this->italic) ? '1' : '0').'" />'
+            .'<strike val="'.(($this->strike) ? '1' : '0').'" />'
+            .'<u val="'.(($this->underline) ? : static::UNDERLINE_NONE).'" />'
             .(($this->size) ? '<sz val="'.$this->size.'"/>' : '')
             .(($this->color) ? '<color val="'.$this->color.'"/>' : '')
             .(($this->name) ? '<name val="'.$this->name.'"/>' : '')
