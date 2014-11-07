@@ -23,6 +23,10 @@ class StyleSheet
         // mandatory styles
         $this->styles = array_merge([
             new Style([
+                "format" => [
+                    "id" => 0,
+                    "code" => "General",
+                ],
                 "fill" => [
                     "pattern" => Styles\Fill::NONE
                 ],
