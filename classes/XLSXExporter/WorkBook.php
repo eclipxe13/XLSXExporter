@@ -53,6 +53,7 @@ class WorkBook {
 
     public function write()
     {
+        // check that there are worksheets
         if (!$this->worksheets->count()) {
             throw new XLSXException("Workbook does not contains any worksheet");
         }
@@ -64,30 +65,32 @@ class WorkBook {
 //        $zip->addEmptyDir("docProps/");
 //        $zip->addFromString("docProps/app.xml" , self::buildAppXML());
 //        $zip->addFromString("docProps/core.xml", self::buildCoreXML());
+        // folders
         $zip->addEmptyDir("xl/");
         $zip->addEmptyDir("xl/_rels/");
         $zip->addEmptyDir("_rels/");
-        // files
+        $zip->addEmptyDir("xl/worksheets/");
+        // simple files
         $zip->addFromString("_rels/.rels", $this->xmlRels());
         $zip->addFromString("[Content_Types].xml" , $this->xmlContentTypes());
         $zip->addFromString("xl/styles.xml", $this->xmlStyles());
         $zip->addFromString("xl/workbook.xml" , $this->xmlWorkbook());
         $zip->addFromString("xl/_rels/workbook.xml.rels", $this->xmlWorkbookRels());
-
-        // worksheets using sharedStrings
+        // create the sharedStrings object because worksheets use it
         $sharedstrings = new SharedStrings();
-        $zip->addEmptyDir("xl/worksheets/");
         foreach($this->worksheets as $worksheet) {
             // write and include the sheet
             $wsfile = $worksheet->write($sharedstrings);
             $zip->addFile($wsfile, $this->workSheetFilePath($worksheet));
             $removefiles[] = $wsfile;
         }
+        // include the shared strings file
         $shstrsfile = $sharedstrings->write();
-        // add the shared string
         $zip->addFile($shstrsfile, "xl/sharedStrings.xml" );
         $removefiles[] = $shstrsfile;
+        // end with zip
         $zip->close();
+        // remove temp files
         foreach($removefiles as $file) {
             unlink($file);
         }
@@ -117,13 +120,15 @@ class WorkBook {
             .'<Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/>'
             .'<Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/>'
             .'<Override PartName="/xl/sharedStrings.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sharedStrings+xml"/>'
-            .array_reduce($this->worksheets->all(), function($r, WorkSheet $ws) {
-                return $r.'<Override PartName="/'.$this->workSheetFilePath($ws).'" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>';
+            .array_reduce($this->worksheets->all(), function($r, WorkSheet $worksheet) {
+                return $r.'<Override PartName="/'.$this->workSheetFilePath($worksheet)
+                    .'" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>'
+                ;
             })
             .'</Types>';
     }
 
-    public function xmlStyles()
+    protected function xmlStyles()
     {
         $styles = [];
         $styles[] = $this->style;
@@ -135,20 +140,11 @@ class WorkBook {
                 $styles[] = $column->getStyle();
             }
         }
-//        print_r([
-//            "before" => array_map(function(Style $s){ return $s->getStyleIndex();}, $styles),
-//        ]);
         $stylesheet = new StyleSheet($styles);
-//        print_r([
-//            "after" => array_map(function(Style $s){ return $s->getStyleIndex();}, $styles),
-//        ]);
-//        print_r([
-//            "styles" => array_map(function(Style $s){ return $s->getStyleIndex();}, $stylesheet->getStyles()),
-//        ]);
         return $stylesheet->asXML();
     }
 
-    public function xmlWorkbook()
+    protected function xmlWorkbook()
     {
         $i = 0;
         return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'."\n"
@@ -163,7 +159,7 @@ class WorkBook {
             ;
     }
 
-    public function xmlWorkbookRels()
+    protected function xmlWorkbookRels()
     {
         $i = 0;
         return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'."\n"
