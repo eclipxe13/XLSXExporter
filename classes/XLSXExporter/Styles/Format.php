@@ -22,6 +22,7 @@ class Format extends AbstractStyle
     const FORMAT_DATE_YMDHM = 160;
     const FORMAT_DATE_YMD = 161;
     const FORMAT_DATE_HM = 162;
+    const FORMAT_DATE_YMDHMS = 163;
 
     protected function properties()
     {
@@ -72,6 +73,7 @@ class Format extends AbstractStyle
             160 => "yyyy-mm-dd hh:mm",
             161 => "yyyy-mm-dd",
             162 => "hh:mm",
+            163 => "yyyy-mm-dd hh:mm:ss",
         ];
         if (!array_key_exists($id, $formats)) {
             throw new XLSXException("A valid number format was not supplied");
