@@ -62,7 +62,7 @@ class WorkSheetWriter
 
     public function writeCell($type, $value, $style) {
         if ($value === null) {
-            $type = CellTypes::TEXT;
+            $type = CellTypes::NUMBER;
             $value = "";
         }
         $t = static::getDataType($type);
@@ -76,8 +76,12 @@ class WorkSheetWriter
             $this->file->fwrite('<v>'.$value.'</v>');
         } elseif ($type === CellTypes::BOOLEAN) {
             $this->file->fwrite('<v>'.(($value) ? 1 : 0).'</v>');
-        } elseif ($type === CellTypes::TIMESTAMP) {
-            $this->file->fwrite('<v>'.$value.'</v>');
+        } elseif ($type === CellTypes::DATE) {
+            $this->file->fwrite('<v>'.static::tsToExcelDate($value).'</v>');
+        } elseif ($type === CellTypes::TIME) {
+            $this->file->fwrite('<v>'.static::tsToExcelTime($value).'</v>');
+        } elseif ($type === CellTypes::DATETIME) {
+            $this->file->fwrite('<v>'.static::tsToExcelDateTime($value).'</v>');
         } elseif ($type === CellTypes::INLINETEXT) {
             $this->file->fwrite('<is><t>'.static::xml($value).'</t></is>');
         }
@@ -97,8 +101,6 @@ class WorkSheetWriter
             return "s";
         } elseif ($type === CellTypes::BOOLEAN) {
             return "b";
-        } elseif ($type === CellTypes::TIMESTAMP) {
-            return "d";
         } elseif ($type === CellTypes::INLINE) {
             return "";
         } else { // DATE & NUMBER
@@ -127,5 +129,35 @@ class WorkSheetWriter
             return self::getNameFromNumber($num2 - 1) . $letter;
         }
         return $letter;
+    }
+
+    public static function tsToExcelTime($ts)
+    {
+        $utc = static::tsToUTCParts($ts);
+        return (($utc[3] * 3600) + ($utc[4] * 60) + $utc[5]) / 86400;
+    }
+
+    public static function tsToExcelDate($ts)
+    {
+        $utc = static::tsToUTCParts($ts);
+        echo print_r([
+            "function" => "tsToExcelDate($ts)",
+            "utc" => $utc,
+        ], true), "\n";
+        $delta = ($utc[0] == 1900) && ($utc[1] <= 2) ? -1 : 0;
+        return (int) (25569 + $delta + (($ts + $utc[6]) / 86400));
+    }
+
+    public static function tsToExcelDateTime($ts)
+    {
+
+        return (float) static::tsToExcelDate($ts) + static::tsToExcelTime($ts);
+    }
+
+    public static function tsToUTCParts($ts)
+    {
+        $offset = date("Z", $ts);
+        $a = array_merge(explode(",", gmdate("Y,m,d,H,i,s", $ts + $offset)), [$offset]);
+        return $a;
     }
 }
