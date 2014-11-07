@@ -44,7 +44,7 @@ class Font extends AbstractStyle
             .'<strike val="'.(($this->strike) ? '1' : '0').'" />'
             .'<u val="'.(($this->underline) ? : static::UNDERLINE_NONE).'" />'
             .(($this->size) ? '<sz val="'.$this->size.'"/>' : '')
-            .(($this->color) ? '<color val="'.$this->color.'"/>' : '')
+            .(($this->color) ? '<color rgb="'.$this->color.'"/>' : '')
             .(($this->name) ? '<name val="'.$this->name.'"/>' : '')
             .'</font>'
         ;
