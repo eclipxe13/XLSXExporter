@@ -13,6 +13,7 @@ class Fill extends AbstractStyle
 {
     const SOLID = "solid";
     const NONE = "none";
+    const GRAY125 = "gray125";
 
     protected function properties()
     {
@@ -24,8 +25,8 @@ class Fill extends AbstractStyle
 
     public function asXML()
     {
-        if (!$this->pattern or $this->pattern == static::NONE) {
-            return '<fill><patternFill patternType="'.static::NONE.'" /></fill>';
+        if (!$this->pattern or $this->pattern == static::NONE or $this->pattern === static::GRAY125) {
+            return '<fill><patternFill patternType="'.static::NONE.'"/></fill>';
         }
         return '<fill>'
             .'<patternFill patternType="'.$this->pattern.'">'
@@ -38,7 +39,7 @@ class Fill extends AbstractStyle
 
     protected function castPattern($value)
     {
-        if ($value !== static::NONE and $value !== static::SOLID) {
+        if (!in_array($value, [static::NONE, static::GRAY125, static::SOLID])) {
             throw new XLSXException("Invalid fill pattern");
         }
         return $value;
