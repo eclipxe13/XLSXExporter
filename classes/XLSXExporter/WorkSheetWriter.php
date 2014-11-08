@@ -101,10 +101,10 @@ class WorkSheetWriter
             return "s";
         } elseif ($type === CellTypes::BOOLEAN) {
             return "b";
-        } elseif ($type === CellTypes::INLINE) {
-            return "";
-        } else { // DATE & NUMBER
+        } elseif ($type === CellTypes::NUMBER) {
             return "n";
+        } else { // INLINE and DATES
+            return "";
         }
     }
 
