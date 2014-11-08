@@ -10,10 +10,12 @@ class SharedStrings {
 
     public function getIndex($string)
     {
-        if (false === $index = array_search($string, $this->strings, true)) {
-            $index = count($this->strings);
-            $this->strings[] = $string;
+        // use the key instead of the content for faster access, it works like a bst
+        if (array_key_exists($string, $this->strings)) {
+            return $this->strings[$string];
         }
+        $index = count($this->strings);
+        $this->strings[$string] = $index;
         return $index;
     }
 
@@ -26,8 +28,10 @@ class SharedStrings {
             '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'."\n"
             .'<sst xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" count="'.$count.'" uniqueCount="'.$count.'">'
         );
-        for($i = 0 ; $i < $count ; $i++) {
-            $file->fwrite('<si><t>'.WorkSheetWriter::xml($this->strings[$i]).'</t></si>');
+        // Not using the index, is not needed
+        // do not use array_keys, it (could?) duplicate the memory used
+        foreach($this->strings as $string => $index) {
+            $file->fwrite('<si><t>'.WorkSheetWriter::xml($string).'</t></si>');
         }
         $file->fwrite('</sst>');
         return $tempfile;
