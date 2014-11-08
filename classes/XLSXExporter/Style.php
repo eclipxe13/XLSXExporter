@@ -160,7 +160,7 @@ class Style
     {
         return '<xf'
             .((null !== $xfid) ? ' xfId="'.$xfid.'"' : '')
-            .' numFmtId="'.$this->format->getIndex().'"'
+            .' numFmtId="'.intval($this->format->id).'"'
             .' fontId="'.$this->font->getIndex().'"'
             .' borderId="'.$this->border->getIndex().'"'
             .' fillId="'.$this->fill->getIndex().'"'
