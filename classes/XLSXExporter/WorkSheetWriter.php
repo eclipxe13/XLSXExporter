@@ -81,7 +81,7 @@ class WorkSheetWriter
             $this->file->fwrite('<v>'.static::tsToExcelTime($value).'</v>');
         } elseif ($type === CellTypes::DATETIME) {
             $this->file->fwrite('<v>'.static::tsToExcelDateTime($value).'</v>');
-        } elseif ($type === CellTypes::INLINETEXT) {
+        } elseif ($type === CellTypes::INLINE) {
             $this->file->fwrite('<is><t>'.static::xml($value).'</t></is>');
         }
         $this->file->fwrite('</c>');
