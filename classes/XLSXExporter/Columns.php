@@ -9,7 +9,7 @@ class Columns extends AbstractCollection
         $this->addItem($item, !$this->isValidInstance($item) ? null : $item->getId());
     }
 
-    public static function isValidInstance($item)
+    public function isValidInstance($item)
     {
         return ($item instanceof Column);
     }

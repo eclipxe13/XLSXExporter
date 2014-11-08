@@ -4,7 +4,7 @@ namespace XLSXExporter;
 
 abstract class AbstractCollection  implements \IteratorAggregate
 {
-    public abstract static function isValidInstance($item);
+    public abstract function isValidInstance($item);
     public abstract function add($item);
 
     /** @var array */
@@ -19,7 +19,7 @@ abstract class AbstractCollection  implements \IteratorAggregate
 
     protected function addItem($item, $id)
     {
-        if (!static::isValidInstance($item)) {
+        if (!$this->isValidInstance($item)) {
             throw new XLSXException("The item is not a valid object for the collection");
         }
         if ($this->exists($id)) {

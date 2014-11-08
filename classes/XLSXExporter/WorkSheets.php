@@ -11,7 +11,7 @@ class WorkSheets extends AbstractCollection
     }
 
 
-    public static function isValidInstance($item)
+    public function isValidInstance($item)
     {
         return ($item instanceof WorkSheet);
     }
