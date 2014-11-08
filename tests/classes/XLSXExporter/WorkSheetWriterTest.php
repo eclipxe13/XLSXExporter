@@ -27,7 +27,7 @@ class WorkSheetWriterTest extends \PHPUnit_Framework_TestCase
 
     public function parseXML($text, $israw)
     {
-        $oXMLWriter = new WorkSheetWriter();
+        $oXMLWriter = new \XMLWriter();
         $oXMLWriter->openMemory();
         $oXMLWriter->startDocument('1.0', 'UTF-8');
         $oXMLWriter->startElement('t');
@@ -53,7 +53,6 @@ class WorkSheetWriterTest extends \PHPUnit_Framework_TestCase
         foreach ($texts as $t) {
             $a = $this->parseXML($t, false);
             $b = $this->parseXML(WorkSheetWriter::xml($t), true);
-            print_r([$t, $a, $b]);
             $this->assertEquals($a, $b);
         }
     }
