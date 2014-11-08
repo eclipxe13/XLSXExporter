@@ -1,6 +1,5 @@
 <?php
 
-
 namespace XLSXExporter\Styles;
 
 use XLSXExporter\XLSXException;

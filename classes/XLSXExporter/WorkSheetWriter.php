@@ -4,7 +4,6 @@ namespace XLSXExporter;
 
 use SplFileObject;
 
-//TODO: Try to use XML Writer
 class WorkSheetWriter
 {
     /** @var SplFileObject */

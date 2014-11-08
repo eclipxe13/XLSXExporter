@@ -1,4 +1,5 @@
 <?php
+
 namespace XLSXExporter;
 
 class DateConverter
