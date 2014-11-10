@@ -17,11 +17,11 @@ class CompleteTest extends \PHPUnit_Framework_TestCase
             new WorkSheet("sheet01", $a, new Columns([
                 new Column("fname", "Name"),
                 new Column("amount", "Amount", CellTypes::NUMBER,
-                    (new Style())->setFromArray(["format" => Styles\Format::FORMAT_COMMA_2DECS])),
+                    (new Style())->setFromArray(["format" => ["code" => Styles\Format::FORMAT_COMMA_2DECS]])),
                 new Column("visit", "Visit", CellTypes::DATETIME,
-                    (new Style())->setFromArray(["format" => Styles\Format::FORMAT_DATE_YMDHM])),
+                    (new Style())->setFromArray(["format" => ["code" => Styles\Format::FORMAT_DATE_YMDHM]])),
                 new Column("check", "Check", CellTypes::BOOLEAN,
-                    (new Style())->setFromArray(["format" => Styles\Format::FORMAT_YESNO])),
+                    (new Style())->setFromArray(["format" => ["code" => Styles\Format::FORMAT_YESNO]])),
             ]))
         ]));
         // write to a temporary file
