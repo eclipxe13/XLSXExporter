@@ -85,7 +85,7 @@ abstract class AbstractStyle
 
     public function getHash()
     {
-        return md5(get_class($this)."\n".print_r($this, true));
+        return sha1(get_class($this)."::".print_r($this->data, true));
     }
 
     public static function utilCastColor($value, $exceptionText)

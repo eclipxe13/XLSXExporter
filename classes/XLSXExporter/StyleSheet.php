@@ -24,8 +24,7 @@ class StyleSheet
         $this->styles = array_merge([
             new Style([
                 "format" => [
-                    "id" => 0,
-                    "code" => "General",
+                    "code" => Styles\Format::FORMAT_GENERAL,
                 ],
                 "fill" => [
                     "pattern" => Styles\Fill::NONE
@@ -41,6 +40,31 @@ class StyleSheet
                 ]
             ]),
         ], $styles);
+    }
+
+    protected function processStylesFormat()
+    {
+        $codes = [];
+        $fmtcounter = 164;
+        $this->objects["format"] = [];
+        $this->hashes["format"] = [];
+        foreach($this->styles as $style) {
+            $format = $style->getFormat();
+            if (!$format->hasValues()) {
+                $format->code = Styles\Format::FORMAT_GENERAL;
+            }
+            if (false !== $builtin = $format->getBuiltInCodeByCode($format->code)) {
+                $format->id = $builtin;
+                array_push($this->objects["format"], $format);
+            } elseif (false !== $numfmtid = array_search($format->code, $codes)) {
+                $format->id = $numfmtid;
+            } else {
+                $format->id = $fmtcounter;
+                $fmtcounter = $fmtcounter + 1;
+                $codes[$format->id] = $format->code;
+                array_push($this->objects["format"], $format);
+            }
+        }
     }
 
     protected function processAddToArray($name, Styles\AbstractStyle $generic)
@@ -59,7 +83,10 @@ class StyleSheet
 
     protected function processStyles()
     {
-        $namedcollections = ["format", "font", "fill", "border"];
+        // different process for "format"
+        $this->processStylesFormat();
+        // same process for "font", "fill" and "border"
+        $namedcollections = ["font", "fill", "border"];
         foreach($namedcollections as $name) {
             $this->objects[$name] = [];
             $this->hashes[$name] = []; // init styles
@@ -76,7 +103,7 @@ class StyleSheet
     protected function xmlCollection($name, $tag)
     {
         return '<'.$tag.' count="'.count($this->objects[$name]).'">'
-            .array_reduce($this->objects[$name], function($r,Styles\AbstractStyle $generic) {
+            .array_reduce($this->objects[$name], function($r, Styles\AbstractStyle $generic) {
                 return $r.$generic->asXML();
             })
             .'</'.$tag.'>'

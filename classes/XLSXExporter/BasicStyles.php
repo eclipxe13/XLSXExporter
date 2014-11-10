@@ -40,9 +40,4 @@ class BasicStyles {
         ]);
     }
 
-    public static function withStdFormat($format)
-    {
-        return (new Style())->setFormat(Styles\Format::standarFormat($format));
-    }
-
 }

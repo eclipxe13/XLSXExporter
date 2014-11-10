@@ -45,6 +45,7 @@ class Style
                 $this->$key->setValues($array[$key]);
             }
         }
+        return $this;
     }
 
     /**

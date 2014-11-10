@@ -16,12 +16,12 @@ class CompleteTest extends \PHPUnit_Framework_TestCase
         $wb = new WorkBook(new WorkSheets([
             new WorkSheet("sheet01", $a, new Columns([
                 new Column("fname", "Name"),
-                new Column("amount", "Amount",
-                    CellTypes::NUMBER, BasicStyles::withStdFormat(Styles\Format::FORMAT_ZERO_2DECS)),
-                new Column("visit", "Visit",
-                    CellTypes::DATETIME, BasicStyles::withStdFormat(Styles\Format::FORMAT_DATE_YMDHM)),
-                new Column("check", "Check",
-                    CellTypes::NUMBER, BasicStyles::withStdFormat(Styles\Format::FORMAT_YESNO)),
+                new Column("amount", "Amount", CellTypes::NUMBER,
+                    (new Style())->setFromArray(["format" => Styles\Format::FORMAT_COMMA_2DECS])),
+                new Column("visit", "Visit", CellTypes::DATETIME,
+                    (new Style())->setFromArray(["format" => Styles\Format::FORMAT_DATE_YMDHM])),
+                new Column("check", "Check", CellTypes::BOOLEAN,
+                    (new Style())->setFromArray(["format" => Styles\Format::FORMAT_YESNO])),
             ]))
         ]));
         // write to a temporary file
