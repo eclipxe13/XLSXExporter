@@ -2,7 +2,7 @@
 
 namespace XLSXExporter\Styles;
 
-use XLSXExporter\WorkSheetWriter;
+use XLSXExporter\XmlConverter;
 
 /**
  *
@@ -66,7 +66,7 @@ class Format extends AbstractStyle
     public function asXML()
     {
         if (null === $this->code) return "";
-        return '<numFmt numFmtId="'.$this->id.'" formatCode="'.WorkSheetWriter::xml($this->code).'"/>'
+        return '<numFmt numFmtId="'.$this->id.'" formatCode="'.XmlConverter::specialchars($this->code).'"/>'
         ;
     }
 

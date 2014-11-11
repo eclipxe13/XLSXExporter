@@ -32,6 +32,7 @@ class WorkBook {
 
     public function __get($name)
     {
+        // read-only properties
         $props = ["worksheets", "style"];
         if (!in_array($name, $props)) {
             throw new XLSXException("Invalid property name $name");

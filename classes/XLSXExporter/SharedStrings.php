@@ -31,7 +31,7 @@ class SharedStrings {
         // Not using the index, is not needed
         // do not use array_keys, it (could?) duplicate the memory used
         foreach($this->strings as $string => $index) {
-            $file->fwrite('<si><t>'.WorkSheetWriter::xml($string).'</t></si>');
+            $file->fwrite('<si><t>'.XmlConverter::specialchars($string).'</t></si>');
         }
         $file->fwrite('</sst>');
         return $tempfile;
