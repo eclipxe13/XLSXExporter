@@ -11,7 +11,6 @@ use XLSXExporter\Styles\Border;
 class Style
 {
 
-    protected $stylename;
     protected $styleindex;
 
     /** @var Format */
@@ -127,17 +126,6 @@ class Style
             or $this->fill->hasValues()
             or $this->border->hasValues()
             ;
-    }
-
-     public function getStyleName()
-    {
-        return $this->stylename;
-    }
-
-    public function setStyleName($stylename)
-    {
-        $this->stylename = $stylename;
-        return $this;
     }
 
    public function setStyleIndex($index)
