@@ -76,11 +76,11 @@ class WorkSheetWriter
         } elseif ($type === CellTypes::BOOLEAN) {
             $this->file->fwrite('<v>'.(($value) ? 1 : 0).'</v>');
         } elseif ($type === CellTypes::DATE) {
-            $this->file->fwrite('<v>'.static::tsToExcelDate($value).'</v>');
+            $this->file->fwrite('<v>'.DateConverter::tsToExcelDate($value).'</v>');
         } elseif ($type === CellTypes::TIME) {
-            $this->file->fwrite('<v>'.static::tsToExcelTime($value).'</v>');
+            $this->file->fwrite('<v>'.DateConverter::tsToExcelTime($value).'</v>');
         } elseif ($type === CellTypes::DATETIME) {
-            $this->file->fwrite('<v>'.static::tsToExcelDateTime($value).'</v>');
+            $this->file->fwrite('<v>'.DateConverter::tsToExcelDateTime($value).'</v>');
         } elseif ($type === CellTypes::INLINE) {
             $this->file->fwrite('<is><t>'.static::xml($value).'</t></is>');
         }
@@ -130,29 +130,4 @@ class WorkSheetWriter
         return $letter;
     }
 
-    public static function tsToExcelTime($ts)
-    {
-        $utc = static::tsToUTCParts($ts);
-        return (($utc[3] * 3600) + ($utc[4] * 60) + $utc[5]) / 86400;
-    }
-
-    public static function tsToExcelDate($ts)
-    {
-        $utc = static::tsToUTCParts($ts);
-        $delta = ($utc[0] == 1900) && ($utc[1] <= 2) ? -1 : 0;
-        return (int) (25569 + $delta + (($ts + $utc[6]) / 86400));
-    }
-
-    public static function tsToExcelDateTime($ts)
-    {
-
-        return (float) static::tsToExcelDate($ts) + static::tsToExcelTime($ts);
-    }
-
-    public static function tsToUTCParts($ts)
-    {
-        $offset = date("Z", $ts);
-        $a = array_merge(explode(",", gmdate("Y,m,d,H,i,s", $ts + $offset)), [$offset]);
-        return $a;
-    }
 }
