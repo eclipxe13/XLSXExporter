@@ -5,7 +5,7 @@ I recommend you to checkout the project [PHPExcel](https://github.com/PHPOffice/
 
 I create this project because PHPExcel does not fit my needs. Specifically, I use this tool to export big amount of data to spreadsheets files to be worked and processed by the end user. Using PHPExcel consume a lot of memory and raising the "memory exhausted error".
 
-Other projects that does something like this and help me in the process:
+Projects that does something like this and help me in the process:
 
  - https://github.com/PHPOffice/PHPExcel
  - https://github.com/mk-j/PHP_XLSXWriter
@@ -13,10 +13,11 @@ Other projects that does something like this and help me in the process:
 ##How it works##
 
 Your main object is a workbook.
-A workbook can contain 1 to several spreadsheets.
-Every worksheet has a collection of columns and a DataProvider object.
-When the structure information (workbook, sheets, columns and providers) has been set you can write the xlsx file.
-Every time a worksheet will be created, the headers are wroten first, then every row of data is written. The data is extracted using the Provider. In this way, you don't need all your data stored on memory, you can use a PDO reader implementing the Provider interface. It also write the data directly to a temporary file, so no memory is being used.
+A workbook contains at least 1 spreadsheet.
+Every spreadsheet (worksheet) has a collection of columns and a DataProvider object.
+When the structure information (workbook, worksheets, columns and providers) has been set you can write the xlsx file.
+Every time a worksheet will be created, the headers are wroten first, then every row of data is written. The data is extracted using the Provider. In this way, you don't need all your data stored on memory, you can use a PDO reader implementing the Provider interface.
+The data is writen to a temporary files (including the final zip), so no large amount of data is being used.
 
 ##Example##
 
@@ -30,9 +31,12 @@ $a = new ProviderArray([
 $wb = new WorkBook(new WorkSheets([
     new WorkSheet("sheet01", $a, new Columns([
         new Column("fname", "Name"),
-        new Column("amount", "Amount", CellTypes::NUMBER, BasicStyles::withStdFormat(Styles\Format::FORMAT_ZERO_2DECS)),
-        new Column("visit", "Visit", CellTypes::DATETIME, BasicStyles::withStdFormat(Styles\Format::FORMAT_DATE_YMDHM)),
-        new Column("check", "Check", CellTypes::NUMBER, BasicStyles::withStdFormat(Styles\Format::FORMAT_YESNO)),
+        new Column("amount", "Amount", CellTypes::NUMBER,
+            (new Style())->setFromArray(["format" => ["code" => Format::FORMAT_COMMA_2DECS]])),
+        new Column("visit", "Visit", CellTypes::DATETIME,
+            (new Style())->setFromArray(["format" => ["code" => Format::FORMAT_DATE_YMDHM]])),
+        new Column("check", "Check", CellTypes::BOOLEAN,
+            (new Style())->setFromArray(["format" => ["code" => Format::FORMAT_YESNO]])),
     ]))
 ]));
 // call the write process
@@ -52,7 +56,7 @@ I want to do several modifications:
 - Apply Inversion of Control Principle, depending on Interfaces and not on classes and use Factories
 Feel free to contribute to this project!
 
-##License##
+##Author & License##
 
-&copy; 2014 Carlos Cortés Soto @eclipxoide eclipxe13@gmail.com. - MIT License according to the LICENSE file
+&copy; 2014 Carlos Cortés Soto @eclipxoide eclipxe13@gmail.com. - MIT License according to LICENSE file
 
