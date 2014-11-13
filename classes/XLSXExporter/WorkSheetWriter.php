@@ -15,7 +15,7 @@ class WorkSheetWriter
     protected $rowscount;
     protected $colscount;
 
-    public function createSheet($filename, $colscount = 1024, $rowscount = 1048575, $initialcol = 1, $initialrow = 1)
+    public function createSheet($filename, $colscount, $rowscount, $initialcol = 1, $initialrow = 1)
     {
         $this->initialrow = $initialrow;
         $this->initialcol = $initialcol;
@@ -34,7 +34,7 @@ class WorkSheetWriter
             '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'."\n"
             .'<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">'
             .'<dimension ref="'.$firstcell.':'.$lastcell.'"/>'
-            .'<sheetViews><sheetView tabSelected="1" workbookViewId="0"/></sheetViews>'
+            .'<sheetViews><sheetView tabSelected="1" workbookViewId="0"><selection activeCell="A1" sqref="A1"/></sheetView></sheetViews>'
             .'<sheetFormatPr baseColWidth="10" defaultRowHeight="15"/>'
             .'<sheetData>'
         );
