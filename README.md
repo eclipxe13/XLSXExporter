@@ -22,6 +22,7 @@ The data is writen to a temporary files (including the final zip), so no large a
 ##Example##
 
 ```php
+
 // create a simple array as example
 $a = new ProviderArray([
     ["fname" => "Charles", "amount" => 1234.561, "visit" => strtotime('2014-01-13 13:14:15'), "check" => 1],
@@ -45,18 +46,27 @@ $tempfile = $wb->write();
 $this->assertTrue(copy($tempfile, "result.xlsx"));
 // remove temporary file
 unlink($tempfile);
+
 ```
 
 ##Development##
 
 I will be using this project for a while, so, I will maintain it and improve it a lot. In this stage you can consider it as a testing project (even when it's used in production).
 I want to do several modifications:
+
 - Make a better documentation
 - Make better tests 
 - Apply Inversion of Control Principle, depending on Interfaces and not on classes and use Factories
-Feel free to contribute to this project!
+- Feel free to contribute to this project!
 
-##Author & License##
+##TODO##
 
-&copy; 2014 Carlos Cortés Soto @eclipxoide eclipxe13@gmail.com. - MIT License according to LICENSE file
+All your help is very appreciated, please contribute with testing, ideas, code, documentation, cofees, etc.
+
+- Add borders style
+- Depend on interfaces and not on classes
+- Write samples with PDO
+- Find a better way to manage SharedStrings without so many memory and fast
+- Depend on a class to create the temporary files
+- Document all the classes
 
