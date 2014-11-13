@@ -14,7 +14,7 @@ class CompleteTest extends \PHPUnit_Framework_TestCase
         ]);
         // The workbook and columns
         $wb = new WorkBook(new WorkSheets([
-            new WorkSheet("sheet01", $a, new Columns([
+            new WorkSheet("data", $a, new Columns([
                 new Column("fname", "Name"),
                 new Column("amount", "Amount", CellTypes::NUMBER,
                     (new Style())->setFromArray(["format" => ["code" => Styles\Format::FORMAT_COMMA_2DECS]])),

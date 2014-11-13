@@ -73,11 +73,13 @@ class WorkBook {
         $zip->addFromString("xl/_rels/workbook.xml.rels", $this->xmlWorkbookRels());
         // create the sharedStrings object because worksheets use it
         $sharedstrings = new SharedStrings();
+        $i = 1;
         foreach($this->worksheets as $worksheet) {
             // write and include the sheet
             $wsfile = $worksheet->write($sharedstrings);
-            $zip->addFile($wsfile, $this->workSheetFilePath($worksheet));
+            $zip->addFile($wsfile, $this->workSheetFilePath($i));
             $removefiles[] = $wsfile;
+            $i = $i + 1;
         }
         // include the shared strings file
         $shstrsfile = $sharedstrings->write();
@@ -93,9 +95,9 @@ class WorkBook {
 
     }
 
-    protected function workSheetFilePath(WorkSheet $worksheet, $prefix = "xl/")
+    protected function workSheetFilePath($index, $prefix = "xl/")
     {
-        return $prefix."worksheets/".$worksheet->getName().".xml";
+        return $prefix."worksheets/sheet".$index.".xml";
     }
 
     protected function xmlRels()
@@ -115,8 +117,8 @@ class WorkBook {
             .'<Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/>'
             .'<Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/>'
             .'<Override PartName="/xl/sharedStrings.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sharedStrings+xml"/>'
-            .array_reduce($this->worksheets->all(), function($r, WorkSheet $worksheet) {
-                return $r.'<Override PartName="/'.$this->workSheetFilePath($worksheet)
+            .array_reduce(range(1, $this->worksheets->count()), function($r, $index) {
+                return $r.'<Override PartName="/'.$this->workSheetFilePath($index)
                     .'" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>'
                 ;
             })
@@ -141,13 +143,13 @@ class WorkBook {
 
     protected function xmlWorkbook()
     {
-        $i = 0;
+        $index = 0;
         return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'."\n"
             .'<workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">'
             .'<sheets>'
-            .array_reduce($this->worksheets->all(), function ($r, WorkSheet $worksheet) use (&$i) {
-                $i = $i + 1;
-                return $r.'<sheet name="'.$worksheet->getName().'" sheetId="'.$i.'" r:id="rId'.$i.'"/>';
+            .array_reduce($this->worksheets->all(), function ($r, WorkSheet $worksheet) use (&$index) {
+                $index = $index + 1;
+                return $r.'<sheet name="'.$worksheet->getName().'" sheetId="'.$index.'" r:id="rId'.$index.'"/>';
             })
             .'</sheets>'
             .'</workbook>'
@@ -156,13 +158,11 @@ class WorkBook {
 
     protected function xmlWorkbookRels()
     {
-        $i = 0;
         return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'."\n"
             .'<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
-            .array_reduce($this->worksheets->all(), function ($r, WorkSheet $worksheet) use (&$i) {
-                $i = $i + 1;
-                return $r.'<Relationship Id="rId'.$i.'"'
-                    .' Target="'.$this->workSheetFilePath($worksheet, "").'"'
+            .array_reduce(range(1, $this->worksheets->count()), function ($r, $index) {
+                return $r.'<Relationship Id="rId'.$index.'"'
+                    .' Target="'.$this->workSheetFilePath($index, "").'"'
                     .' Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet"/>'
                 ;
             })

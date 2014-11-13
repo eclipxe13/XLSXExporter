@@ -54,6 +54,7 @@ class WorkSheet
 
     public function setName($name)
     {
+        // TODO: Validate correct names for worksheets
         $this->name = $name;
     }
 
@@ -91,7 +92,7 @@ class WorkSheet
     {
         $tempfile = tempnam(sys_get_temp_dir(), "ws-");
         $writer = new WorkSheetWriter();
-        $writer->createSheet($tempfile, $this->columns->count(), $this->provider->count());
+        $writer->createSheet($tempfile, $this->columns->count());//, $this->provider->count());
         $writer->openSheet();
         // -- write headers contents
         {
