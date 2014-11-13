@@ -146,6 +146,7 @@ class WorkBook {
         $index = 0;
         return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'."\n"
             .'<workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">'
+            .'<bookViews><workbookView/></bookViews>' // without the bookviews the user in MS Excel cannot copy and paste the content
             .'<sheets>'
             .array_reduce($this->worksheets->all(), function ($r, WorkSheet $worksheet) use (&$index) {
                 $index = $index + 1;
