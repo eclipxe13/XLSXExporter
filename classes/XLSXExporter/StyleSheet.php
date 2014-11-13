@@ -55,7 +55,10 @@ class StyleSheet
             }
             if (false !== $builtin = $format->getBuiltInCodeByCode($format->code)) {
                 $format->id = $builtin;
-                array_push($this->objects["format"], $format);
+                if (!in_array($format->code, $codes)) {
+                    $codes[$format->id] = $format->code;
+                    array_push($this->objects["format"], $format);
+                }
             } elseif (false !== $numfmtid = array_search($format->code, $codes)) {
                 $format->id = $numfmtid;
             } else {
