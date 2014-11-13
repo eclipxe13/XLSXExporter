@@ -7,6 +7,7 @@ use XLSXExporter\Styles\Font;
 use XLSXExporter\Styles\Fill;
 use XLSXExporter\Styles\Alignment;
 use XLSXExporter\Styles\Border;
+use XLSXExporter\Styles\Protection;
 
 class Style
 {
@@ -23,6 +24,8 @@ class Style
     protected $alignment;
     /** @var Border */
     protected $border;
+    /** @var Protection */
+    protected $protection;
 
     public function __construct($arrayStyles = null)
     {
@@ -31,6 +34,7 @@ class Style
         $this->fill = new Fill();
         $this->alignment = new Alignment();
         $this->border = new Border();
+        $this->protection = new Protection();
         if (is_array($arrayStyles) and count($arrayStyles)) {
             $this->setFromArray($arrayStyles);
         }
@@ -38,7 +42,7 @@ class Style
 
     public function setFromArray(array $array)
     {
-        $keys = ["format", "font", "fill", "alignment", "border"];
+        $keys = ["format", "font", "fill", "alignment", "border", "protection"];
         foreach($keys as $key) {
             if (array_key_exists($key, $array) and is_array($array[$key])) {
                 $this->$key->setValues($array[$key]);
@@ -118,6 +122,20 @@ class Style
         return $this;
     }
 
+    /**
+     * @return Protection
+     */
+    public function getProtection()
+    {
+        return $this->protection;
+    }
+
+    public function setProtection(Protection $protection)
+    {
+        $this->protection = $protection;
+        return $this;
+    }
+
     public function hasValues()
     {
         return $this->format->hasValues()
@@ -125,6 +143,7 @@ class Style
             or $this->alignment->hasValues()
             or $this->fill->hasValues()
             or $this->border->hasValues()
+            or $this->protection->hasValues()
             ;
     }
 
@@ -145,17 +164,17 @@ class Style
             .((null !== $xfid) ? ' xfId="'.$xfid.'"' : '')
             .' numFmtId="'.intval($this->format->id).'"'
             .' fontId="'.$this->font->getIndex().'"'
-            .' borderId="'.$this->border->getIndex().'"'
             .' fillId="'.$this->fill->getIndex().'"'
-            .' applyAlignment="'.(($this->alignment->hasValues()) ? '1' : '0').'"'
-            .' applyBorder="'.(($this->border->hasValues()) ? '1' : '0').'"'
-            .' applyFill="'.(($this->fill->hasValues()) ? '1' : '0').'"'
-            .' applyFont="'.(($this->font->hasValues()) ? '1' : '0').'"'
+            .' borderId="'.$this->border->getIndex().'"'
             .' applyNumberFormat="'.(($this->format->hasValues()) ? '1' : '0').'"'
-            .' applyProtection="1"'
+            .' applyFont="'.(($this->font->hasValues()) ? '1' : '0').'"'
+            .' applyFill="'.(($this->fill->hasValues()) ? '1' : '0').'"'
+            .' applyBorder="'.(($this->border->hasValues()) ? '1' : '0').'"'
+            .' applyAlignment="'.(($this->alignment->hasValues()) ? '1' : '0').'"'
+            .' applyProtection="'.(($this->protection->hasValues()) ? '1' : '0').'"'
             .'>'
             .(($this->alignment->hasValues()) ? $this->alignment->asXML() : '')
-            .'<protection locked="1" hidden="0"/>'
+            .(($this->protection->hasValues()) ? $this->protection->asXML() : '')
             .'</xf>'
         ;
     }
