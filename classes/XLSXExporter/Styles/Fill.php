@@ -25,7 +25,7 @@ class Fill extends AbstractStyle
     public function asXML()
     {
         if (!$this->pattern or $this->pattern == static::NONE or $this->pattern === static::GRAY125) {
-            return '<fill><patternFill patternType="'.static::NONE.'"/></fill>';
+            return '<fill><patternFill patternType="'.$this->pattern.'"/></fill>';
         }
         return '<fill>'
             .'<patternFill patternType="'.$this->pattern.'">'
