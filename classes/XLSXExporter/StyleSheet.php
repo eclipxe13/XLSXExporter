@@ -115,28 +115,22 @@ class StyleSheet
 
     protected function xmlCellStylesXF()
     {
-        $i = 0;
-        return '<cellStyleXfs count="'.count($this->styles).'">'
-            .array_reduce($this->styles, function($r, Style $style) use (&$i) {
-//                if (!$style->hasValues()) return $r;
-                $style->setStyleIndex($i);
-                $i = $i + 1;
-                return $r.$style->asXML();
-
-            })
+        return '<cellStyleXfs count="1">'
+            .'<xf numFmtId="0" fontId="0" fillId="0" borderId="0"/>'
             .'</cellStyleXfs>'
         ;
     }
 
     protected function xmlCellXfs()
     {
-        $i = -1;
+        $i = 0;
         return '<cellXfs count="'.count($this->styles).'">'
             .array_reduce($this->styles, function($r, Style $style) use (&$i) {
-//                if (!$style->hasValues()) return $r;
+                // // if no values then do not include
+                // if (!$style->hasValues()) return $r;
+                $style->setStyleIndex($i);
                 $i = $i + 1;
-                return $r.$style->asXML($i);
-
+                return $r.$style->asXML();
             })
             .'</cellXfs>'
         ;
@@ -155,6 +149,7 @@ class StyleSheet
             .$this->xmlCellStylesXF()
             .$this->xmlCellXfs()
             .'<cellStyles count="1"><cellStyle name="Normal" xfId="0" builtinId="0"/></cellStyles>'
+            .'<dxfs count="0"/>'
             .'</styleSheet>'
             ;
     }
