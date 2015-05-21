@@ -1,7 +1,17 @@
-<phpunit bootstrap="./bootstrap.php">
+<phpunit bootstrap="./bootstrap.php" colors="true">
     <testsuites>
         <testsuite>
-            <directory>./classes</directory>
+            <directory>./classes/</directory>
         </testsuite>
     </testsuites>
+    <!-- report also coverage -->
+    <logging>
+        <log type="coverage-text" target="php://stdout" showUncoveredFiles="true"/>
+    </logging>
+    <!-- exclude composer vendor folder -->
+    <filter>
+        <blacklist>
+            <directory>../vendor/</directory>
+        </blacklist>
+    </filter>
 </phpunit>

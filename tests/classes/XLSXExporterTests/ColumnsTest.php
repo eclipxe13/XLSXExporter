@@ -1,6 +1,9 @@
 <?php
 
-namespace XLSXExporter;
+namespace XLSXExporterTests;
+
+use XLSXExporter\Column;
+use XLSXExporter\Columns;
 
 class ColumnsTest extends \PHPUnit_Framework_TestCase
 {

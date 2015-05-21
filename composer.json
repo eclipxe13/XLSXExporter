@@ -9,5 +9,15 @@
     ],
     "require": {
         "php": ">=5.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "XLSXExporter\\": "classes/XLSXExporter/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "XLSXExporterTests\\": "tests/XLSXExporterTests/"
+        }
     }
 }

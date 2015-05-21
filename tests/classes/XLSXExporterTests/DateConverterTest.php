@@ -1,6 +1,8 @@
 <?php
 
-namespace XLSXExporter;
+namespace XLSXExporterTests;
+
+use XLSXExporter\DateConverter;
 
 class DateConverterTest extends \PHPUnit_Framework_TestCase
 {

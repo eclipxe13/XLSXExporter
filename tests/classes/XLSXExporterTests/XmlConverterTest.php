@@ -1,5 +1,8 @@
 <?php
-namespace XLSXExporter;
+
+namespace XLSXExporterTests;
+
+use XLSXExporter\XmlConverter;
 
 class XmlConverterTest extends \PHPUnit_Framework_TestCase
 {
