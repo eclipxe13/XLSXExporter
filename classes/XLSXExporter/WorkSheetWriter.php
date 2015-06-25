@@ -23,7 +23,7 @@ class WorkSheetWriter
         $this->rowscount = $rowscount;
         $this->row = $initialrow;
         $this->col = $initialcol;
-        $this->file = new SplFileObject($filename, "a");
+        $this->file = new SplFileObject($filename, "w");
     }
 
     public function openSheet()
