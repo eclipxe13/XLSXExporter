@@ -4,18 +4,18 @@ namespace XLSXExporter;
 
 class ProviderArray implements ProviderInterface
 {
-    private $data;
+    private $dataset;
     private $index;
 
-    public function __construct($data)
+    public function __construct(array $dataset)
     {
-        $this->data = $data;
+        $this->dataset = $dataset;
         $this->index = 0;
     }
 
     public function get($key)
     {
-        return $this->data[$this->index][$key];
+        return $this->dataset[$this->index][$key];
     }
 
     public function next()
@@ -25,12 +25,12 @@ class ProviderArray implements ProviderInterface
 
     public function valid()
     {
-        return ($this->index < count($this->data));
+        return ($this->index < count($this->dataset));
     }
 
     public function count()
     {
-        return count($this->data);
+        return count($this->dataset);
     }
 
 }
