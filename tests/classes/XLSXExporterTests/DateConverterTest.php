@@ -76,4 +76,22 @@ class DateConverterTest extends \PHPUnit_Framework_TestCase
         }
     }
 
+
+    public function providerTimeStampToExcel()
+    {
+        return [
+            ["2014-12-31", DateConverter::DATE, 42004],
+            ["2014-10-26 01:15:00", DateConverter::DATETIME, 41938.0520833333],
+            ["01:15:00", DateConverter::TIME, 0.0520833333],
+        ];
+    }
+
+    /**
+     * @dataProvider providerTimeStampToExcel
+     */
+    public function testTimeStampToExcel($ts, $type, $expected)
+    {
+        $this->assertSame($expected, DateConverter::tsToExcel(strtotime($ts), $type));
+    }
+
 }

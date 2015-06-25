@@ -53,11 +53,7 @@ class ColumnsTest extends \PHPUnit_Framework_TestCase
     {
         $o = new Columns();
         $this->setExpectedException("XLSXExporter\\XLSXException", "The item is not a valid object for the collection");
-        $o->addArray([
-            new Column("foo"),
-            new \stdClass(),
-            new Column("bar")
-        ]);
+        $o->addArray([ new Column("foo"), new \stdClass(), new Column("bar") ]);
     }
 
     public function testCommonUsage()

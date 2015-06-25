@@ -11,6 +11,7 @@ use XLSXExporter\Column;
 use XLSXExporter\CellTypes;
 use XLSXExporter\Style;
 use XLSXExporter\Styles\Format;
+use XLSXExporter\Styles\Alignment;
 
 class CompleteTest extends \PHPUnit_Framework_TestCase
 {
@@ -27,11 +28,11 @@ class CompleteTest extends \PHPUnit_Framework_TestCase
             new WorkSheet("data", $a, new Columns([
                 new Column("fname", "Name"),
                 new Column("amount", "Amount", CellTypes::NUMBER,
-                    (new Style())->setFromArray(["format" => ["code" => Format::FORMAT_COMMA_2DECS]])),
+                    (new Style())->setFromArray(["format" => ["code" => Format::FORMAT_COMMA_2DECS], "font" => ["bold" => 1]])),
                 new Column("visit", "Visit", CellTypes::DATETIME,
-                    (new Style())->setFromArray(["format" => ["code" => Format::FORMAT_DATE_YMDHM]])),
+                    (new Style())->setFromArray(["format" => ["code" => Format::FORMAT_DATE_YMDHM], "protection" => ["hidden" => 1, "locked" => 1]])),
                 new Column("check", "Check", CellTypes::BOOLEAN,
-                    (new Style())->setFromArray(["format" => ["code" => Format::FORMAT_YESNO]])),
+                    (new Style())->setFromArray(["format" => ["code" => Format::FORMAT_YESNO], "alignment" => Alignment::HORIZONTAL_CENTER])),
             ]))
         ]));
         // write to a temporary file
