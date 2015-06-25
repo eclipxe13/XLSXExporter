@@ -70,7 +70,7 @@ class StyleSheet
         }
     }
 
-    protected function processAddToArray($name, Styles\AbstractStyle $generic)
+    protected function processAddToArray($name, Styles\StyleInterface $generic)
     {
         $generic->setIndex(0);
         if ($generic->hasValues()) {
@@ -106,7 +106,7 @@ class StyleSheet
     protected function xmlCollection($name, $tag)
     {
         return '<'.$tag.' count="'.count($this->objects[$name]).'">'
-            .array_reduce($this->objects[$name], function($r, Styles\AbstractStyle $generic) {
+            .array_reduce($this->objects[$name], function($r, Styles\StyleInterface $generic) {
                 return $r.$generic->asXML();
             })
             .'</'.$tag.'>'

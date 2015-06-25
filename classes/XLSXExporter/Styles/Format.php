@@ -5,7 +5,7 @@ namespace XLSXExporter\Styles;
 use XLSXExporter\XmlConverter;
 
 /**
- *
+ * @property $id TODO: document this property
  * @property string $code format code
  *
  * References:

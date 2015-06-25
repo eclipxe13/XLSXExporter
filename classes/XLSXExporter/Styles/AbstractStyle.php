@@ -4,7 +4,7 @@ namespace XLSXExporter\Styles;
 
 use XLSXExporter\XLSXException;
 
-abstract class AbstractStyle
+abstract class AbstractStyle implements StyleInterface
 {
 
     protected $data = [];
@@ -31,8 +31,7 @@ abstract class AbstractStyle
 
     public function __get($name)
     {
-        $props = $this->properties();
-        if (!in_array($name, $props)) {
+        if (!in_array($name, $this->properties())) {
             throw new XLSXException("Invalid property name $name");
         }
         $method = "get".ucfirst($name);
@@ -47,8 +46,7 @@ abstract class AbstractStyle
 
     public function __set($name, $value)
     {
-        $props = $this->properties();
-        if (!in_array($name, $props)) {
+        if (!in_array($name, $this->properties())) {
             throw new XLSXException("Invalid property name $name");
         }
         $method = "cast".ucfirst($name);

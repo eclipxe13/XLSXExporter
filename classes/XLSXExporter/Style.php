@@ -2,162 +2,153 @@
 
 namespace XLSXExporter;
 
-use XLSXExporter\Styles\Format;
-use XLSXExporter\Styles\Font;
-use XLSXExporter\Styles\Fill;
-use XLSXExporter\Styles\Alignment;
-use XLSXExporter\Styles\Border;
-use XLSXExporter\Styles\Protection;
-
+/**
+ * Class to access the style specification
+ * @property-read Styles\Alignment $alignment
+ * @property-read Styles\Border $border
+ * @property-read Styles\Fill $fill
+ * @property-read Styles\Font $font
+ * @property-read Styles\Format $format
+ * @property-read Styles\Protection $protection
+ * @method Styles\Alignment getAlignment()
+ * @method Styles\Border getBorder()
+ * @method Styles\Fill getFill()
+ * @method Styles\Font getFont()
+ * @method Styles\Format getFormat()
+ * @method Styles\Protection getProtection()
+ * @method Style setAlignment(Styles\Alignment $value)
+ * @method Style setBorder(Styles\Border $value)
+ * @method Style setFill(Styles\Fill $value)
+ * @method Style setFont(Styles\Font $value)
+ * @method Style setFormat(Styles\Format $value)
+ * @method Style setProtection(Styles\Protection $value)
+ */
 class Style
 {
 
     protected $styleindex;
 
-    /** @var Format */
-    protected $format;
-    /** @var Font */
-    protected $font;
-    /** @var Fill */
-    protected $fill;
-    /** @var Alignment */
-    protected $alignment;
-    /** @var Border */
-    protected $border;
-    /** @var Protection */
-    protected $protection;
+    /** @var Styles\StyleInterface[] */
+    protected $members = [
+        "format" => null,
+        "font" => null,
+        "fill" => null,
+        "alignment" => null,
+        "border" => null,
+        "protection" => null
+    ];
 
-    public function __construct($arrayStyles = null)
+    public function __construct(array $arrayStyles = null)
     {
-        $this->format = new Format();
-        $this->font = new Font();
-        $this->fill = new Fill();
-        $this->alignment = new Alignment();
-        $this->border = new Border();
-        $this->protection = new Protection();
-        if (is_array($arrayStyles) and count($arrayStyles)) {
+        foreach(array_keys($this->members) as $stylename) {
+            $styleclass = '\XLSXExporter\Styles\\' . ucfirst($stylename);
+            $this->$stylename = new $styleclass;
+        }
+        if (null !== $arrayStyles) {
             $this->setFromArray($arrayStyles);
         }
     }
 
+    public function __get($name)
+    {
+        if (! array_key_exists($name, $this->members)) {
+            throw new \LogicException("Invalid property name $name");
+        }
+        return $this->members[$name];
+    }
+
+    public function __set($name, $value)
+    {
+        if (! array_key_exists($name, $this->members)) {
+            throw new \LogicException("Invalid property name $name");
+        }
+        $styleclass = '\XLSXExporter\Styles\\' . ucfirst($name);
+        if (! $value instanceof $styleclass) {
+            throw new \LogicException("The value must be an instance of $styleclass");
+        }
+        return $this->members[$name] = $value;
+    }
+
+    public function __call($name, $arguments)
+    {
+        $getter = (0 === strpos($name, "get"));
+        $setter = (0 === strpos($name, "set"));
+        if ($getter or $setter) {
+            $name = lcfirst(substr($name, 3));
+        } elseif (!$getter and !$setter) {
+            throw new \LogicException("Invalid method name $name");
+        }
+        if (! array_key_exists($name, $this->members)) {
+            throw new \LogicException("Invalid setter/getter name $name");
+        }
+        if ($getter) {
+            return $this->$name;
+        }
+        if (1 != count($arguments)) {
+            throw new \LogicException("Invalid setter argument");
+        }
+        $this->$name = $arguments[0];
+        return $this;
+    }
+
+    public function getMemberNames()
+    {
+        return array_keys($this->members);
+    }
+
+    /**
+     * Set styles from an array of key-values
+     * Keys: format, font, fill, alignment, border, protection
+     * @param array $array
+     * @return \XLSXExporter\Style
+     */
     public function setFromArray(array $array)
     {
-        $keys = ["format", "font", "fill", "alignment", "border", "protection"];
-        foreach($keys as $key) {
+        if (!count($array)) return $this;
+        foreach($this->members as $key => $style) {
             if (array_key_exists($key, $array) and is_array($array[$key])) {
-                $this->$key->setValues($array[$key]);
+                $style->setValues($array[$key]);
             }
         }
         return $this;
     }
 
     /**
-     * @return Format
+     * Check if any of the styles has valid values
+     * @return boolean
      */
-    public function getFormat()
-    {
-        return $this->format;
-    }
-
-    public function setFormat(Format $format)
-    {
-        $this->format = $format;
-        return $this;
-    }
-
-    /**
-     * @return Font
-     */
-    public function getFont()
-    {
-        return $this->font;
-    }
-
-    public function setFont(Font $font)
-    {
-        $this->font = $font;
-        return $this;
-    }
-
-
-    /**
-     * @return Fill
-     */
-    public function getFill()
-    {
-        return $this->fill;
-    }
-
-    public function setFill(Fill $fill)
-    {
-        $this->fill = $fill;
-        return $this;
-    }
-
-    /**
-     * @return Alignment
-     */
-    public function getAlignment()
-    {
-        return $this->alignment;
-    }
-
-    public function setAlignment(Alignment $alignment)
-    {
-        $this->alignment = $alignment;
-        return $this;
-    }
-
-    /**
-     * @return Border
-     */
-    public function getBorder()
-    {
-        return $this->border;
-    }
-
-    public function setBorder(Border $border)
-    {
-        $this->border = $border;
-        return $this;
-    }
-
-    /**
-     * @return Protection
-     */
-    public function getProtection()
-    {
-        return $this->protection;
-    }
-
-    public function setProtection(Protection $protection)
-    {
-        $this->protection = $protection;
-        return $this;
-    }
-
     public function hasValues()
     {
-        return $this->format->hasValues()
-            or $this->font->hasValues()
-            or $this->alignment->hasValues()
-            or $this->fill->hasValues()
-            or $this->border->hasValues()
-            or $this->protection->hasValues()
-            ;
+        foreach($this->members as $style) {
+            if ($style->hasValues()) return true;
+        }
+        return false;
     }
 
-   public function setStyleIndex($index)
+    /**
+     * @param integer $index
+     * @return \XLSXExporter\Style
+     */
+    public function setStyleIndex($index)
     {
         $this->styleindex = $index;
         return $this;
     }
 
+    /**
+     *
+     * @return integer
+     */
     public function getStyleIndex()
     {
         return $this->styleindex;
     }
 
+    /**
+     * Method to return the XML xf node
+     * This method could be outside this object
+     * @access private
+     */
     public function asXML($xfId = 0)
     {
         // all the apply is set to not inherit the value from cellStyleXfs
