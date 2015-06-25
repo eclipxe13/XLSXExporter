@@ -56,10 +56,6 @@ class WorkBook {
         $filename = tempnam(sys_get_temp_dir(), "xlsx-");
         $zip = new ZipArchive();
         $zip->open($filename, ZipArchive::CREATE);
-
-//        $zip->addEmptyDir("docProps/");
-//        $zip->addFromString("docProps/app.xml" , self::buildAppXML());
-//        $zip->addFromString("docProps/core.xml", self::buildCoreXML());
         // folders
         $zip->addEmptyDir("xl/");
         $zip->addEmptyDir("xl/_rels/");
@@ -76,6 +72,7 @@ class WorkBook {
         $i = 1;
         foreach($this->worksheets as $worksheet) {
             // write and include the sheet
+            /* @var $worksheet WorkSheet */
             $wsfile = $worksheet->write($sharedstrings);
             $zip->addFile($wsfile, $this->workSheetFilePath($i));
             $removefiles[] = $wsfile;
