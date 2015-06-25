@@ -101,7 +101,7 @@ class WorkSheet
             $styleindex = $this->getHeaderStyle()->getStyleIndex();
             foreach($this->columns as $column) {
                 // write cell
-                $s = $strings->getIndex($column->getTitle());
+                $s = $strings->add($column->getTitle());
                 $writer->writeCell(CellTypes::TEXT, $s, $styleindex);
             }
             $writer->closeRow();
@@ -114,7 +114,7 @@ class WorkSheet
                 // write cell
                 $value = $this->provider->get($column->getId());
                 if (CellTypes::TEXT === $type = $column->getType()) {
-                    $value = $strings->getIndex($value);
+                    $value = $strings->add($value);
                 }
                 $writer->writeCell($type, $value, $column->style->getStyleIndex());
             }
