@@ -1,6 +1,11 @@
 {
     "name": "eclipxe/xlsxexporter",
-    "description": "Description of project XLSXExporter.",
+    "description": "PHP Office Open XML Spreadsheet (xlsx) exporter",
+    "type": "library",
+    "keywords": ["excel", "xlsx", "office-open-xml"],
+    "homepage": "https://github.com/eclipxe13/XLSXExporter",
+    "license": "LGPL-3.0+",
+    "minimum-stability": "dev",
     "authors": [
         {
             "name": "Carlos C Soto",
@@ -8,7 +13,8 @@
         }
     ],
     "require": {
-        "php": ">=5.4"
+        "php": ">=5.4",
+        "ext-zip": "*"
     },
     "autoload": {
         "psr-4": {
