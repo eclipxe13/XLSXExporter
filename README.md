@@ -19,6 +19,21 @@ When the structure information (workbook, worksheets, columns and providers) has
 Every time a worksheet will be created, the headers are written first, then every row of data is written. The data is extracted using the Provider. In this way, you don't need all your data stored on memory, you can use a PDO reader implementing the Provider interface.
 The data is written to a temporary files (including the final zip), so no large amount of data is being used.
 
+## Install ##
+
+Use composer, as June 2015 I haven't create the packlist file, so please run `composer require eclipxe/xlsxexporter` or include this on your `composer.json` file:
+
+```javascript
+    "require": {
+        "eclipxe/xlsxexporter": "dev-master"
+    }
+```
+
+You can download a copy and include the `autoloader.php` file, it will register the autoloading feature using `spl_autoload_register`
+function for the namespace `XLSXExporter`.
+
+
+
 ##Example##
 
 ```php
