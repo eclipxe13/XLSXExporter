@@ -1,27 +1,30 @@
-#XLSXExporter#
+# XLSXExporter
 
 PHP Office Open XML Spreadsheet (xlsx) Exporter is a project to write xlsx files using PHP.
 I recommend you to checkout the project [PHPExcel](https://github.com/PHPOffice/PHPExcel) that has an excellent support for this kind of files.
 
-I create this project because PHPExcel does not fit my needs. Specifically, I use this tool to export big amount of data to spreadsheets files to be exported and processed by the end user. Using PHPExcel consume a lot of memory and raising the "memory exhausted error".
+I create this project because PHPExcel does not fit my needs.
+Specifically, I use this tool to export big amount of data to spreadsheets
+files to be exported and processed by the end user.
+Using PHPExcel consume a lot of memory and raising the "memory exhausted error".
 
-Projects that does something like this and help me in the process:
+Projects that does something like this and I use it as reference:
 
  - https://github.com/PHPOffice/PHPExcel
  - https://github.com/mk-j/PHP_XLSXWriter
 
-##How it works##
+## How it works
 
-Your main object is a workbook.
-A workbook contains at least 1 spreadsheet.
-Every spreadsheet (worksheet) has a collection of columns and a DataProvider object.
-When the structure information (workbook, worksheets, columns and providers) has been set you can write the xlsx file.
-Every time a worksheet will be created, the headers are written first, then every row of data is written. The data is extracted using the Provider. In this way, you don't need all your data stored on memory, you can use a PDO reader implementing the Provider interface.
-The data is written to a temporary files (including the final zip), so no large amount of data is being used.
+1. Your main object is a workbook.
+1. A workbook contains at least 1 spreadsheet.
+1. Every spreadsheet (worksheet) has a collection of columns and a DataProvider object.
+1. When the structure information (workbook, worksheets, columns and providers) has been set you can write the xlsx file.
+1. Every time a worksheet will be created, the headers are written first, then every row of data is written. The data is extracted using the Provider. In this way, you don't need all your data stored on memory, you can use a PDO reader implementing the Provider interface.
+1. The data is written to a temporary files (including the final zip), so no large amount of data is being used.
 
-## Install ##
+## Installation
 
-Use composer, as June 2015 I haven't create the packlist file, so please run `composer require eclipxe/xlsxexporter` or include this on your `composer.json` file:
+Use composer, so please run `composer require eclipxe/xlsxexporter` or include this on your `composer.json` file:
 
 ```javascript
     "require": {
@@ -30,11 +33,10 @@ Use composer, as June 2015 I haven't create the packlist file, so please run `co
 ```
 
 You can download a copy and include the `autoloader.php` file, it will register the autoloading feature using `spl_autoload_register`
-function for the namespace `XLSXExporter`.
+function for the namespace `XLSXExporter\` and include the file only if it exists and is readable.
 
 
-
-##Example##
+## Example
 
 ```php
 
@@ -43,6 +45,7 @@ $a = new ProviderArray([
     ["fname" => "Charles", "amount" => 1234.561, "visit" => strtotime('2014-01-13 13:14:15'), "check" => 1],
     ["fname" => "Foo", "amount" => 6543.219, "visit" => strtotime('2014-12-31 23:59:59'), "check" => 0],
 ]);
+
 // create the workbook with all the information
 $wb = new WorkBook(new WorkSheets([
     new WorkSheet("sheet01", $a, new Columns([
@@ -55,26 +58,30 @@ $wb = new WorkBook(new WorkSheets([
             (new Style())->setFromArray(["format" => ["code" => Format::FORMAT_YESNO]])),
     ]))
 ]));
+
 // call the write process
 $tempfile = $wb->write();
+
 // copy the file to a certain location
 $this->assertTrue(copy($tempfile, "result.xlsx"));
+
 // remove temporary file
 unlink($tempfile);
 
 ```
 
-##Development##
+## Development
 
-I will be using this project for a while, so, I will maintain it and improve it a lot. In this stage you can consider it as a testing project (even when it's used in production).
+I will be using this project for a while, so, I will maintain it and improve it.
+In this stage you can consider it as a testing project (even when it's used in production).
 I want to do several modifications:
 
-- Make a better documentation
-- Make better tests
+- Better documentation
+- Better tests
 - Apply Inversion of Control Principle, depending on Interfaces and not on classes and use Factories
 - Feel free to contribute to this project!
 
-##TODO##
+## TODO
 
 All your help is very appreciated, please contribute with testing, ideas, code, documentation, coffees, etc.
 
@@ -84,3 +91,7 @@ All your help is very appreciated, please contribute with testing, ideas, code, 
 - Find a better way to manage SharedStrings without so many memory and fast
 - Depend on a class to create the temporary files
 - Document all the classes
+
+## License
+
+License MIT - Copyright (c) 2014 - 2015 Carlos Cortés Soto
