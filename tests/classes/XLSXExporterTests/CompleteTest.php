@@ -39,7 +39,7 @@ class CompleteTest extends \PHPUnit_Framework_TestCase
         $tempfile = $wb->write();
         $this->assertFileExists($tempfile);
         // copy the file to a certain location
-        $this->assertTrue(copy($tempfile, "result.xlsx"));
+        $this->assertTrue(copy($tempfile, __DIR__ . "/../../result.xlsx"));
         // remove temporary file
         unlink($tempfile);
     }
