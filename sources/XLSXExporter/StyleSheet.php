@@ -127,8 +127,6 @@ class StyleSheet
         $i = 0;
         return '<cellXfs count="' . count($this->styles) . '">'
             . array_reduce($this->styles, function ($r, Style $style) use (&$i) {
-                // // if no values then do not include
-                // if (!$style->hasValues()) return $r;
                 $style->setStyleIndex($i);
                 $i = $i + 1;
                 return $r . $style->asXML();
