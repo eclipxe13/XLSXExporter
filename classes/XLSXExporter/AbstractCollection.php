@@ -4,6 +4,10 @@ namespace XLSXExporter;
 
 abstract class AbstractCollection  implements \IteratorAggregate
 {
+    /**
+     * @param mixed $item
+     * @return bool
+     */
     public abstract function isValidInstance($item);
     public abstract function add($item);
 
