@@ -31,19 +31,28 @@ class CompleteTest extends \PHPUnit_Framework_TestCase
                     "amount",
                     "Amount",
                     CellTypes::NUMBER,
-                    (new Style())->setFromArray(["format" => ["code" => Format::FORMAT_COMMA_2DECS], "font" => ["bold" => 1]])
+                    (new Style())->setFromArray([
+                        "format" => ["code" => Format::FORMAT_COMMA_2DECS],
+                        "font" => ["bold" => 1]
+                    ])
                 ),
                 new Column(
                     "visit",
                     "Visit",
                     CellTypes::DATETIME,
-                    (new Style())->setFromArray(["format" => ["code" => Format::FORMAT_DATE_YMDHM], "protection" => ["hidden" => 1, "locked" => 1]])
+                    (new Style())->setFromArray([
+                        "format" => ["code" => Format::FORMAT_DATE_YMDHM],
+                        "protection" => ["hidden" => 1, "locked" => 1]
+                    ])
                 ),
                 new Column(
                     "check",
                     "Check",
                     CellTypes::BOOLEAN,
-                    (new Style())->setFromArray(["format" => ["code" => Format::FORMAT_YESNO], "alignment" => Alignment::HORIZONTAL_CENTER])
+                    (new Style())->setFromArray([
+                        "format" => ["code" => Format::FORMAT_YESNO],
+                        "alignment" => Alignment::HORIZONTAL_CENTER
+                    ])
                 ),
             ]))
         ]));
@@ -51,7 +60,10 @@ class CompleteTest extends \PHPUnit_Framework_TestCase
         $tempfile = $wb->write();
         $this->assertFileExists($tempfile);
         // copy the file to a certain location
-        $this->assertTrue(copy($tempfile, __DIR__ . "/../../result.xlsx"));
+        $build = __DIR__ . "/../../../build/";
+        if (is_dir($build)) {
+            copy($tempfile, $build . "/complete-test.xlsx");
+        }
         // remove temporary file
         unlink($tempfile);
     }
