@@ -68,7 +68,6 @@ class DateConverterTest extends \PHPUnit_Framework_TestCase
                 1 / 86000
             );
         }
-
     }
 
     public function testTimeStampToDateTime()
