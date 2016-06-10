@@ -1,4 +1,4 @@
-# XLSXExporter
+# eclipxe13/XLSXExporter
 
 [![Source Code][badge-source]][source]
 [![Latest Version][badge-release]][release]
@@ -116,7 +116,7 @@ License MIT - Copyright (c) 2014 - 2016 Carlos Cortés Soto
 [coverage]: https://coveralls.io/github/eclipxe13/XLSXExporter?branch=master
 [downloads]: https://packagist.org/packages/eclipxe/xlsxexporter
 
-[badge-source]: http://img.shields.io/badge/source-eclipxe13/generic--collections-blue.svg?style=flat-square
+[badge-source]: http://img.shields.io/badge/source-eclipxe13/XLSXExporter-blue.svg?style=flat-square
 [badge-release]: https://img.shields.io/github/release/eclipxe13/XLSXExporter.svg?style=flat-square
 [badge-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
 [badge-build]: https://img.shields.io/travis/eclipxe13/XLSXExporter.svg?style=flat-square
