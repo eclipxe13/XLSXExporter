@@ -65,20 +65,23 @@ class WorkSheetWriter
         $this->col = $this->initialcol;
     }
 
+    /**
+     * @param string $type one constant of CellTypes class
+     * @param mixed $value the value to write
+     * @param string $style the cell style
+     */
     public function writeCell($type, $value, $style)
     {
         if ($value === null) {
             $type = CellTypes::NUMBER;
             $value = "";
         }
-        $t = static::getDataType($type);
+        $ooxType = static::getDataType($type);
         $this->file->fwrite('<c r="' . static::colByNumber($this->col) . $this->row . '"'
             . (($style) ? ' s="' . $style . '"' : '')
-            . (($t) ? ' t="' . $t . '"' : '')
+            . (($ooxType) ? ' t="' . $ooxType . '"' : '')
             . '>');
-        if ($type === CellTypes::TEXT) {
-            $this->file->fwrite('<v>' . $value . '</v>');
-        } elseif ($type === CellTypes::NUMBER) {
+        if ($type === CellTypes::TEXT || $type === CellTypes::NUMBER) {
             $this->file->fwrite('<v>' . $value . '</v>');
         } elseif ($type === CellTypes::BOOLEAN) {
             $this->file->fwrite('<v>' . (($value) ? 1 : 0) . '</v>');
@@ -95,12 +98,12 @@ class WorkSheetWriter
         $this->col = $this->col + 1;
     }
 
-    public static function xml($text)
-    {
-        // do not convert single quotes
-        return htmlspecialchars($text, ENT_XML1 | ENT_COMPAT, 'UTF-8');
-    }
-
+    /**
+     * Retrieve the internal Office Open Xml internal data type
+     *
+     * @param string $type
+     * @return string
+     */
     public static function getDataType($type)
     {
         if ($type === CellTypes::TEXT) {
@@ -114,15 +117,21 @@ class WorkSheetWriter
         }
     }
 
+    /**
+     * Get the letters of the column, the first column number is 1
+     *
+     * @param int $column
+     * @return string
+     */
     public static function colByNumber($column)
     {
-        return static::getNameFromNumber($column - 1);
+        return static::getNameFromNumber(max(1, $column) - 1);
     }
 
     /**
      * This function was posted by Anthony Ferrara (ircmaxell) at stackoverflow
      * http://stackoverflow.com/questions/3302857/algorithm-to-get-the-excel-like-column-name-of-a-number
-     * The licence of this is considered as public domain
+     * The license of this code is considered as public domain
      * @author ircmaxell http://stackoverflow.com/users/338665/ircmaxell
      * @param integer $num base zero index
      * @return string
