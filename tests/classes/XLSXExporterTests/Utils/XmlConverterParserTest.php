@@ -1,14 +1,16 @@
 <?php
 
-namespace XLSXExporterTests;
+namespace classes\XLSXExporterTests\Utils;
 
+use PHPUnit\Framework\TestCase;
 use XLSXExporter\Utils\XmlConverter;
+use XMLWriter;
 
-class XmlConverterTest extends \PHPUnit_Framework_TestCase
+class XmlConverterParserTest extends TestCase
 {
     public function parseXML($text, $israw)
     {
-        $oXMLWriter = new \XMLWriter();
+        $oXMLWriter = new XMLWriter();
         $oXMLWriter->openMemory();
         $oXMLWriter->startDocument('1.0', 'UTF-8');
         $oXMLWriter->startElement('t');
@@ -32,9 +34,9 @@ class XmlConverterTest extends \PHPUnit_Framework_TestCase
             "I am text with Ünicödé & HTML €ntities ©",
         ];
         foreach ($texts as $t) {
-            $a = $this->parseXML($t, false);
-            $b = $this->parseXML(XmlConverter::parse($t), true);
-            $this->assertEquals($a, $b);
+            $expected = $this->parseXML($t, false);
+            $received = $this->parseXML(XmlConverter::parse($t), true);
+            $this->assertEquals($expected, $received);
         }
     }
 }
