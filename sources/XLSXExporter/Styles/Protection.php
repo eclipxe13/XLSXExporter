@@ -3,25 +3,25 @@
 namespace XLSXExporter\Styles;
 
 /**
- * @property boolean $hidden
- * @property boolean $locked
+ * @property bool $hidden
+ * @property bool $locked
  */
 class Protection extends AbstractStyle
 {
     protected function properties()
     {
         return [
-            "hidden",
-            "locked",
+            'hidden',
+            'locked',
         ];
     }
 
     public function asXML()
     {
         return '<protection'
-            .' locked="'.(($this->locked) ? "1" : "0").'"'
-            .' hidden="'.(($this->hidden) ? "1" : "0").'"'
-            .'/>'
+            . ' locked="' . (($this->locked) ? '1' : '0') . '"'
+            . ' hidden="' . (($this->hidden) ? '1' : '0') . '"'
+            . '/>'
         ;
     }
 

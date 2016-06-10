@@ -17,7 +17,7 @@ abstract class AbstractStyle implements StyleInterface
      * @var array
      */
     protected $data = [];
-    
+
     /** @var int Index property */
     protected $index;
 
@@ -51,10 +51,10 @@ abstract class AbstractStyle implements StyleInterface
 
     public function __get($name)
     {
-        if (!in_array($name, $this->properties())) {
+        if (! in_array($name, $this->properties())) {
             throw new XLSXException("Invalid property name $name");
         }
-        $method = "get" . ucfirst($name);
+        $method = 'get' . ucfirst($name);
         if (method_exists($this, $method)) {
             return $this->$method();
         }
@@ -66,14 +66,14 @@ abstract class AbstractStyle implements StyleInterface
 
     public function __set($name, $value)
     {
-        if (!in_array($name, $this->properties())) {
+        if (! in_array($name, $this->properties())) {
             throw new XLSXException("Invalid property name $name");
         }
-        $method = "cast" . ucfirst($name);
+        $method = 'cast' . ucfirst($name);
         if (method_exists($this, $method)) {
             $value = $this->$method($value);
         } else {
-            $method = "set" . ucfirst($name);
+            $method = 'set' . ucfirst($name);
             if (method_exists($this, $method)) {
                 $this->$method($value);
             }
@@ -103,6 +103,6 @@ abstract class AbstractStyle implements StyleInterface
 
     public function getHash()
     {
-        return sha1(self::class . "::" . print_r($this->data, true));
+        return sha1(self::class . '::' . print_r($this->data, true));
     }
 }

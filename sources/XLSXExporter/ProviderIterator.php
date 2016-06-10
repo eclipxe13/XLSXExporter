@@ -65,7 +65,7 @@ class ProviderIterator implements ProviderInterface
     {
         $asObject = is_object($current);
         $asArray = is_array($current) || $current instanceof \ArrayAccess;
-        if (!$asObject && !$asArray) {
+        if (! $asObject && ! $asArray) {
             return null;
         }
         if ($asArray) {

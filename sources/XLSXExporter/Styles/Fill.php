@@ -11,36 +11,36 @@ use XLSXExporter\XLSXException;
  */
 class Fill extends AbstractStyle
 {
-    const SOLID = "solid";
-    const NONE = "none";
-    const GRAY125 = "gray125";
+    const SOLID = 'solid';
+    const NONE = 'none';
+    const GRAY125 = 'gray125';
 
     protected function properties()
     {
         return [
-            "color",
-            "pattern",
+            'color',
+            'pattern',
         ];
     }
 
     public function asXML()
     {
-        if (!$this->pattern or $this->pattern == static::NONE or $this->pattern === static::GRAY125) {
-            return '<fill><patternFill patternType="'.$this->pattern.'"/></fill>';
+        if (! $this->pattern or $this->pattern == static::NONE or $this->pattern === static::GRAY125) {
+            return '<fill><patternFill patternType="' . $this->pattern . '"/></fill>';
         }
         return '<fill>'
-            .'<patternFill patternType="'.$this->pattern.'">'
-            .'<fgColor rgb="'.$this->color.'"/>'
-            .'<bgColor rgb="'.$this->color.'"/>'
-            .'</patternFill>'
-            .'</fill>'
+            . '<patternFill patternType="' . $this->pattern . '">'
+            . '<fgColor rgb="' . $this->color . '"/>'
+            . '<bgColor rgb="' . $this->color . '"/>'
+            . '</patternFill>'
+            . '</fill>'
         ;
     }
 
     protected function castPattern($value)
     {
-        if (!in_array($value, [static::NONE, static::GRAY125, static::SOLID])) {
-            throw new XLSXException("Invalid fill pattern");
+        if (! in_array($value, [static::NONE, static::GRAY125, static::SOLID])) {
+            throw new XLSXException('Invalid fill pattern');
         }
         return $value;
     }
@@ -48,7 +48,7 @@ class Fill extends AbstractStyle
     protected function castColor($value)
     {
         if (false === $color = OpenXmlColor::cast($value)) {
-            throw new XLSXException("Invalid fill color");
+            throw new XLSXException('Invalid fill color');
         }
         return $color;
     }

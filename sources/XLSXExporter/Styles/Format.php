@@ -60,13 +60,13 @@ class Format extends AbstractStyle
 
     protected function properties()
     {
-        return ["id", "code"];
+        return ['id', 'code'];
     }
 
     public function asXML()
     {
         if (null === $this->code) {
-            return "";
+            return '';
         }
         return '<numFmt numFmtId="' . $this->id . '" formatCode="' . XmlConverter::parse($this->code) . '"/>';
     }
@@ -115,14 +115,14 @@ class Format extends AbstractStyle
             67 => 't0%',
             68 => 't0.00%',
             69 => 't# ?/?',
-            70 => 't# ??/??'
+            70 => 't# ??/??',
         ];
     }
 
     public static function getBuiltInCodeById($id)
     {
         $codes = static::getBuiltInCodes();
-        return (array_key_exists($id, $codes)) ? $codes[$id] : "" ;
+        return (array_key_exists($id, $codes)) ? $codes[$id] : '';
     }
 
     public static function getBuiltInCodeByCode($code)

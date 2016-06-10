@@ -4,9 +4,9 @@ namespace XLSXExporter;
 
 class DateConverter
 {
-    const TIME = "TIME";
-    const DATE = "DATE";
-    const DATETIME = "DATETIME";
+    const TIME = 'TIME';
+    const DATE = 'DATE';
+    const DATETIME = 'DATETIME';
 
     public static function tsToExcel($ts, $type)
     {
@@ -41,9 +41,9 @@ class DateConverter
 
     public static function utcParts($ts)
     {
-        $offset = date("Z", $ts);
+        $offset = date('Z', $ts);
         return array_merge(
-            explode(",", gmdate("Y,m,d,H,i,s", $ts + $offset)),
+            explode(',', gmdate('Y,m,d,H,i,s', $ts + $offset)),
             [$offset]
         );
     }

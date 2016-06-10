@@ -10,7 +10,6 @@ namespace XLSXExporter;
  */
 class Column
 {
-
     protected $id;
     protected $type;
     protected $title;
@@ -20,12 +19,12 @@ class Column
      */
     protected $style;
 
-    public function __construct($id, $title = "", $type = CellTypes::TEXT, $style = null)
+    public function __construct($id, $title = '', $type = CellTypes::TEXT, $style = null)
     {
         $this->setId($id);
         $this->setType($type);
         $this->setTitle($title);
-        if (!($style instanceof Style)) {
+        if (! ($style instanceof Style)) {
             $style = new Style();
         }
         $this->setStyle($style);
@@ -33,21 +32,21 @@ class Column
 
     public function __get($name)
     {
-        $props = ["id", "type", "title", "style"];
-        if (!in_array($name, $props)) {
+        $props = ['id', 'type', 'title', 'style'];
+        if (! in_array($name, $props)) {
             throw new XLSXException("Invalid property name $name");
         }
-        $method = "get".ucfirst($name);
+        $method = 'get' . ucfirst($name);
         return $this->$method();
     }
 
     public function __set($name, $value)
     {
-        $props = ["type", "title", "style"];
-        if (!in_array($name, $props)) {
+        $props = ['type', 'title', 'style'];
+        if (! in_array($name, $props)) {
             throw new XLSXException("Invalid property name $name");
         }
-        $method = "set".ucfirst($name);
+        $method = 'set' . ucfirst($name);
         $this->$method($value);
     }
 

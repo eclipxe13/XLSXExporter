@@ -6,7 +6,7 @@ class Border extends AbstractStyle
 {
     public function asXML()
     {
-        return "";
+        return '';
     }
 
     protected function properties()

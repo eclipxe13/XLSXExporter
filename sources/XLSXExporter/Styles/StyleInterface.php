@@ -14,7 +14,7 @@ interface StyleInterface
      * @return void
      */
     public function setIndex($index);
-    
+
     /**
      * @return int
      */

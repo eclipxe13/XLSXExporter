@@ -24,14 +24,14 @@ class WorkSheet
     public function __construct($name, $provider = null, $columns = null, $headerstyle = null)
     {
         $this->setName($name);
-        if (!($columns instanceof Columns)) {
+        if (! ($columns instanceof Columns)) {
             $columns = new Columns();
         }
         $this->setColumns($columns);
         if ($provider instanceof ProviderInterface) {
             $this->setProvider($provider);
         }
-        if (!($headerstyle instanceof Style)) {
+        if (! ($headerstyle instanceof Style)) {
             $headerstyle = BasicStyles::defaultHeader();
         }
         $this->setHeaderStyle($headerstyle);
@@ -39,11 +39,11 @@ class WorkSheet
 
     public function __get($name)
     {
-        $props = ["name", "columns"];
-        if (!in_array($name, $props)) {
+        $props = ['name', 'columns'];
+        if (! in_array($name, $props)) {
             throw new XLSXException("Invalid property name $name");
         }
-        $method = "get".ucfirst($name);
+        $method = 'get' . ucfirst($name);
         return $this->$method();
     }
 
@@ -90,7 +90,7 @@ class WorkSheet
 
     public function write(SharedStrings $strings)
     {
-        $tempfile = tempnam(sys_get_temp_dir(), "ws-");
+        $tempfile = tempnam(sys_get_temp_dir(), 'ws-');
         $writer = new WorkSheetWriter();
         $writer->createSheet($tempfile, $this->columns->count(), $this->provider->count());
         $writer->openSheet();

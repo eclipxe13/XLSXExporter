@@ -12,11 +12,11 @@ class OpenXmlColor
      */
     public static function cast($value)
     {
-        $color = strtoupper(ltrim($value, "#"));
+        $color = strtoupper(ltrim($value, '#'));
         if (strlen($color) == 6) {
-            $color = "FF" . $color;
+            $color = 'FF' . $color;
         }
-        if (!preg_match("/[0-9A-F]{8}/", $color)) {
+        if (! preg_match('/[0-9A-F]{8}/', $color)) {
             return false;
         }
         return $color;

@@ -10,14 +10,13 @@ use XLSXExporter\Utils\XmlConverter;
  */
 class SharedStrings implements \Countable
 {
-
     protected $strings = [];
 
     /**
      * Add a string into the collection, return the index of the string
      * If the string already exists it will return the previous index
      * @param string $string
-     * @return integer
+     * @return int
      */
     public function add($string)
     {
@@ -36,8 +35,8 @@ class SharedStrings implements \Countable
      */
     public function write()
     {
-        $filename = tempnam(sys_get_temp_dir(), "ws-");
-        $file = new SplFileObject($filename, "w");
+        $filename = tempnam(sys_get_temp_dir(), 'ws-');
+        $file = new SplFileObject($filename, 'w');
         $this->writeTo($file);
         return $filename;
     }
@@ -52,12 +51,12 @@ class SharedStrings implements \Countable
         $file->fwrite(
             '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' . "\n"
             . '<sst xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"'
-            . ' count="'.$count.'" uniqueCount="'.$count.'">'
+            . ' count="' . $count . '" uniqueCount="' . $count . '">'
         );
         // Not using the index, is not needed
         // do not use array_keys, it (could?) duplicate the memory usage
         foreach ($this->strings as $string => $index) {
-            $file->fwrite('<si><t>'.XmlConverter::parse($string).'</t></si>');
+            $file->fwrite('<si><t>' . XmlConverter::parse($string) . '</t></si>');
         }
         $file->fwrite('</sst>');
     }

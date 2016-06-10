@@ -7,7 +7,6 @@ use XLSXExporter\Utils\XmlConverter;
 
 class WorkSheetWriter
 {
-
     /** @var SplFileObject */
     protected $file;
     protected $row;
@@ -25,7 +24,7 @@ class WorkSheetWriter
         $this->rowscount = $rowscount;
         $this->row = $initialrow;
         $this->col = $initialcol;
-        $this->file = new SplFileObject($filename, "w");
+        $this->file = new SplFileObject($filename, 'w');
     }
 
     public function openSheet()
@@ -74,7 +73,7 @@ class WorkSheetWriter
     {
         if ($value === null) {
             $type = CellTypes::NUMBER;
-            $value = "";
+            $value = '';
         }
         $ooxType = static::getDataType($type);
         $this->file->fwrite('<c r="' . static::colByNumber($this->col) . $this->row . '"'
@@ -107,13 +106,13 @@ class WorkSheetWriter
     public static function getDataType($type)
     {
         if ($type === CellTypes::TEXT) {
-            return "s";
+            return 's';
         } elseif ($type === CellTypes::BOOLEAN) {
-            return "b";
+            return 'b';
         } elseif ($type === CellTypes::NUMBER) {
-            return "n";
+            return 'n';
         } else { // INLINE and DATES
-            return "";
+            return '';
         }
     }
 
@@ -133,7 +132,7 @@ class WorkSheetWriter
      * http://stackoverflow.com/questions/3302857/algorithm-to-get-the-excel-like-column-name-of-a-number
      * The license of this code is considered as public domain
      * @author ircmaxell http://stackoverflow.com/users/338665/ircmaxell
-     * @param integer $num base zero index
+     * @param int $num base zero index
      * @return string
      */
     protected static function getNameFromNumber($num)
