@@ -25,24 +25,23 @@ namespace XLSXExporter;
  */
 class Style
 {
-
     protected $styleindex;
 
     /** @var Styles\StyleInterface[] */
     protected $members = [
-        "format" => null,
-        "font" => null,
-        "fill" => null,
-        "alignment" => null,
-        "border" => null,
-        "protection" => null
+        'format' => null,
+        'font' => null,
+        'fill' => null,
+        'alignment' => null,
+        'border' => null,
+        'protection' => null,
     ];
 
     public function __construct(array $arrayStyles = null)
     {
         foreach (array_keys($this->members) as $stylename) {
             $styleclass = '\XLSXExporter\Styles\\' . ucfirst($stylename);
-            $this->$stylename = new $styleclass;
+            $this->$stylename = new $styleclass();
         }
         if (null !== $arrayStyles) {
             $this->setFromArray($arrayStyles);
@@ -71,11 +70,11 @@ class Style
 
     public function __call($name, $arguments)
     {
-        $getter = (0 === strpos($name, "get"));
-        $setter = (0 === strpos($name, "set"));
+        $getter = (0 === strpos($name, 'get'));
+        $setter = (0 === strpos($name, 'set'));
         if ($getter or $setter) {
             $name = lcfirst(substr($name, 3));
-        } elseif (!$getter and !$setter) {
+        } elseif (! $getter and ! $setter) {
             throw new \LogicException("Invalid method name $name");
         }
         if (! array_key_exists($name, $this->members)) {
@@ -85,7 +84,7 @@ class Style
             return $this->$name;
         }
         if (1 != count($arguments)) {
-            throw new \LogicException("Invalid setter argument");
+            throw new \LogicException('Invalid setter argument');
         }
         $this->$name = $arguments[0];
         return $this;
@@ -104,7 +103,7 @@ class Style
      */
     public function setFromArray(array $array)
     {
-        if (!count($array)) {
+        if (! count($array)) {
             return $this;
         }
         foreach ($this->members as $key => $style) {
@@ -117,7 +116,7 @@ class Style
 
     /**
      * Check if any of the styles has valid values
-     * @return boolean
+     * @return bool
      */
     public function hasValues()
     {
@@ -130,7 +129,7 @@ class Style
     }
 
     /**
-     * @param integer $index
+     * @param int $index
      * @return \XLSXExporter\Style
      */
     public function setStyleIndex($index)
@@ -141,7 +140,7 @@ class Style
 
     /**
      *
-     * @return integer
+     * @return int
      */
     public function getStyleIndex()
     {
@@ -160,11 +159,11 @@ class Style
     {
         // all the apply is set to not inherit the value from cellStyleXfs
         return '<xf'
-            . ' numFmtId="'.intval($this->format->id).'"'
-            . ' fontId="'.$this->font->getIndex().'"'
-            . ' fillId="'.$this->fill->getIndex().'"'
-            . ' borderId="'.$this->border->getIndex().'"'
-            . ' xfId="'.(($xfId) ? : 0).'"' // all is based on cellStyleXfs[0] by default
+            . ' numFmtId="' . intval($this->format->id) . '"'
+            . ' fontId="' . $this->font->getIndex() . '"'
+            . ' fillId="' . $this->fill->getIndex() . '"'
+            . ' borderId="' . $this->border->getIndex() . '"'
+            . ' xfId="' . (($xfId) ? : 0) . '"' // all is based on cellStyleXfs[0] by default
             . ' applyNumberFormat="false"'
             . ' applyFont="false"'
             . ' applyFill="false"'

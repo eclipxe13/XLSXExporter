@@ -13,32 +13,32 @@ class StyleSheet
 
     public function __construct(array $styles)
     {
-        if (!count($styles)) {
-            throw new XLSXException("Error creating the stylesheet, no styles found");
+        if (! count($styles)) {
+            throw new XLSXException('Error creating the stylesheet, no styles found');
         }
         foreach ($styles as $style) {
-            if (!($style instanceof Style)) {
-                throw new XLSXException("Error creating the stylesheet, received an invalid style object");
+            if (! ($style instanceof Style)) {
+                throw new XLSXException('Error creating the stylesheet, received an invalid style object');
             }
         }
         // mandatory styles
         $this->styles = array_merge([
             new Style([
-                "format" => [
-                    "code" => Styles\Format::FORMAT_GENERAL,
+                'format' => [
+                    'code' => Styles\Format::FORMAT_GENERAL,
                 ],
-                "fill" => [
-                    "pattern" => Styles\Fill::NONE
+                'fill' => [
+                    'pattern' => Styles\Fill::NONE,
                 ],
-                "alignment" => [
-                    "horizontal" => Styles\Alignment::HORIZONTAL_GENERAL,
-                    "vertical" => Styles\Alignment::VERTICAL_BOTTOM
+                'alignment' => [
+                    'horizontal' => Styles\Alignment::HORIZONTAL_GENERAL,
+                    'vertical' => Styles\Alignment::VERTICAL_BOTTOM,
                 ],
                 ]),
             new Style([
-                "fill" => [
-                    "pattern" => Styles\Fill::GRAY125
-                ]
+                'fill' => [
+                    'pattern' => Styles\Fill::GRAY125,
+                ],
                 ]),
             ], $styles);
     }
@@ -47,18 +47,18 @@ class StyleSheet
     {
         $codes = [];
         $fmtcounter = 164;
-        $this->objects["format"] = [];
-        $this->hashes["format"] = [];
+        $this->objects['format'] = [];
+        $this->hashes['format'] = [];
         foreach ($this->styles as $style) {
             $format = $style->getFormat();
-            if (!$format->hasValues()) {
+            if (! $format->hasValues()) {
                 $format->code = Styles\Format::FORMAT_GENERAL;
             }
             if (false !== $builtin = $format->getBuiltInCodeByCode($format->code)) {
                 $format->id = $builtin;
-                if (!in_array($format->code, $codes)) {
+                if (! in_array($format->code, $codes)) {
                     $codes[$format->id] = $format->code;
-                    array_push($this->objects["format"], $format);
+                    array_push($this->objects['format'], $format);
                 }
             } elseif (false !== $numfmtid = array_search($format->code, $codes)) {
                 $format->id = $numfmtid;
@@ -66,7 +66,7 @@ class StyleSheet
                 $format->id = $fmtcounter;
                 $fmtcounter = $fmtcounter + 1;
                 $codes[$format->id] = $format->code;
-                array_push($this->objects["format"], $format);
+                array_push($this->objects['format'], $format);
             }
         }
     }
@@ -90,7 +90,7 @@ class StyleSheet
         // different process for "format"
         $this->processStylesFormat();
         // same process for "font", "fill" and "border"
-        $namedcollections = ["font", "fill", "border"];
+        $namedcollections = ['font', 'fill', 'border'];
         foreach ($namedcollections as $name) {
             $this->objects[$name] = [];
             $this->hashes[$name] = []; // init styles
@@ -98,7 +98,7 @@ class StyleSheet
         foreach ($this->styles as $style) {
             $style->setStyleIndex(0);
             foreach ($namedcollections as $name) {
-                $method = "get" . ucfirst($name);
+                $method = 'get' . ucfirst($name);
                 $this->processAddToArray($name, $style->$method());
             }
         }
@@ -142,9 +142,9 @@ class StyleSheet
         $this->processStyles();
         return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' . "\n"
             . '<styleSheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">'
-            . $this->xmlCollection("format", "numFmts")
-            . $this->xmlCollection("font", "fonts")
-            . $this->xmlCollection("fill", "fills")
+            . $this->xmlCollection('format', 'numFmts')
+            . $this->xmlCollection('font', 'fonts')
+            . $this->xmlCollection('fill', 'fills')
             //.$this->xmlCollection("border", "borders")
             . '<borders count="1"><border><left/><right/><top/><bottom/><diagonal/></border></borders>'
             . $this->xmlCellStylesXF()

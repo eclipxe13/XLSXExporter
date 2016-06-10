@@ -1,5 +1,14 @@
 # XLSXExporter
 
+[![Source Code][badge-source]][source]
+[![Latest Version][badge-release]][release]
+[![Software License][badge-license]][license]
+[![Build Status][badge-build]][build]
+[![Scrutinizer][badge-quality]][quality]
+[![SensioLabsInsight][badge-sensiolabs]][sensiolabs]
+[![Coverage Status][badge-coverage]][coverage]
+[![Total Downloads][badge-downloads]][downloads]
+
 PHP Office Open XML Spreadsheet (xlsx) Exporter is a project to write xlsx files using PHP.
 I recommend you to checkout the project [PHPExcel](https://github.com/PHPOffice/PHPExcel)
 that has an excellent support for this kind of files.
@@ -97,3 +106,21 @@ All your help is very appreciated, please contribute with testing, ideas, code, 
 ## License
 
 License MIT - Copyright (c) 2014 - 2016 Carlos Cortés Soto
+
+[source]: https://github.com/eclipxe13/xlsxexporter
+[release]: https://github.com/eclipxe13/xlsxexporter/releases
+[license]: https://github.com/eclipxe13/xlsxexporter/blob/master/LICENSE
+[build]: https://travis-ci.org/eclipxe13/xlsxexporter
+[quality]: https://scrutinizer-ci.com/g/eclipxe13/xlsxexporter/
+[sensiolabs]: https://insight.sensiolabs.com/projects/eeb7099d-e35d-4acb-8ce2-457004a47913
+[coverage]: https://coveralls.io/github/eclipxe13/xlsxexporter?branch=master
+[downloads]: https://packagist.org/packages/eclipxe/xlsxexporter
+
+[badge-source]: http://img.shields.io/badge/source-eclipxe13/generic--collections-blue.svg?style=flat-square
+[badge-release]: https://img.shields.io/github/release/eclipxe13/xlsxexporter.svg?style=flat-square
+[badge-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
+[badge-build]: https://img.shields.io/travis/eclipxe13/xlsxexporter.svg?style=flat-square
+[badge-quality]: https://img.shields.io/scrutinizer/g/eclipxe13/xlsxexporter/master.svg?style=flat-square
+[badge-sensiolabs]: https://img.shields.io/sensiolabs/i/eeb7099d-e35d-4acb-8ce2-457004a47913.svg?style=flat-square
+[badge-coverage]: https://coveralls.io/repos/github/eclipxe13/xlsxexporter/badge.svg?branch=master
+[badge-downloads]: https://img.shields.io/packagist/dt/eclipxe/xlsxexporter.svg?style=flat-square

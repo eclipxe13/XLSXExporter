@@ -10,7 +10,6 @@ use ZipArchive;
  */
 class WorkBook
 {
-
     /** @var WorkSheets */
     protected $worksheets;
 
@@ -20,12 +19,12 @@ class WorkBook
     public function __construct($worksheets = null, $style = null)
     {
         // wroksheets
-        if (!($worksheets instanceof WorkSheets)) {
+        if (! ($worksheets instanceof WorkSheets)) {
             $worksheets = new WorkSheets();
         }
         $this->worksheets = $worksheets;
         // style
-        if (!($style instanceof Style)) {
+        if (! ($style instanceof Style)) {
             $style = BasicStyles::defaultStyle();
         }
         $this->style = $style;
@@ -34,11 +33,11 @@ class WorkBook
     public function __get($name)
     {
         // read-only properties
-        $props = ["worksheets", "style"];
-        if (!in_array($name, $props)) {
+        $props = ['worksheets', 'style'];
+        if (! in_array($name, $props)) {
             throw new XLSXException("Invalid property name $name");
         }
-        $method = "get".ucfirst($name);
+        $method = 'get' . ucfirst($name);
         return $this->$method();
     }
 
@@ -50,24 +49,24 @@ class WorkBook
     public function write()
     {
         // check that there are worksheets
-        if (!$this->worksheets->count()) {
-            throw new XLSXException("Workbook does not contains any worksheet");
+        if (! $this->worksheets->count()) {
+            throw new XLSXException('Workbook does not contains any worksheet');
         }
         $removefiles = [];
-        $filename = tempnam(sys_get_temp_dir(), "xlsx-");
+        $filename = tempnam(sys_get_temp_dir(), 'xlsx-');
         $zip = new ZipArchive();
         $zip->open($filename, ZipArchive::CREATE);
         // folders
-        $zip->addEmptyDir("xl/");
-        $zip->addEmptyDir("xl/_rels/");
-        $zip->addEmptyDir("_rels/");
-        $zip->addEmptyDir("xl/worksheets/");
+        $zip->addEmptyDir('xl/');
+        $zip->addEmptyDir('xl/_rels/');
+        $zip->addEmptyDir('_rels/');
+        $zip->addEmptyDir('xl/worksheets/');
         // simple files
-        $zip->addFromString("_rels/.rels", $this->xmlRels());
-        $zip->addFromString("[Content_Types].xml", $this->xmlContentTypes());
-        $zip->addFromString("xl/styles.xml", $this->xmlStyles());
-        $zip->addFromString("xl/workbook.xml", $this->xmlWorkbook());
-        $zip->addFromString("xl/_rels/workbook.xml.rels", $this->xmlWorkbookRels());
+        $zip->addFromString('_rels/.rels', $this->xmlRels());
+        $zip->addFromString('[Content_Types].xml', $this->xmlContentTypes());
+        $zip->addFromString('xl/styles.xml', $this->xmlStyles());
+        $zip->addFromString('xl/workbook.xml', $this->xmlWorkbook());
+        $zip->addFromString('xl/_rels/workbook.xml.rels', $this->xmlWorkbookRels());
         // create the sharedStrings object because worksheets use it
         $sharedstrings = new SharedStrings();
         $i = 1;
@@ -81,7 +80,7 @@ class WorkBook
         }
         // include the shared strings file
         $shstrsfile = $sharedstrings->write();
-        $zip->addFile($shstrsfile, "xl/sharedStrings.xml");
+        $zip->addFile($shstrsfile, 'xl/sharedStrings.xml');
         $removefiles[] = $shstrsfile;
         // end with zip
         $zip->close();
@@ -92,24 +91,24 @@ class WorkBook
         return $filename;
     }
 
-    protected function workSheetFilePath($index, $prefix = "xl/")
+    protected function workSheetFilePath($index, $prefix = 'xl/')
     {
-        return $prefix."worksheets/sheet".$index.".xml";
+        return $prefix . 'worksheets/sheet' . $index . '.xml';
     }
 
     protected function xmlRels()
     {
-        return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'."\n"
-            .'<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
-            .'<Relationship Id="wb1"'
-            .' Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument"'
-            .' Target="xl/workbook.xml"/>'
-            .'</Relationships>';
+        return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' . "\n"
+            . '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
+            . '<Relationship Id="wb1"'
+            . ' Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument"'
+            . ' Target="xl/workbook.xml"/>'
+            . '</Relationships>';
     }
 
     protected function xmlContentTypes()
     {
-        return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'."\n"
+        return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' . "\n"
             . '<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">'
             . '<Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>'
             . '<Default Extension="xml" ContentType="application/xml"/>'
@@ -120,11 +119,11 @@ class WorkBook
             . '<Override PartName="/xl/sharedStrings.xml"'
             . ' ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sharedStrings+xml"/>'
             . array_reduce(range(1, $this->worksheets->count()), function ($r, $index) {
-                return $r.'<Override PartName="/'.$this->workSheetFilePath($index)
-                    .'" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>'
+                return $r . '<Override PartName="/' . $this->workSheetFilePath($index)
+                    . '" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>'
                 ;
             })
-            .'</Types>';
+            . '</Types>';
     }
 
     protected function xmlStyles()
@@ -146,14 +145,15 @@ class WorkBook
     protected function xmlWorkbook()
     {
         $index = 0;
-        return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'."\n"
+        return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' . "\n"
             . '<workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"'
             . ' xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">'
             . '<bookViews><workbookView/></bookViews>' // without the bookviews the user in MS Excel cannot copy paste
             . '<sheets>'
             . array_reduce($this->worksheets->all(), function ($r, WorkSheet $worksheet) use (&$index) {
                 $index = $index + 1;
-                return $r.'<sheet name="'.$worksheet->getName().'" sheetId="'.$index.'" r:id="rId'.$index.'"/>';
+                return $r . '<sheet name="' . $worksheet->getName() . '"'
+                    . ' sheetId="' . $index . '" r:id="rId' . $index . '"/>';
             })
             . '</sheets>'
             . '</workbook>'
@@ -162,19 +162,19 @@ class WorkBook
 
     protected function xmlWorkbookRels()
     {
-        return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'."\n"
-            .'<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
-            .array_reduce(range(1, $this->worksheets->count()), function ($r, $index) {
-                return $r.'<Relationship Id="rId'.$index.'"'
-                    .' Target="'.$this->workSheetFilePath($index, "").'"'
-                    .' Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet"/>'
+        return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' . "\n"
+            . '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
+            . array_reduce(range(1, $this->worksheets->count()), function ($r, $index) {
+                return $r . '<Relationship Id="rId' . $index . '"'
+                    . ' Target="' . $this->workSheetFilePath($index, '') . '"'
+                    . ' Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet"/>'
                 ;
             })
-            .'<Relationship Id="stl1" Target="styles.xml"'
+            . '<Relationship Id="stl1" Target="styles.xml"'
             . ' Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles"/>'
-            .'<Relationship Id="shs1" Target="sharedStrings.xml"'
+            . '<Relationship Id="shs1" Target="sharedStrings.xml"'
             . ' Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/sharedStrings"/>'
-            .'</Relationships>'
+            . '</Relationships>'
             ;
     }
 }

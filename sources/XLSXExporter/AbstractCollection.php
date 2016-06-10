@@ -23,11 +23,11 @@ abstract class AbstractCollection implements \IteratorAggregate
 
     protected function addItem($item, $id)
     {
-        if (!$this->isValidInstance($item)) {
-            throw new XLSXException("The item is not a valid object for the collection");
+        if (! $this->isValidInstance($item)) {
+            throw new XLSXException('The item is not a valid object for the collection');
         }
         if ($this->exists($id)) {
-            throw new XLSXException("There is a item with the same id, ids must be unique");
+            throw new XLSXException('There is a item with the same id, ids must be unique');
         }
         $this->collection[$id] = $item;
     }
@@ -46,7 +46,7 @@ abstract class AbstractCollection implements \IteratorAggregate
     /**
      * Check if a item id exists
      * @param string $id
-     * @return boolean
+     * @return bool
      */
     public function exists($id)
     {
@@ -55,7 +55,7 @@ abstract class AbstractCollection implements \IteratorAggregate
 
     /**
      * Number of items
-     * @return integer
+     * @return int
      */
     public function count()
     {
@@ -70,7 +70,7 @@ abstract class AbstractCollection implements \IteratorAggregate
      */
     public function get($id)
     {
-        if (!$this->exists($id)) {
+        if (! $this->exists($id)) {
             throw new XLSXException("The item $id does not exists");
         }
         return $this->collection[$id];
