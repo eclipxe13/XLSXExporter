@@ -3,6 +3,7 @@
 namespace XLSXExporter;
 
 use Iterator;
+use XLSXExporter\Utils\ProviderGetValue;
 
 /**
  * ProviderIterator is a facade to be able to use any Iterator as a Provider
@@ -50,28 +51,7 @@ class ProviderIterator implements ProviderInterface
 
     public function get($key)
     {
-        return $this->getValue($this->iterator->current(), $key);
-    }
-
-    /**
-     * Retrieve a key from an array key or a object property
-     *
-     * @param mixed $current
-     * @param string $key
-     * @return mixed
-     * @throws XLSXException
-     */
-    private function getValue($current, $key)
-    {
-        $asObject = is_object($current);
-        $asArray = is_array($current) || $current instanceof \ArrayAccess;
-        if (! $asObject && ! $asArray) {
-            return null;
-        }
-        if ($asArray) {
-            return (isset($current[$key])) ? $current[$key] : null;
-        }
-        return (isset($current->{$key})) ? $current->{$key} : null;
+        return ProviderGetValue::get($this->iterator->current(), $key);
     }
 
     public function next()

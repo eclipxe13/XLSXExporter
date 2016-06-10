@@ -2,6 +2,8 @@
 
 namespace XLSXExporter;
 
+use XLSXExporter\Utils\ProviderGetValue;
+
 class ProviderArray implements ProviderInterface
 {
     private $dataset;
@@ -15,7 +17,10 @@ class ProviderArray implements ProviderInterface
 
     public function get($key)
     {
-        return $this->dataset[$this->index][$key];
+        if (! $this->valid()) {
+            return null;
+        }
+        return ProviderGetValue::get($this->dataset[$this->index], $key);
     }
 
     public function next()
