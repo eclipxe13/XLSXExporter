@@ -1,7 +1,8 @@
 # XLSXExporter
 
 PHP Office Open XML Spreadsheet (xlsx) Exporter is a project to write xlsx files using PHP.
-I recommend you to checkout the project [PHPExcel](https://github.com/PHPOffice/PHPExcel) that has an excellent support for this kind of files.
+I recommend you to checkout the project [PHPExcel](https://github.com/PHPOffice/PHPExcel)
+that has an excellent support for this kind of files.
 
 I create this project because PHPExcel does not fit my needs.
 Specifically, I use this tool to export big amount of data to spreadsheets
@@ -26,10 +27,12 @@ Projects that does something like this and I use it as reference:
 
 Use composer, so please run `composer require eclipxe/xlsxexporter` or include this on your `composer.json` file:
 
-```javascript
+```json
+{
     "require": {
         "eclipxe/xlsxexporter": "dev-master"
     }
+}
 ```
 
 You can download a copy and include the `autoloader.php` file, it will register the autoloading feature using `spl_autoload_register`
@@ -39,7 +42,6 @@ function for the namespace `XLSXExporter\` and include the file only if it exist
 ## Example
 
 ```php
-
 // create a simple array as example
 $a = new ProviderArray([
     ["fname" => "Charles", "amount" => 1234.561, "visit" => strtotime('2014-01-13 13:14:15'), "check" => 1],
@@ -63,11 +65,10 @@ $wb = new WorkBook(new WorkSheets([
 $tempfile = $wb->write();
 
 // copy the file to a certain location
-$this->assertTrue(copy($tempfile, "result.xlsx"));
+copy($tempfile, "result.xlsx");
 
 // remove temporary file
 unlink($tempfile);
-
 ```
 
 ## Development
@@ -76,6 +77,7 @@ I will be using this project for a while, so, I will maintain it and improve it.
 In this stage you can consider it as a testing project (even when it's used in production).
 I want to do several modifications:
 
+- Follow PSR-2 http://www.php-fig.org/psr/psr-2/
 - Better documentation
 - Better tests
 - Apply Inversion of Control Principle, depending on Interfaces and not on classes and use Factories
@@ -94,4 +96,4 @@ All your help is very appreciated, please contribute with testing, ideas, code, 
 
 ## License
 
-License MIT - Copyright (c) 2014 - 2015 Carlos Cortés Soto
+License MIT - Copyright (c) 2014 - 2016 Carlos Cortés Soto
