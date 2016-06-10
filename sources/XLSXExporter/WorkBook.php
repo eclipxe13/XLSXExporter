@@ -6,9 +6,10 @@ use ZipArchive;
 
 /**
  * @property-read Style $style Default style for the whole document
- * @property-read WorkSheets $worksheets Collections of worksheets
+ * @property-read WorkSheets|WorkSheet[] $worksheets Collections of worksheets
  */
-class WorkBook {
+class WorkBook
+{
 
     /** @var WorkSheets */
     protected $worksheets;
@@ -63,14 +64,14 @@ class WorkBook {
         $zip->addEmptyDir("xl/worksheets/");
         // simple files
         $zip->addFromString("_rels/.rels", $this->xmlRels());
-        $zip->addFromString("[Content_Types].xml" , $this->xmlContentTypes());
+        $zip->addFromString("[Content_Types].xml", $this->xmlContentTypes());
         $zip->addFromString("xl/styles.xml", $this->xmlStyles());
-        $zip->addFromString("xl/workbook.xml" , $this->xmlWorkbook());
+        $zip->addFromString("xl/workbook.xml", $this->xmlWorkbook());
         $zip->addFromString("xl/_rels/workbook.xml.rels", $this->xmlWorkbookRels());
         // create the sharedStrings object because worksheets use it
         $sharedstrings = new SharedStrings();
         $i = 1;
-        foreach($this->worksheets as $worksheet) {
+        foreach ($this->worksheets as $worksheet) {
             // write and include the sheet
             /* @var $worksheet WorkSheet */
             $wsfile = $worksheet->write($sharedstrings);
@@ -80,16 +81,15 @@ class WorkBook {
         }
         // include the shared strings file
         $shstrsfile = $sharedstrings->write();
-        $zip->addFile($shstrsfile, "xl/sharedStrings.xml" );
+        $zip->addFile($shstrsfile, "xl/sharedStrings.xml");
         $removefiles[] = $shstrsfile;
         // end with zip
         $zip->close();
         // remove temp files
-        foreach($removefiles as $file) {
+        foreach ($removefiles as $file) {
             unlink($file);
         }
         return $filename;
-
     }
 
     protected function workSheetFilePath($index, $prefix = "xl/")
@@ -101,20 +101,25 @@ class WorkBook {
     {
         return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'."\n"
             .'<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
-            .'<Relationship Id="wb1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/>'
+            .'<Relationship Id="wb1"'
+            .' Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument"'
+            .' Target="xl/workbook.xml"/>'
             .'</Relationships>';
     }
 
     protected function xmlContentTypes()
     {
         return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'."\n"
-            .'<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">'
-            .'<Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>'
-            .'<Default Extension="xml" ContentType="application/xml"/>'
-            .'<Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/>'
-            .'<Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/>'
-            .'<Override PartName="/xl/sharedStrings.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sharedStrings+xml"/>'
-            .array_reduce(range(1, $this->worksheets->count()), function($r, $index) {
+            . '<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">'
+            . '<Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>'
+            . '<Default Extension="xml" ContentType="application/xml"/>'
+            . '<Override PartName="/xl/workbook.xml"'
+            . ' ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/>'
+            . '<Override PartName="/xl/styles.xml"'
+            . ' ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/>'
+            . '<Override PartName="/xl/sharedStrings.xml"'
+            . ' ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sharedStrings+xml"/>'
+            . array_reduce(range(1, $this->worksheets->count()), function ($r, $index) {
                 return $r.'<Override PartName="/'.$this->workSheetFilePath($index)
                     .'" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>'
                 ;
@@ -126,10 +131,10 @@ class WorkBook {
     {
         $styles = [];
         $styles[] = $this->style;
-        foreach($this->worksheets as $worksheet) {
+        foreach ($this->worksheets as $worksheet) {
             // add worksheet header style
             $styles[] = $worksheet->getHeaderStyle();
-            foreach($worksheet->getColumns() as $column) {
+            foreach ($worksheet->getColumns() as $column) {
                 // add worksheet column style
                 $styles[] = $column->getStyle();
             }
@@ -142,15 +147,16 @@ class WorkBook {
     {
         $index = 0;
         return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'."\n"
-            .'<workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">'
-            .'<bookViews><workbookView/></bookViews>' // without the bookviews the user in MS Excel cannot copy and paste the content
-            .'<sheets>'
-            .array_reduce($this->worksheets->all(), function ($r, WorkSheet $worksheet) use (&$index) {
+            . '<workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"'
+            . ' xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">'
+            . '<bookViews><workbookView/></bookViews>' // without the bookviews the user in MS Excel cannot copy paste
+            . '<sheets>'
+            . array_reduce($this->worksheets->all(), function ($r, WorkSheet $worksheet) use (&$index) {
                 $index = $index + 1;
                 return $r.'<sheet name="'.$worksheet->getName().'" sheetId="'.$index.'" r:id="rId'.$index.'"/>';
             })
-            .'</sheets>'
-            .'</workbook>'
+            . '</sheets>'
+            . '</workbook>'
             ;
     }
 
@@ -164,10 +170,11 @@ class WorkBook {
                     .' Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet"/>'
                 ;
             })
-            .'<Relationship Id="stl1" Target="styles.xml" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles"/>'
-            .'<Relationship Id="shs1" Target="sharedStrings.xml" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/sharedStrings"/>'
+            .'<Relationship Id="stl1" Target="styles.xml"'
+            . ' Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles"/>'
+            .'<Relationship Id="shs1" Target="sharedStrings.xml"'
+            . ' Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/sharedStrings"/>'
             .'</Relationships>'
             ;
     }
-
 }

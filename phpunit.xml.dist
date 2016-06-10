@@ -4,17 +4,10 @@
             <directory suffix="Test.php">tests/</directory>
         </testsuite>
     </testsuites>
-    <!-- report also coverage -->
-    <logging>
-        <log type="coverage-text" target="php://stdout" showUncoveredFiles="true"/>
-    </logging>
     <!-- exclude composer vendor folder -->
     <filter>
         <whitelist>
-            <directory>src/</directory>
-            <exclude>
-                <directory>vendor/</directory>
-            </exclude>
+            <directory suffix=".php">classes/</directory>
         </whitelist>
     </filter>
 </phpunit>

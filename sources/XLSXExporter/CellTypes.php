@@ -2,7 +2,8 @@
 
 namespace XLSXExporter;
 
-abstract class CellTypes {
+abstract class CellTypes
+{
     const TEXT = "TEXT";
     const NUMBER = "NUMBER";
     const BOOLEAN = "BOOLEAN";

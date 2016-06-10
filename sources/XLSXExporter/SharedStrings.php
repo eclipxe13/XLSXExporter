@@ -3,6 +3,7 @@
 namespace XLSXExporter;
 
 use SplFileObject;
+use XLSXExporter\Utils\XmlConverter;
 
 /**
  * Collection of Shared strings, this collection is a increase-only, cannot reduce or clean
@@ -49,13 +50,14 @@ class SharedStrings implements \Countable
     {
         $count = count($this->strings);
         $file->fwrite(
-            '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'."\n"
-            .'<sst xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" count="'.$count.'" uniqueCount="'.$count.'">'
+            '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' . "\n"
+            . '<sst xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"'
+            . ' count="'.$count.'" uniqueCount="'.$count.'">'
         );
         // Not using the index, is not needed
         // do not use array_keys, it (could?) duplicate the memory usage
-        foreach($this->strings as $string => $index) {
-            $file->fwrite('<si><t>'.XmlConverter::specialchars($string).'</t></si>');
+        foreach ($this->strings as $string => $index) {
+            $file->fwrite('<si><t>'.XmlConverter::parse($string).'</t></si>');
         }
         $file->fwrite('</sst>');
     }
@@ -64,5 +66,4 @@ class SharedStrings implements \Countable
     {
         return count($this->strings, $mode);
     }
-
 }

@@ -32,5 +32,4 @@ class ProviderArray implements ProviderInterface
     {
         return count($this->dataset);
     }
-
 }

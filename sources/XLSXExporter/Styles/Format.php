@@ -2,7 +2,7 @@
 
 namespace XLSXExporter\Styles;
 
-use XLSXExporter\XmlConverter;
+use XLSXExporter\Utils\XmlConverter;
 
 /**
  * @property $id TODO: document this property
@@ -65,9 +65,10 @@ class Format extends AbstractStyle
 
     public function asXML()
     {
-        if (null === $this->code) return "";
-        return '<numFmt numFmtId="'.$this->id.'" formatCode="'.XmlConverter::specialchars($this->code).'"/>'
-        ;
+        if (null === $this->code) {
+            return "";
+        }
+        return '<numFmt numFmtId="' . $this->id . '" formatCode="' . XmlConverter::parse($this->code) . '"/>';
     }
 
     public static function getBuiltInCodes()
@@ -128,6 +129,4 @@ class Format extends AbstractStyle
     {
         return array_search((string) $code, static::getBuiltInCodes(), true);
     }
-
-
 }

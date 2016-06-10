@@ -17,7 +17,12 @@ class DateConverterTest extends \PHPUnit_Framework_TestCase
         ];
         foreach ($a as $test) {
             $ts = strtotime($test["s"]);
-            $this->assertEquals(round($test["e"], 9), round(DateConverter::tsToExcelTime($ts), 9), "Checking ".$test["s"].", TS: ".$ts." - ".date("H:i:s", $ts), 1 / 86000);
+            $this->assertEquals(
+                round($test["e"], 9),
+                round(DateConverter::tsToExcelTime($ts), 9),
+                "Checking ".$test["s"].", TS: ".$ts." - ".date("H:i:s", $ts),
+                1 / 86000
+            );
         }
     }
     public function testTimeStampToDate()
@@ -31,7 +36,12 @@ class DateConverterTest extends \PHPUnit_Framework_TestCase
         ];
         foreach ($a as $test) {
             $ts = strtotime($test["s"]);
-            $this->assertEquals(round($test["e"], 9), round(DateConverter::tsToExcelDateTime($ts), 9), "Checking ".$test["s"].", TS: ".$ts, 1 / 86000);
+            $this->assertEquals(
+                round($test["e"], 9),
+                round(DateConverter::tsToExcelDateTime($ts), 9),
+                "Checking ".$test["s"].", TS: ".$ts,
+                1 / 86000
+            );
         }
     }
     public function testTimeStampToDate1900()
@@ -51,9 +61,13 @@ class DateConverterTest extends \PHPUnit_Framework_TestCase
         ];
         foreach ($a as $test) {
             $ts = strtotime($test["s"]);
-            $this->assertEquals(round($test["e"], 9), round(DateConverter::tsToExcelDateTime($ts), 9), "Checking ".$test["s"].", TS: ".$ts, 1 / 86000);
+            $this->assertEquals(
+                round($test["e"], 9),
+                round(DateConverter::tsToExcelDateTime($ts), 9),
+                "Checking ".$test["s"].", TS: ".$ts,
+                1 / 86000
+            );
         }
-
     }
 
     public function testTimeStampToDateTime()
@@ -72,7 +86,12 @@ class DateConverterTest extends \PHPUnit_Framework_TestCase
         ];
         foreach ($a as $test) {
             $ts = strtotime($test["s"]);
-            $this->assertEquals(round($test["e"], 9), round(DateConverter::tsToExcelDateTime($ts), 9), "Checking ".$test["s"].", TS: ".$ts, 1 / 86000);
+            $this->assertEquals(
+                round($test["e"], 9),
+                round(DateConverter::tsToExcelDateTime($ts), 9),
+                "Checking ".$test["s"].", TS: ".$ts,
+                1 / 86000
+            );
         }
     }
 
@@ -93,5 +112,4 @@ class DateConverterTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertSame($expected, DateConverter::tsToExcel(strtotime($ts), $type));
     }
-
 }

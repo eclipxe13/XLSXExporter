@@ -4,6 +4,7 @@ namespace XLSXExporterTests;
 
 use XLSXExporter\Column;
 use XLSXExporter\Columns;
+use XLSXExporter\XLSXException;
 
 class ColumnsTest extends \PHPUnit_Framework_TestCase
 {
@@ -33,7 +34,8 @@ class ColumnsTest extends \PHPUnit_Framework_TestCase
         $c = new Column("foo");
         $o = new Columns();
         $o->add($c);
-        $this->setExpectedException("XLSXExporter\\XLSXException", "There is a item with the same id, ids must be unique");
+        $this->expectException(XLSXException::class);
+        $this->expectExceptionMessage("There is a item with the same id, ids must be unique");
         $o->add($c);
     }
 
@@ -45,14 +47,16 @@ class ColumnsTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf("XLSXExporter\\Column", $o->get("foo"));
         $this->assertTrue($o->exists("foo"));
         $this->assertFalse($o->exists("baz"));
-        $this->setExpectedException("XLSXExporter\\XLSXException", "The item baz does not exists");
+        $this->expectException(XLSXException::class);
+        $this->expectExceptionMessage("The item baz does not exists");
         $o->get("baz");
     }
 
     public function testAddArrayOnlyAllowColumnObjects()
     {
         $o = new Columns();
-        $this->setExpectedException("XLSXExporter\\XLSXException", "The item is not a valid object for the collection");
+        $this->expectException(XLSXException::class);
+        $this->expectExceptionMessage("The item is not a valid object for the collection");
         $o->addArray([ new Column("foo"), new \stdClass(), new Column("bar") ]);
     }
 
@@ -66,7 +70,7 @@ class ColumnsTest extends \PHPUnit_Framework_TestCase
         ]);
         $this->assertEquals(3, $o->count(), "The count must be 3");
         $this->assertCount(3, $o->all(), "The count of all must be 3");
-        foreach($o as $key => $value) {
+        foreach ($o as $key => $value) {
             $this->assertTrue(in_array($key, ["foo", "bar", "baz"]));
             $this->assertInstanceOf("XLSXExporter\\Column", $value);
         }

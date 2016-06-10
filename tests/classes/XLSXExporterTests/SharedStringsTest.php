@@ -21,7 +21,7 @@ class SharedStringsTest extends \PHPUnit_Framework_TestCase
             ['baz', 2],
         ];
         $st = new SharedStrings();
-        foreach($samples as $sample) {
+        foreach ($samples as $sample) {
             $index = $st->add($sample[0]);
             $this->assertSame($sample[1], $index, 'When include a string the expected index does not match');
         }

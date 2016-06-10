@@ -4,12 +4,12 @@ namespace XLSXExporter;
 
 /**
  * Class to access the style specification
- * @property-read Styles\Alignment $alignment
- * @property-read Styles\Border $border
- * @property-read Styles\Fill $fill
- * @property-read Styles\Font $font
- * @property-read Styles\Format $format
- * @property-read Styles\Protection $protection
+ * @property Styles\Alignment $alignment
+ * @property Styles\Border $border
+ * @property Styles\Fill $fill
+ * @property Styles\Font $font
+ * @property Styles\Format $format
+ * @property Styles\Protection $protection
  * @method Styles\Alignment getAlignment()
  * @method Styles\Border getBorder()
  * @method Styles\Fill getFill()
@@ -40,7 +40,7 @@ class Style
 
     public function __construct(array $arrayStyles = null)
     {
-        foreach(array_keys($this->members) as $stylename) {
+        foreach (array_keys($this->members) as $stylename) {
             $styleclass = '\XLSXExporter\Styles\\' . ucfirst($stylename);
             $this->$stylename = new $styleclass;
         }
@@ -104,8 +104,10 @@ class Style
      */
     public function setFromArray(array $array)
     {
-        if (!count($array)) return $this;
-        foreach($this->members as $key => $style) {
+        if (!count($array)) {
+            return $this;
+        }
+        foreach ($this->members as $key => $style) {
             if (array_key_exists($key, $array) and is_array($array[$key])) {
                 $style->setValues($array[$key]);
             }
@@ -119,8 +121,10 @@ class Style
      */
     public function hasValues()
     {
-        foreach($this->members as $style) {
-            if ($style->hasValues()) return true;
+        foreach ($this->members as $style) {
+            if ($style->hasValues()) {
+                return true;
+            }
         }
         return false;
     }
@@ -147,28 +151,30 @@ class Style
     /**
      * Method to return the XML xf node
      * This method could be outside this object
+     *
+     * @param int $xfId
+     * @return string
      * @access private
      */
     public function asXML($xfId = 0)
     {
         // all the apply is set to not inherit the value from cellStyleXfs
         return '<xf'
-            .' numFmtId="'.intval($this->format->id).'"'
-            .' fontId="'.$this->font->getIndex().'"'
-            .' fillId="'.$this->fill->getIndex().'"'
-            .' borderId="'.$this->border->getIndex().'"'
-            .' xfId="'.(($xfId) ? : 0).'"' // all is based on cellStyleXfs[0] by default
-            .' applyNumberFormat="false"'
-            .' applyFont="false"'
-            .' applyFill="false"'
-            .' applyBorder="false"'
-            .' applyAlignment="false"'
-            .' applyProtection="false"'
-            .'>'
-            .(($this->alignment->hasValues()) ? $this->alignment->asXML() : '')
-            .(($this->protection->hasValues()) ? $this->protection->asXML() : '')
-            .'</xf>'
+            . ' numFmtId="'.intval($this->format->id).'"'
+            . ' fontId="'.$this->font->getIndex().'"'
+            . ' fillId="'.$this->fill->getIndex().'"'
+            . ' borderId="'.$this->border->getIndex().'"'
+            . ' xfId="'.(($xfId) ? : 0).'"' // all is based on cellStyleXfs[0] by default
+            . ' applyNumberFormat="false"'
+            . ' applyFont="false"'
+            . ' applyFill="false"'
+            . ' applyBorder="false"'
+            . ' applyAlignment="false"'
+            . ' applyProtection="false"'
+            . '>'
+            . (($this->alignment->hasValues()) ? $this->alignment->asXML() : '')
+            . (($this->protection->hasValues()) ? $this->protection->asXML() : '')
+            . '</xf>'
         ;
     }
-
 }

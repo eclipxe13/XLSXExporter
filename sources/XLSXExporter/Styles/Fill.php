@@ -2,6 +2,7 @@
 
 namespace XLSXExporter\Styles;
 
+use XLSXExporter\Utils\OpenXmlColor;
 use XLSXExporter\XLSXException;
 
 /**
@@ -46,7 +47,9 @@ class Fill extends AbstractStyle
 
     protected function castColor($value)
     {
-        return static::utilCastColor($value, "Invalid fill color");
+        if (false === $color = OpenXmlColor::cast($value)) {
+            throw new XLSXException("Invalid fill color");
+        }
+        return $color;
     }
-
 }

@@ -1,11 +1,14 @@
 <?php
 
-
-namespace XLSXExporter;
+namespace XLSXExporter\Utils;
 
 class XmlConverter
 {
-    public static function specialchars($text)
+    /**
+     * @param string $text
+     * @return string
+     */
+    public static function parse($text)
     {
         // do not convert single quotes
         return htmlspecialchars($text, ENT_XML1 | ENT_COMPAT, 'UTF-8');

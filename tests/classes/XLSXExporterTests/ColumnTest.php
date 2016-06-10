@@ -32,7 +32,4 @@ class ColumnTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertInstanceOf("XLSXExporter\\Style", $this->column->getStyle());
     }
-
-
-
 }

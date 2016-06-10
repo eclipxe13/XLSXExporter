@@ -4,29 +4,35 @@ namespace XLSXExporter\Styles;
 
 use XLSXExporter\XLSXException;
 
+/**
+ * Abstract implementation of the StyleInterface
+ * Use this class
+ *
+ * @package XLSXExporter\Styles
+ */
 abstract class AbstractStyle implements StyleInterface
 {
-    /** @var array */
+    /**
+     * Storage of the properties contents
+     * @var array
+     */
     protected $data = [];
+    
     /** @var int Index property */
     protected $index;
 
     /**
      * Get an array of property names
+     *
      * @return array
      */
     abstract protected function properties();
 
     /**
-     * Get the element as xml element
-     * @return string
+     * @inheritdoc
      */
     abstract public function asXML();
 
-    /**
-     * Set all values from the key-value array
-     * @param array $array
-     */
     public function setValues(array $array)
     {
         foreach ($array as $key => $value) {
@@ -34,10 +40,6 @@ abstract class AbstractStyle implements StyleInterface
         }
     }
 
-    /**
-     * Return a key-values array with the properties of the class and its values
-     * @return array
-     */
     public function getValues()
     {
         $array = [];
@@ -103,17 +105,4 @@ abstract class AbstractStyle implements StyleInterface
     {
         return sha1(self::class . "::" . print_r($this->data, true));
     }
-
-    public static function utilCastColor($value, $exceptionText)
-    {
-        $color = strtoupper(ltrim($value, "#"));
-        if (strlen($color) == 6) {
-            $color = "FF" . $color;
-        }
-        if (!preg_match("/[0-9A-F]{8}/", $color)) {
-            throw new XLSXException($exceptionText);
-        }
-        return $color;
-    }
-
 }
