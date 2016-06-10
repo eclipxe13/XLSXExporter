@@ -3,6 +3,7 @@
 namespace XLSXExporter;
 
 use SplFileObject;
+use XLSXExporter\Utils\XmlConverter;
 
 class WorkSheetWriter
 {
@@ -35,7 +36,9 @@ class WorkSheetWriter
             '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' . "\n"
             . '<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">'
             . '<dimension ref="' . $firstcell . ':' . $lastcell . '"/>'
-            . '<sheetViews><sheetView tabSelected="1" workbookViewId="0"><selection activeCell="A1" sqref="A1"/></sheetView></sheetViews>'
+            . '<sheetViews>'
+            . '<sheetView tabSelected="1" workbookViewId="0"><selection activeCell="A1" sqref="A1"/></sheetView>'
+            . '</sheetViews>'
             . '<sheetFormatPr baseColWidth="10" defaultRowHeight="15"/>'
             . '<sheetData>'
         );
@@ -86,7 +89,7 @@ class WorkSheetWriter
         } elseif ($type === CellTypes::DATETIME) {
             $this->file->fwrite('<v>' . DateConverter::tsToExcelDateTime($value) . '</v>');
         } elseif ($type === CellTypes::INLINE) {
-            $this->file->fwrite('<is><t>' . XmlConverter::specialchars($value) . '</t></is>');
+            $this->file->fwrite('<is><t>' . XmlConverter::parse($value) . '</t></is>');
         }
         $this->file->fwrite('</c>');
         $this->col = $this->col + 1;

@@ -2,7 +2,7 @@
 
 namespace XLSXExporterTests;
 
-use XLSXExporter\XmlConverter;
+use XLSXExporter\Utils\XmlConverter;
 
 class XmlConverterTest extends \PHPUnit_Framework_TestCase
 {
@@ -33,7 +33,7 @@ class XmlConverterTest extends \PHPUnit_Framework_TestCase
         ];
         foreach ($texts as $t) {
             $a = $this->parseXML($t, false);
-            $b = $this->parseXML(XmlConverter::specialchars($t), true);
+            $b = $this->parseXML(XmlConverter::parse($t), true);
             $this->assertEquals($a, $b);
         }
     }

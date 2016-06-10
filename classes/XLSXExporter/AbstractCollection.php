@@ -65,6 +65,7 @@ abstract class AbstractCollection implements \IteratorAggregate
     /**
      * Return one item
      * @param string $id
+     * @return mixed
      * @throws XLSXException
      */
     public function get($id)

@@ -3,7 +3,7 @@
 namespace XLSXExporter;
 
 /**
- * @property-read Column $columns Columns object
+ * @property-read Columns|Column[] $columns Columns object
  * @property-read string $name Name of the worksheet
  * @property-read Style $headerstyle Style of the header columns
  */
@@ -12,7 +12,7 @@ class WorkSheet
     /** @var string The name of the worksheet **/
     protected $name;
 
-    /** @var Columns Columns collection */
+    /** @var Columns|Column[] Columns collection */
     protected $columns;
 
     /** @var ProviderInterface */

@@ -4,7 +4,7 @@ namespace XLSXExporter;
 
 class StyleSheet
 {
-    /** @var Style */
+    /** @var Style|Style[] */
     protected $styles;
     /** @var array */
     protected $hashes;
@@ -155,6 +155,10 @@ class StyleSheet
         ;
     }
 
+    /**
+     * Styles collection
+     * @return Style|Style[]
+     */
     public function getStyles()
     {
         return $this->styles;

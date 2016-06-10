@@ -42,7 +42,14 @@ class Alignment extends AbstractStyle
 
     protected function castHorizontal($value)
     {
-        if (!in_array($value, [static::HORIZONTAL_GENERAL, static::HORIZONTAL_LEFT, static::HORIZONTAL_CENTER, static::HORIZONTAL_RIGHT, static::HORIZONTAL_JUSTIFY])) {
+        $aligns = [
+            static::HORIZONTAL_GENERAL,
+            static::HORIZONTAL_LEFT,
+            static::HORIZONTAL_CENTER,
+            static::HORIZONTAL_RIGHT,
+            static::HORIZONTAL_JUSTIFY
+        ];
+        if (!in_array($value, $aligns)) {
             throw new XLSXException("Invalid alignment horizontal");
         }
         return $value;

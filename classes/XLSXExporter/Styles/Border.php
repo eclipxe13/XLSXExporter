@@ -2,8 +2,6 @@
 
 namespace XLSXExporter\Styles;
 
-// use XLSXExporter\XLSXException;
-
 class Border extends AbstractStyle
 {
     public function asXML()

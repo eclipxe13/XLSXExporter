@@ -2,6 +2,9 @@
 
 namespace XLSXExporter\Styles;
 
+use XLSXExporter\Utils\OpenXmlColor;
+use XLSXExporter\XLSXException;
+
 /**
  * @property string $name Font name
  * @property integer $size Font size (pt)
@@ -14,7 +17,6 @@ namespace XLSXExporter\Styles;
  */
 class Font extends AbstractStyle
 {
-
     const UNDERLINE_NONE = 'none';
     const UNDERLINE_DOUBLE = 'double';
     const UNDERLINE_SINGLE = 'single';
@@ -82,7 +84,10 @@ class Font extends AbstractStyle
 
     protected function castColor($value)
     {
-        return static::utilCastColor($value, "Invalid font color");
+        if (false === $color = OpenXmlColor::cast($value)) {
+            throw new XLSXException("Invalid font color");
+        }
+        return $color;
     }
 
     protected function castUnderline($value)

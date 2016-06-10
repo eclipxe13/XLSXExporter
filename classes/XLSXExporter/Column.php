@@ -81,11 +81,17 @@ class Column
         return $this->type;
     }
 
+    /**
+     * @param Style $style
+     */
     public function setStyle(Style $style)
     {
         $this->style = $style;
     }
 
+    /**
+     * @return Style
+     */
     public function getStyle()
     {
         return $this->style;

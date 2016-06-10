@@ -151,27 +151,30 @@ class Style
     /**
      * Method to return the XML xf node
      * This method could be outside this object
+     *
+     * @param int $xfId
+     * @return string
      * @access private
      */
     public function asXML($xfId = 0)
     {
         // all the apply is set to not inherit the value from cellStyleXfs
         return '<xf'
-            .' numFmtId="'.intval($this->format->id).'"'
-            .' fontId="'.$this->font->getIndex().'"'
-            .' fillId="'.$this->fill->getIndex().'"'
-            .' borderId="'.$this->border->getIndex().'"'
-            .' xfId="'.(($xfId) ? : 0).'"' // all is based on cellStyleXfs[0] by default
-            .' applyNumberFormat="false"'
-            .' applyFont="false"'
-            .' applyFill="false"'
-            .' applyBorder="false"'
-            .' applyAlignment="false"'
-            .' applyProtection="false"'
-            .'>'
-            .(($this->alignment->hasValues()) ? $this->alignment->asXML() : '')
-            .(($this->protection->hasValues()) ? $this->protection->asXML() : '')
-            .'</xf>'
+            . ' numFmtId="'.intval($this->format->id).'"'
+            . ' fontId="'.$this->font->getIndex().'"'
+            . ' fillId="'.$this->fill->getIndex().'"'
+            . ' borderId="'.$this->border->getIndex().'"'
+            . ' xfId="'.(($xfId) ? : 0).'"' // all is based on cellStyleXfs[0] by default
+            . ' applyNumberFormat="false"'
+            . ' applyFont="false"'
+            . ' applyFill="false"'
+            . ' applyBorder="false"'
+            . ' applyAlignment="false"'
+            . ' applyProtection="false"'
+            . '>'
+            . (($this->alignment->hasValues()) ? $this->alignment->asXML() : '')
+            . (($this->protection->hasValues()) ? $this->protection->asXML() : '')
+            . '</xf>'
         ;
     }
 }
