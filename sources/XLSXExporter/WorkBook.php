@@ -152,7 +152,8 @@ class WorkBook
             . '<sheets>'
             . array_reduce($this->worksheets->all(), function ($r, WorkSheet $worksheet) use (&$index) {
                 $index = $index + 1;
-                return $r . '<sheet name="' . $worksheet->getName() . '" sheetId="' . $index . '" r:id="rId' . $index . '"/>';
+                return $r . '<sheet name="' . $worksheet->getName() . '"'
+                    . ' sheetId="' . $index . '" r:id="rId' . $index . '"/>';
             })
             . '</sheets>'
             . '</workbook>'
