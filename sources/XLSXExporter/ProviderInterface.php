@@ -5,10 +5,11 @@ namespace XLSXExporter;
 interface ProviderInterface
 {
     /**
-     * Return a value from the current tuple
+     * Get a value of the current tuple based on the key
+     * If the current tuple does not contains the key it should return NULL
      *
      * @param string $key
-     * @return mixed
+     * @return mixed|null value or null if the key is not set
      */
     public function get($key);
 
