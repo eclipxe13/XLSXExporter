@@ -72,9 +72,9 @@ class Style
     {
         $getter = (0 === strpos($name, 'get'));
         $setter = (0 === strpos($name, 'set'));
-        if ($getter or $setter) {
+        if ($getter || $setter) {
             $name = lcfirst(substr($name, 3));
-        } elseif (! $getter and ! $setter) {
+        } elseif (! $getter && ! $setter) {
             throw new \LogicException("Invalid method name $name");
         }
         if (! array_key_exists($name, $this->members)) {
@@ -107,7 +107,7 @@ class Style
             return $this;
         }
         foreach ($this->members as $key => $style) {
-            if (array_key_exists($key, $array) and is_array($array[$key])) {
+            if (array_key_exists($key, $array) && is_array($array[$key])) {
                 $style->setValues($array[$key]);
             }
         }

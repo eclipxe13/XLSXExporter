@@ -30,7 +30,7 @@ class DateConverter
         $utc = static::utcParts($ts);
         // Bug 1900 is not a leap year
         // http://support.microsoft.com/kb/214326
-        $delta = ($utc[0] == 1900 and $utc[1] <= 2) ? -1 : 0;
+        $delta = ($utc[0] == 1900 && $utc[1] <= 2) ? -1 : 0;
         return (int) (25569 + $delta + (($ts + $utc[6]) / 86400));
     }
 
