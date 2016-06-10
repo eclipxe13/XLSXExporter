@@ -21,7 +21,7 @@ class OpenXmlColor
     public static function cast($color)
     {
         if (is_int($color)) {
-            if ($color < 0 && $color > 4294967295) {
+            if ($color < 0 || $color > 4294967295) {
                 return false;
             }
             return self::cast(str_pad(dechex($color), ($color > 16777215) ? 8 : 6, '0', STR_PAD_LEFT));
