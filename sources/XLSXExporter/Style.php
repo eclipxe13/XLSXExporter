@@ -4,12 +4,12 @@ namespace XLSXExporter;
 
 /**
  * Class to access the style specification
- * @property-read Styles\Alignment $alignment
- * @property-read Styles\Border $border
- * @property-read Styles\Fill $fill
- * @property-read Styles\Font $font
- * @property-read Styles\Format $format
- * @property-read Styles\Protection $protection
+ * @property Styles\Alignment $alignment
+ * @property Styles\Border $border
+ * @property Styles\Fill $fill
+ * @property Styles\Font $font
+ * @property Styles\Format $format
+ * @property Styles\Protection $protection
  * @method Styles\Alignment getAlignment()
  * @method Styles\Border getBorder()
  * @method Styles\Fill getFill()
