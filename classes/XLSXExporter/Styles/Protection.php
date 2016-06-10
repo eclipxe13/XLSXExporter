@@ -34,5 +34,4 @@ class Protection extends AbstractStyle
     {
         return (bool) $value;
     }
-
 }

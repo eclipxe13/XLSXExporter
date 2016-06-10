@@ -93,5 +93,4 @@ class DateConverterTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertSame($expected, DateConverter::tsToExcel(strtotime($ts), $type));
     }
-
 }

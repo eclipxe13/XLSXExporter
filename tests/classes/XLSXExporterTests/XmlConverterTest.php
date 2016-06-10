@@ -37,6 +37,4 @@ class XmlConverterTest extends \PHPUnit_Framework_TestCase
             $this->assertEquals($a, $b);
         }
     }
-
-
 }

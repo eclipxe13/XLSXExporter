@@ -13,5 +13,4 @@ class Columns extends AbstractCollection
     {
         return ($item instanceof Column);
     }
-
 }

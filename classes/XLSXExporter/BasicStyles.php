@@ -2,7 +2,8 @@
 
 namespace XLSXExporter;
 
-class BasicStyles {
+class BasicStyles
+{
 
     public static function defaultStyle($fontname = "Calibri", $fontsize = 11)
     {
@@ -39,5 +40,4 @@ class BasicStyles {
             ],
         ]);
     }
-
 }

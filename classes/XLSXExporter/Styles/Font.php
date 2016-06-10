@@ -15,7 +15,7 @@ namespace XLSXExporter\Styles;
 class Font extends AbstractStyle
 {
 
-	const UNDERLINE_NONE = 'none';
+    const UNDERLINE_NONE = 'none';
     const UNDERLINE_DOUBLE = 'double';
     const UNDERLINE_SINGLE = 'single';
 
@@ -92,6 +92,4 @@ class Font extends AbstractStyle
         }
         return $value;
     }
-
-
 }

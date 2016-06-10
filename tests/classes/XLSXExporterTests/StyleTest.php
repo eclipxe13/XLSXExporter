@@ -10,7 +10,7 @@ class StyleTest extends \PHPUnit_Framework_TestCase
         $s = new Style();
         $expectedMembers = $s->getMemberNames();
         $this->assertGreaterThan(0, count($expectedMembers), "There are no members!");
-        foreach($expectedMembers as $member) {
+        foreach ($expectedMembers as $member) {
             $this->assertInstanceOf('\XLSXExporter\Styles\\' . ucfirst($member), $s->$member, "$member is bad instanced");
             $getter = 'get' . ucfirst($member);
             $this->assertSame($s->$member, $s->$getter(), "$member property access is not the same as the getter method");
@@ -141,5 +141,4 @@ class StyleTest extends \PHPUnit_Framework_TestCase
         $empty = '<xf applyAlignment="false" applyBorder="false" applyFill="false" applyFont="false" applyNumberFormat="false" applyProtection="false" borderId="" fillId="" fontId="" numFmtId="0" xfId="0"/>';
         $this->assertXmlStringEqualsXmlString($empty, $s->asXML(), "Style does not match with expected XML");
     }
-
 }

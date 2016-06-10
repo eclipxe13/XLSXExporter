@@ -99,18 +99,18 @@ class WorkSheet
             // write new row
             $writer->openRow();
             $styleindex = $this->getHeaderStyle()->getStyleIndex();
-            foreach($this->columns as $column) {
-                // write cell
-                $s = $strings->add($column->getTitle());
-                $writer->writeCell(CellTypes::TEXT, $s, $styleindex);
-            }
+        foreach ($this->columns as $column) {
+            // write cell
+            $s = $strings->add($column->getTitle());
+            $writer->writeCell(CellTypes::TEXT, $s, $styleindex);
+        }
             $writer->closeRow();
         }
         // -- write cell contents
-        while($this->provider->valid()) {
+        while ($this->provider->valid()) {
             // write new row
             $writer->openRow();
-            foreach($this->columns as $column) {
+            foreach ($this->columns as $column) {
                 // write cell
                 $value = $this->provider->get($column->getId());
                 if (CellTypes::TEXT === $type = $column->getType()) {
@@ -125,5 +125,4 @@ class WorkSheet
         $writer->closeSheet();
         return $tempfile;
     }
-
 }

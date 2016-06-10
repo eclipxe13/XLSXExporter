@@ -8,7 +8,8 @@ namespace XLSXExporter;
  * @property string $title Column title
  * @property Style $style Style object
  */
-class Column {
+class Column
+{
 
     protected $id;
     protected $type;
@@ -89,5 +90,4 @@ class Column {
     {
         return $this->style;
     }
-
 }

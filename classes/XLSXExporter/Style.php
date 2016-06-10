@@ -40,7 +40,7 @@ class Style
 
     public function __construct(array $arrayStyles = null)
     {
-        foreach(array_keys($this->members) as $stylename) {
+        foreach (array_keys($this->members) as $stylename) {
             $styleclass = '\XLSXExporter\Styles\\' . ucfirst($stylename);
             $this->$stylename = new $styleclass;
         }
@@ -104,8 +104,10 @@ class Style
      */
     public function setFromArray(array $array)
     {
-        if (!count($array)) return $this;
-        foreach($this->members as $key => $style) {
+        if (!count($array)) {
+            return $this;
+        }
+        foreach ($this->members as $key => $style) {
             if (array_key_exists($key, $array) and is_array($array[$key])) {
                 $style->setValues($array[$key]);
             }
@@ -119,8 +121,10 @@ class Style
      */
     public function hasValues()
     {
-        foreach($this->members as $style) {
-            if ($style->hasValues()) return true;
+        foreach ($this->members as $style) {
+            if ($style->hasValues()) {
+                return true;
+            }
         }
         return false;
     }
@@ -170,5 +174,4 @@ class Style
             .'</xf>'
         ;
     }
-
 }

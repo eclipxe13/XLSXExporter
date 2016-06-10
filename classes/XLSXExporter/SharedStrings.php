@@ -54,7 +54,7 @@ class SharedStrings implements \Countable
         );
         // Not using the index, is not needed
         // do not use array_keys, it (could?) duplicate the memory usage
-        foreach($this->strings as $string => $index) {
+        foreach ($this->strings as $string => $index) {
             $file->fwrite('<si><t>'.XmlConverter::specialchars($string).'</t></si>');
         }
         $file->fwrite('</sst>');
@@ -64,5 +64,4 @@ class SharedStrings implements \Countable
     {
         return count($this->strings, $mode);
     }
-
 }

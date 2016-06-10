@@ -115,5 +115,4 @@ abstract class AbstractStyle implements StyleInterface
         }
         return $color;
     }
-
 }

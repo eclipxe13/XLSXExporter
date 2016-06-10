@@ -6,12 +6,13 @@ namespace XLSXExporter\Styles;
 
 class Border extends AbstractStyle
 {
-    public function asXML() {
+    public function asXML()
+    {
         return "";
     }
 
-    protected function properties() {
+    protected function properties()
+    {
         return [];
     }
-
 }

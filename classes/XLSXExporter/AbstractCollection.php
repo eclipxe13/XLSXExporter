@@ -2,14 +2,14 @@
 
 namespace XLSXExporter;
 
-abstract class AbstractCollection  implements \IteratorAggregate
+abstract class AbstractCollection implements \IteratorAggregate
 {
     /**
      * @param mixed $item
      * @return bool
      */
-    public abstract function isValidInstance($item);
-    public abstract function add($item);
+    abstract public function isValidInstance($item);
+    abstract public function add($item);
 
     /** @var array */
     protected $collection = [];
@@ -38,7 +38,7 @@ abstract class AbstractCollection  implements \IteratorAggregate
      */
     public function addArray(array $items)
     {
-        foreach($items as $item) {
+        foreach ($items as $item) {
             $this->add($item);
         }
     }
@@ -87,8 +87,8 @@ abstract class AbstractCollection  implements \IteratorAggregate
     /**
      * @return \ArrayIterator
      */
-    public function getIterator() {
+    public function getIterator()
+    {
         return new \ArrayIterator($this->collection);
     }
-
 }

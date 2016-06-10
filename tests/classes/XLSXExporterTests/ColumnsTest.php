@@ -66,7 +66,7 @@ class ColumnsTest extends \PHPUnit_Framework_TestCase
         ]);
         $this->assertEquals(3, $o->count(), "The count must be 3");
         $this->assertCount(3, $o->all(), "The count of all must be 3");
-        foreach($o as $key => $value) {
+        foreach ($o as $key => $value) {
             $this->assertTrue(in_array($key, ["foo", "bar", "baz"]));
             $this->assertInstanceOf("XLSXExporter\\Column", $value);
         }

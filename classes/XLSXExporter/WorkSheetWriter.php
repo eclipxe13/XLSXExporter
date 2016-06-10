@@ -6,6 +6,7 @@ use SplFileObject;
 
 class WorkSheetWriter
 {
+
     /** @var SplFileObject */
     protected $file;
     protected $row;
@@ -28,61 +29,64 @@ class WorkSheetWriter
 
     public function openSheet()
     {
-        $firstcell = $this->colByNumber($this->initialcol).$this->initialrow;
-        $lastcell = $this->colByNumber($this->colscount).($this->rowscount + 1);
+        $firstcell = $this->colByNumber($this->initialcol) . $this->initialrow;
+        $lastcell = $this->colByNumber($this->colscount) . ($this->rowscount + 1);
         $this->file->fwrite(
-            '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'."\n"
-            .'<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">'
-            .'<dimension ref="'.$firstcell.':'.$lastcell.'"/>'
-            .'<sheetViews><sheetView tabSelected="1" workbookViewId="0"><selection activeCell="A1" sqref="A1"/></sheetView></sheetViews>'
-            .'<sheetFormatPr baseColWidth="10" defaultRowHeight="15"/>'
-            .'<sheetData>'
+            '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' . "\n"
+            . '<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">'
+            . '<dimension ref="' . $firstcell . ':' . $lastcell . '"/>'
+            . '<sheetViews><sheetView tabSelected="1" workbookViewId="0"><selection activeCell="A1" sqref="A1"/></sheetView></sheetViews>'
+            . '<sheetFormatPr baseColWidth="10" defaultRowHeight="15"/>'
+            . '<sheetData>'
         );
     }
 
-    public function closeSheet() {
+    public function closeSheet()
+    {
         $this->file->fwrite(''
-            .'</sheetData>'
-            .'<pageMargins left="0.7" right="0.7" top="0.75" bottom="0.75" header="0.3" footer="0.3"/>'
-            .'</worksheet>'
-        );
+            . '</sheetData>'
+            . '<pageMargins left="0.7" right="0.7" top="0.75" bottom="0.75" header="0.3" footer="0.3"/>'
+            . '</worksheet>');
         $this->file = null;
     }
 
-    public function openRow() {
-        $this->file->fwrite('<row r="'.$this->row.'" spans="1:'.$this->colscount.'">');
+    public function openRow()
+    {
+        $this->file->fwrite('<row r="' . $this->row . '" spans="1:' . $this->colscount . '">');
     }
 
-    public function closeRow() {
+    public function closeRow()
+    {
         $this->file->fwrite('</row>');
         $this->row = $this->row + 1;
         $this->col = $this->initialcol;
     }
 
-    public function writeCell($type, $value, $style) {
+    public function writeCell($type, $value, $style)
+    {
         if ($value === null) {
             $type = CellTypes::NUMBER;
             $value = "";
         }
         $t = static::getDataType($type);
-        $this->file->fwrite('<c r="'.static::colByNumber($this->col).$this->row.'"'
-            .(($style) ? ' s="'.$style.'"' : '')
-            .(($t) ? ' t="'.$t.'"' : '')
-            .'>');
+        $this->file->fwrite('<c r="' . static::colByNumber($this->col) . $this->row . '"'
+            . (($style) ? ' s="' . $style . '"' : '')
+            . (($t) ? ' t="' . $t . '"' : '')
+            . '>');
         if ($type === CellTypes::TEXT) {
-            $this->file->fwrite('<v>'.$value.'</v>');
+            $this->file->fwrite('<v>' . $value . '</v>');
         } elseif ($type === CellTypes::NUMBER) {
-            $this->file->fwrite('<v>'.$value.'</v>');
+            $this->file->fwrite('<v>' . $value . '</v>');
         } elseif ($type === CellTypes::BOOLEAN) {
-            $this->file->fwrite('<v>'.(($value) ? 1 : 0).'</v>');
+            $this->file->fwrite('<v>' . (($value) ? 1 : 0) . '</v>');
         } elseif ($type === CellTypes::DATE) {
-            $this->file->fwrite('<v>'.DateConverter::tsToExcelDate($value).'</v>');
+            $this->file->fwrite('<v>' . DateConverter::tsToExcelDate($value) . '</v>');
         } elseif ($type === CellTypes::TIME) {
-            $this->file->fwrite('<v>'.DateConverter::tsToExcelTime($value).'</v>');
+            $this->file->fwrite('<v>' . DateConverter::tsToExcelTime($value) . '</v>');
         } elseif ($type === CellTypes::DATETIME) {
-            $this->file->fwrite('<v>'.DateConverter::tsToExcelDateTime($value).'</v>');
+            $this->file->fwrite('<v>' . DateConverter::tsToExcelDateTime($value) . '</v>');
         } elseif ($type === CellTypes::INLINE) {
-            $this->file->fwrite('<is><t>'.XmlConverter::specialchars($value).'</t></is>');
+            $this->file->fwrite('<is><t>' . XmlConverter::specialchars($value) . '</t></is>');
         }
         $this->file->fwrite('</c>');
         $this->col = $this->col + 1;
@@ -120,7 +124,8 @@ class WorkSheetWriter
      * @param integer $num base zero index
      * @return string
      */
-    protected static function getNameFromNumber($num) {
+    protected static function getNameFromNumber($num)
+    {
         $numeric = ($num) % 26;
         $letter = chr(65 + $numeric);
         $num2 = intval($num / 26);
@@ -129,5 +134,4 @@ class WorkSheetWriter
         }
         return $letter;
     }
-
 }

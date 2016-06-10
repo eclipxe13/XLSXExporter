@@ -26,5 +26,4 @@ class WorkSheetWriterTest extends \PHPUnit_Framework_TestCase
             $this->assertEquals($v, WorkSheetWriter::colByNumber($n));
         }
     }
-
 }

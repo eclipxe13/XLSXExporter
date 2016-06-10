@@ -48,5 +48,4 @@ class Fill extends AbstractStyle
     {
         return static::utilCastColor($value, "Invalid fill color");
     }
-
 }

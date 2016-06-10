@@ -65,7 +65,9 @@ class Format extends AbstractStyle
 
     public function asXML()
     {
-        if (null === $this->code) return "";
+        if (null === $this->code) {
+            return "";
+        }
         return '<numFmt numFmtId="'.$this->id.'" formatCode="'.XmlConverter::specialchars($this->code).'"/>'
         ;
     }
@@ -128,6 +130,4 @@ class Format extends AbstractStyle
     {
         return array_search((string) $code, static::getBuiltInCodes(), true);
     }
-
-
 }

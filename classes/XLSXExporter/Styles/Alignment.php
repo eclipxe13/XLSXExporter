@@ -60,5 +60,4 @@ class Alignment extends AbstractStyle
     {
         return (bool) $value;
     }
-
 }

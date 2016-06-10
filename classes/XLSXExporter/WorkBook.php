@@ -8,7 +8,8 @@ use ZipArchive;
  * @property-read Style $style Default style for the whole document
  * @property-read WorkSheets $worksheets Collections of worksheets
  */
-class WorkBook {
+class WorkBook
+{
 
     /** @var WorkSheets */
     protected $worksheets;
@@ -63,14 +64,14 @@ class WorkBook {
         $zip->addEmptyDir("xl/worksheets/");
         // simple files
         $zip->addFromString("_rels/.rels", $this->xmlRels());
-        $zip->addFromString("[Content_Types].xml" , $this->xmlContentTypes());
+        $zip->addFromString("[Content_Types].xml", $this->xmlContentTypes());
         $zip->addFromString("xl/styles.xml", $this->xmlStyles());
-        $zip->addFromString("xl/workbook.xml" , $this->xmlWorkbook());
+        $zip->addFromString("xl/workbook.xml", $this->xmlWorkbook());
         $zip->addFromString("xl/_rels/workbook.xml.rels", $this->xmlWorkbookRels());
         // create the sharedStrings object because worksheets use it
         $sharedstrings = new SharedStrings();
         $i = 1;
-        foreach($this->worksheets as $worksheet) {
+        foreach ($this->worksheets as $worksheet) {
             // write and include the sheet
             /* @var $worksheet WorkSheet */
             $wsfile = $worksheet->write($sharedstrings);
@@ -80,12 +81,12 @@ class WorkBook {
         }
         // include the shared strings file
         $shstrsfile = $sharedstrings->write();
-        $zip->addFile($shstrsfile, "xl/sharedStrings.xml" );
+        $zip->addFile($shstrsfile, "xl/sharedStrings.xml");
         $removefiles[] = $shstrsfile;
         // end with zip
         $zip->close();
         // remove temp files
-        foreach($removefiles as $file) {
+        foreach ($removefiles as $file) {
             unlink($file);
         }
         return $filename;
@@ -114,7 +115,7 @@ class WorkBook {
             .'<Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/>'
             .'<Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/>'
             .'<Override PartName="/xl/sharedStrings.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sharedStrings+xml"/>'
-            .array_reduce(range(1, $this->worksheets->count()), function($r, $index) {
+            .array_reduce(range(1, $this->worksheets->count()), function ($r, $index) {
                 return $r.'<Override PartName="/'.$this->workSheetFilePath($index)
                     .'" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>'
                 ;
@@ -126,10 +127,10 @@ class WorkBook {
     {
         $styles = [];
         $styles[] = $this->style;
-        foreach($this->worksheets as $worksheet) {
+        foreach ($this->worksheets as $worksheet) {
             // add worksheet header style
             $styles[] = $worksheet->getHeaderStyle();
-            foreach($worksheet->getColumns() as $column) {
+            foreach ($worksheet->getColumns() as $column) {
                 // add worksheet column style
                 $styles[] = $column->getStyle();
             }
@@ -169,5 +170,4 @@ class WorkBook {
             .'</Relationships>'
             ;
     }
-
 }
