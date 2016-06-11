@@ -2,7 +2,7 @@
 
 namespace XLSXExporter;
 
-class Columns extends AbstractCollection
+class Columns extends Collection
 {
     /**
      * Add a column to this collection

@@ -2,7 +2,7 @@
 
 namespace XLSXExporter;
 
-abstract class AbstractCollection implements \IteratorAggregate, \Countable
+abstract class Collection implements \IteratorAggregate, \Countable
 {
     /**
      * @param mixed $item

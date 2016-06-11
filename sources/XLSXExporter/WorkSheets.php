@@ -2,7 +2,7 @@
 
 namespace XLSXExporter;
 
-class WorkSheets extends AbstractCollection
+class WorkSheets extends Collection
 {
     /**
      * Add a WorkSheet to this collection
