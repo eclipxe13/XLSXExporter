@@ -11,6 +11,13 @@ class StyleSheet
     /** @var array */
     protected $objects;
 
+    /**
+     * StyleSheet constructor.
+     *
+     * @param Style[] $styles
+     * @throws XLSXException Error creating the stylesheet, no styles found
+     * @throws XLSXException Error creating the stylesheet, received an invalid style object
+     */
     public function __construct(array $styles)
     {
         if (! count($styles)) {
@@ -25,6 +32,11 @@ class StyleSheet
         $this->styles = array_merge($this->mandatoryStyles(), $styles);
     }
 
+    /**
+     * The mandatory styles, must be declared before any other style
+     *
+     * @return Style[]
+     */
     protected function mandatoryStyles()
     {
         return [
