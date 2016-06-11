@@ -1,7 +1,8 @@
 <?php
 
-namespace XLSXExporter;
+namespace XLSXExporter\Providers;
 
+use XLSXExporter\ProviderInterface;
 use XLSXExporter\Utils\ProviderGetValue;
 
 class ProviderArray implements ProviderInterface

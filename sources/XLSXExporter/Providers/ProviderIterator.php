@@ -1,8 +1,9 @@
 <?php
 
-namespace XLSXExporter;
+namespace XLSXExporter\Providers;
 
 use Iterator;
+use XLSXExporter\ProviderInterface;
 use XLSXExporter\Utils\ProviderGetValue;
 
 /**
