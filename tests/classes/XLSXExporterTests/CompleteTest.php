@@ -2,7 +2,7 @@
 
 namespace XLSXExporterTests;
 
-use XLSXExporter\ProviderArray;
+use XLSXExporter\Providers\ProviderArray;
 use XLSXExporter\WorkBook;
 use XLSXExporter\WorkSheet;
 use XLSXExporter\WorkSheets;
