@@ -71,7 +71,7 @@ class StyleSheet
             if (! $format->hasValues()) {
                 $format->code = Styles\Format::FORMAT_GENERAL;
             }
-            if (false !== $builtin = $format->getBuiltInCodeByCode($format->code)) {
+            if (false !== $builtin = $format->getBuiltInCodeIdByCode($format->code)) {
                 $format->id = $builtin;
                 if (! in_array($format->code, $codes)) {
                     $codes[$format->id] = $format->code;
@@ -121,6 +121,11 @@ class StyleSheet
         }
     }
 
+    /**
+     * @param string $name
+     * @param string $tag
+     * @return string
+     */
     protected function xmlCollection($name, $tag)
     {
         return '<' . $tag . ' count="' . count($this->objects[$name]) . '">'
@@ -131,6 +136,9 @@ class StyleSheet
         ;
     }
 
+    /**
+     * @return string
+     */
     protected function xmlCellStylesXF()
     {
         return '<cellStyleXfs count="1">'
@@ -139,6 +147,9 @@ class StyleSheet
         ;
     }
 
+    /**
+     * @return string
+     */
     protected function xmlCellXfs()
     {
         $index = 0;
@@ -152,6 +163,11 @@ class StyleSheet
         ;
     }
 
+    /**
+     * Return the content of the style sheet in xml format
+     *
+     * @return string
+     */
     public function asXML()
     {
         $this->processStyles();
@@ -172,7 +188,7 @@ class StyleSheet
 
     /**
      * Styles collection
-     * @return Style|Style[]
+     * @return Style[]
      */
     public function getStyles()
     {

@@ -5,7 +5,7 @@ namespace XLSXExporter\Styles;
 use XLSXExporter\Utils\XmlConverter;
 
 /**
- * @property $id TODO: document this property
+ * @property int $id numeric identificator for the format
  * @property string $code format code
  *
  * References:
@@ -119,13 +119,25 @@ class Format extends AbstractStyle
         ];
     }
 
+    /**
+     * Get the code for a built in id, if not found return an empty string
+     *
+     * @param $id
+     * @return string
+     */
     public static function getBuiltInCodeById($id)
     {
         $codes = static::getBuiltInCodes();
         return (array_key_exists($id, $codes)) ? $codes[$id] : '';
     }
 
-    public static function getBuiltInCodeByCode($code)
+    /**
+     * Get the id for a built in code, if not found return false
+     *
+     * @param string $code
+     * @return int|false
+     */
+    public static function getBuiltInCodeIdByCode($code)
     {
         return array_search((string) $code, static::getBuiltInCodes(), true);
     }
