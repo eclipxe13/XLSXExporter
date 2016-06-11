@@ -50,41 +50,46 @@ class WorkBook
         if (! $this->worksheets->count()) {
             throw new XLSXException('Workbook does not contains any worksheet');
         }
-        $removefiles = [];
+        // validations end, create the file
         $filename = tempnam(sys_get_temp_dir(), 'xlsx-');
-        $zip = new ZipArchive();
-        $zip->open($filename, ZipArchive::CREATE);
-        // folders
-        $zip->addEmptyDir('xl/');
-        $zip->addEmptyDir('xl/_rels/');
-        $zip->addEmptyDir('_rels/');
-        $zip->addEmptyDir('xl/worksheets/');
-        // simple files
-        $zip->addFromString('_rels/.rels', $this->xmlRels());
-        $zip->addFromString('[Content_Types].xml', $this->xmlContentTypes());
-        $zip->addFromString('xl/styles.xml', $this->xmlStyles());
-        $zip->addFromString('xl/workbook.xml', $this->xmlWorkbook());
-        $zip->addFromString('xl/_rels/workbook.xml.rels', $this->xmlWorkbookRels());
-        // create the sharedStrings object because worksheets use it
-        $sharedstrings = new SharedStrings();
-        $i = 1;
-        foreach ($this->worksheets as $worksheet) {
-            // write and include the sheet
-            /* @var $worksheet WorkSheet */
-            $wsfile = $worksheet->write($sharedstrings);
-            $zip->addFile($wsfile, $this->workSheetFilePath($i));
-            $removefiles[] = $wsfile;
-            $i = $i + 1;
-        }
-        // include the shared strings file
-        $shstrsfile = $sharedstrings->write();
-        $zip->addFile($shstrsfile, 'xl/sharedStrings.xml');
-        $removefiles[] = $shstrsfile;
-        // end with zip
-        $zip->close();
-        // remove temp files
-        foreach ($removefiles as $file) {
-            unlink($file);
+        $removefiles = [];
+        try {
+            $zip = new ZipArchive();
+            $zip->open($filename, ZipArchive::CREATE);
+            // folders
+            $zip->addEmptyDir('xl/');
+            $zip->addEmptyDir('xl/_rels/');
+            $zip->addEmptyDir('_rels/');
+            $zip->addEmptyDir('xl/worksheets/');
+            // simple files
+            $zip->addFromString('_rels/.rels', $this->xmlRels());
+            $zip->addFromString('[Content_Types].xml', $this->xmlContentTypes());
+            $zip->addFromString('xl/styles.xml', $this->xmlStyles());
+            $zip->addFromString('xl/workbook.xml', $this->xmlWorkbook());
+            $zip->addFromString('xl/_rels/workbook.xml.rels', $this->xmlWorkbookRels());
+            // create the sharedStrings object because worksheets use it
+            $sharedstrings = new SharedStrings();
+            $i = 1;
+            foreach ($this->worksheets as $worksheet) {
+                // write and include the sheet
+                $wsfile = $worksheet->write($sharedstrings);
+                $removefiles[] = $wsfile;
+                $zip->addFile($wsfile, $this->workSheetFilePath($i));
+                $i = $i + 1;
+            }
+            // include the shared strings file
+            $shstrsfile = $sharedstrings->write();
+            $removefiles[] = $shstrsfile;
+            $zip->addFile($shstrsfile, 'xl/sharedStrings.xml');
+            // end with zip
+            $zip->close();
+        } catch (\Exception $exception) {
+            throw $exception;
+        } finally {
+            // remove temporary files
+            foreach ($removefiles as $file) {
+                unlink($file);
+            }
         }
         return $filename;
     }
