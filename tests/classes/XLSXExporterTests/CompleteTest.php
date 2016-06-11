@@ -2,7 +2,7 @@
 
 namespace XLSXExporterTests;
 
-use XLSXExporter\ProviderArray;
+use XLSXExporter\Providers\ProviderArray;
 use XLSXExporter\WorkBook;
 use XLSXExporter\WorkSheet;
 use XLSXExporter\WorkSheets;
@@ -31,7 +31,7 @@ class CompleteTest extends \PHPUnit_Framework_TestCase
                     "amount",
                     "Amount",
                     CellTypes::NUMBER,
-                    (new Style())->setFromArray([
+                    new Style([
                         "format" => ["code" => Format::FORMAT_COMMA_2DECS],
                         "font" => ["bold" => 1]
                     ])
@@ -40,7 +40,7 @@ class CompleteTest extends \PHPUnit_Framework_TestCase
                     "visit",
                     "Visit",
                     CellTypes::DATETIME,
-                    (new Style())->setFromArray([
+                    new Style([
                         "format" => ["code" => Format::FORMAT_DATE_YMDHM],
                         "protection" => ["hidden" => 1, "locked" => 1]
                     ])
@@ -49,7 +49,7 @@ class CompleteTest extends \PHPUnit_Framework_TestCase
                     "check",
                     "Check",
                     CellTypes::BOOLEAN,
-                    (new Style())->setFromArray([
+                    new Style([
                         "format" => ["code" => Format::FORMAT_YESNO],
                         "alignment" => Alignment::HORIZONTAL_CENTER
                     ])

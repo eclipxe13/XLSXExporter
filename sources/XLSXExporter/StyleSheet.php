@@ -76,12 +76,12 @@ class StyleSheet
         $generic->setIndex(0);
         if ($generic->hasValues()) {
             $hash = $generic->getHash();
-            if (false === $i = array_search($hash, $this->hashes[$name], true)) {
-                $i = count($this->hashes[$name]);
+            if (false === $index = array_search($hash, $this->hashes[$name], true)) {
+                $index = count($this->hashes[$name]);
                 array_push($this->hashes[$name], $hash);
                 array_push($this->objects[$name], $generic);
             }
-            $generic->setIndex($i);
+            $generic->setIndex($index);
         }
     }
 
@@ -107,8 +107,8 @@ class StyleSheet
     protected function xmlCollection($name, $tag)
     {
         return '<' . $tag . ' count="' . count($this->objects[$name]) . '">'
-            . array_reduce($this->objects[$name], function ($r, Styles\StyleInterface $generic) {
-                return $r . $generic->asXML();
+            . array_reduce($this->objects[$name], function ($return, Styles\StyleInterface $generic) {
+                return $return . $generic->asXML();
             })
             . '</' . $tag . '>'
         ;
@@ -124,14 +124,12 @@ class StyleSheet
 
     protected function xmlCellXfs()
     {
-        $i = 0;
+        $index = 0;
         return '<cellXfs count="' . count($this->styles) . '">'
-            . array_reduce($this->styles, function ($r, Style $style) use (&$i) {
-                // // if no values then do not include
-                // if (!$style->hasValues()) return $r;
-                $style->setStyleIndex($i);
-                $i = $i + 1;
-                return $r . $style->asXML();
+            . array_reduce($this->styles, function ($return, Style $style) use (&$index) {
+                $style->setStyleIndex($index);
+                $index = $index + 1;
+                return $return . $style->asXML();
             })
             . '</cellXfs>'
         ;

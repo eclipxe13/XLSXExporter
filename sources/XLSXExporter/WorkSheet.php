@@ -2,10 +2,15 @@
 
 namespace XLSXExporter;
 
+use XLSXExporter\Providers\NullProvider;
+
 /**
- * @property-read Columns|Column[] $columns Columns object
- * @property-read string $name Name of the worksheet
- * @property-read Style $headerstyle Style of the header columns
+ * WorkSheet class
+ *
+ * @property ProviderInterface $provider Provider object
+ * @property Columns|Column[] $columns Columns object
+ * @property string $name Name of the worksheet
+ * @property Style $headerStyle Style of the header columns
  */
 class WorkSheet
 {
@@ -19,27 +24,40 @@ class WorkSheet
     protected $provider;
 
     /** @var Style */
-    protected $headerstyle;
+    protected $headerStyle;
 
-    public function __construct($name, $provider = null, $columns = null, $headerstyle = null)
-    {
+    /**
+     * WorkSheet constructor.
+     *
+     * @param string $name
+     * @param ProviderInterface $provider
+     * @param Columns $columns
+     * @param Style $headerStyle
+     */
+    public function __construct(
+        $name,
+        ProviderInterface $provider = null,
+        Columns $columns = null,
+        Style $headerStyle = null
+    ) {
         $this->setName($name);
-        if (! ($columns instanceof Columns)) {
-            $columns = new Columns();
-        }
-        $this->setColumns($columns);
-        if ($provider instanceof ProviderInterface) {
-            $this->setProvider($provider);
-        }
-        if (! ($headerstyle instanceof Style)) {
-            $headerstyle = BasicStyles::defaultHeader();
-        }
-        $this->setHeaderStyle($headerstyle);
+        $this->setProvider(($provider) ? : new NullProvider());
+        $this->setColumns(($columns) ? : new Columns());
+        $this->setHeaderStyle(($headerStyle) ? : BasicStyles::defaultHeader());
     }
 
+    /**
+     * Magic method, this allow to access methods as getters:
+     * - name => getName
+     * - columns => getColumns
+     *
+     * @param string $name
+     * @return mixed
+     * @throws XLSXException
+     */
     public function __get($name)
     {
-        $props = ['name', 'columns'];
+        $props = ['name', 'provider', 'columns', 'headerStyle'];
         if (! in_array($name, $props)) {
             throw new XLSXException("Invalid property name $name");
         }
@@ -47,47 +65,108 @@ class WorkSheet
         return $this->$method();
     }
 
+    /**
+     * @return string Worksheet name
+     */
     public function getName()
     {
         return $this->name;
     }
 
+    /**
+     * Set the name of the sheet, be aware that the name has several constraints:
+     * - Must be a string
+     * - Cannot contains: : \ / ? * [ ] ' tab nl cr null
+     * - Cannot be more than 31 chars
+     * - Cannot be an empty string
+     *
+     * @param string $name
+     * @throws XLSXException
+     */
     public function setName($name)
     {
-        // TODO: Validate correct names for worksheets
+        if (! is_string($name)) {
+            throw new XLSXException('Invalid worksheet name, is not a string');
+        }
+        if ('' === $name) {
+            throw new XLSXException('Invalid worksheet name, is empty');
+        }
+        $castedName = preg_replace('/[\'\/\\\\:\?\*\[\]\n\r\t\0]/', '', $name);
+        if ($name !== $castedName) {
+            throw new XLSXException('Invalid worksheet name, contains invalid chars');
+        }
+        if (strlen($castedName) > 31) {
+            throw new XLSXException('Invalid worksheet name, is more than 31 chars length');
+        }
         $this->name = $name;
     }
 
+    /**
+     * Retrieve the columns collection object
+     *
+     * @return Column[]|Columns
+     */
     public function getColumns()
     {
         return $this->columns;
     }
 
+    /**
+     * Set the columns collection object
+     *
+     * @param Columns $columns
+     */
     public function setColumns(Columns $columns)
     {
         $this->columns = $columns;
     }
 
+    /**
+     * Retrieve the header style
+     *
+     * @return Style
+     */
     public function getHeaderStyle()
     {
-        return $this->headerstyle;
+        return $this->headerStyle;
     }
 
-    public function setHeaderStyle(Style $headerstyle)
+    /**
+     * Set the header style
+     * @param Style $headerStyle
+     */
+    public function setHeaderStyle(Style $headerStyle)
     {
-        $this->headerstyle = $headerstyle;
+        $this->headerStyle = $headerStyle;
     }
 
+    /**
+     * Set the provider object
+     *
+     * @param ProviderInterface $provider
+     */
     public function setProvider(ProviderInterface $provider)
     {
         $this->provider = $provider;
     }
 
+    /**
+     * Retrieve the provider object, null if the object has not been set
+     *
+     * @return ProviderInterface
+     */
     public function getProvider()
     {
         return $this->provider;
     }
 
+    /**
+     * Write the contents of the worksheet, it requires a SharedStrings object
+     *
+     * @param SharedStrings $strings
+     * @return string
+     * @throws XLSXException
+     */
     public function write(SharedStrings $strings)
     {
         $tempfile = tempnam(sys_get_temp_dir(), 'ws-');
@@ -95,17 +174,14 @@ class WorkSheet
         $writer->createSheet($tempfile, $this->columns->count(), $this->provider->count());
         $writer->openSheet();
         // -- write headers contents
-        {
-            // write new row
-            $writer->openRow();
-            $styleindex = $this->getHeaderStyle()->getStyleIndex();
+        $writer->openRow();
+        $styleindex = $this->getHeaderStyle()->getStyleIndex();
         foreach ($this->columns as $column) {
             // write cell
             $s = $strings->add($column->getTitle());
             $writer->writeCell(CellTypes::TEXT, $s, $styleindex);
         }
-            $writer->closeRow();
-        }
+        $writer->closeRow();
         // -- write cell contents
         while ($this->provider->valid()) {
             // write new row

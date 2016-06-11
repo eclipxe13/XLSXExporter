@@ -2,19 +2,29 @@
 
 namespace XLSXExporter;
 
-class Columns extends AbstractCollection
+class Columns extends Collection
 {
     /**
+     * Add a column to this collection
+     *
      * @param Column $item
      * @throws XLSXException
      */
     public function add($item)
     {
-        $this->addItem($item, ! $this->isValidInstance($item) ? null : $item->getId());
+        if (! $item instanceof Column) {
+            throw new XLSXException('Invalid Column object');
+        }
+        $this->collection[] = $item;
     }
 
-    public function isValidInstance($item)
+    /**
+     * @param string $id
+     * @param Column $item
+     * @return bool
+     */
+    protected function elementMatchId($id, $item)
     {
-        return ($item instanceof Column);
+        return ($id == $item->getId());
     }
 }

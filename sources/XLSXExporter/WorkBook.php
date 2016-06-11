@@ -16,18 +16,16 @@ class WorkBook
     /** @var Style default base style */
     protected $style;
 
-    public function __construct($worksheets = null, $style = null)
+    /**
+     * WorkBook constructor.
+     *
+     * @param WorkSheets|null $worksheets
+     * @param Style|null $style
+     */
+    public function __construct(WorkSheets $worksheets = null, Style $style = null)
     {
-        // wroksheets
-        if (! ($worksheets instanceof WorkSheets)) {
-            $worksheets = new WorkSheets();
-        }
-        $this->worksheets = $worksheets;
-        // style
-        if (! ($style instanceof Style)) {
-            $style = BasicStyles::defaultStyle();
-        }
-        $this->style = $style;
+        $this->worksheets = ($worksheets) ? : new WorkSheets();
+        $this->style = ($style) ? : BasicStyles::defaultStyle();
     }
 
     public function __get($name)
@@ -52,41 +50,51 @@ class WorkBook
         if (! $this->worksheets->count()) {
             throw new XLSXException('Workbook does not contains any worksheet');
         }
-        $removefiles = [];
-        $filename = tempnam(sys_get_temp_dir(), 'xlsx-');
-        $zip = new ZipArchive();
-        $zip->open($filename, ZipArchive::CREATE);
-        // folders
-        $zip->addEmptyDir('xl/');
-        $zip->addEmptyDir('xl/_rels/');
-        $zip->addEmptyDir('_rels/');
-        $zip->addEmptyDir('xl/worksheets/');
-        // simple files
-        $zip->addFromString('_rels/.rels', $this->xmlRels());
-        $zip->addFromString('[Content_Types].xml', $this->xmlContentTypes());
-        $zip->addFromString('xl/styles.xml', $this->xmlStyles());
-        $zip->addFromString('xl/workbook.xml', $this->xmlWorkbook());
-        $zip->addFromString('xl/_rels/workbook.xml.rels', $this->xmlWorkbookRels());
-        // create the sharedStrings object because worksheets use it
-        $sharedstrings = new SharedStrings();
-        $i = 1;
-        foreach ($this->worksheets as $worksheet) {
-            // write and include the sheet
-            /* @var $worksheet WorkSheet */
-            $wsfile = $worksheet->write($sharedstrings);
-            $zip->addFile($wsfile, $this->workSheetFilePath($i));
-            $removefiles[] = $wsfile;
-            $i = $i + 1;
+        // check that every sheet has a different name
+        $repeatedNames = $this->worksheets->retrieveRepeatedNames();
+        if (count($repeatedNames)) {
+            throw new XLSXException('Workbook has worksheets with the same name: ' . implode(',', $repeatedNames));
         }
-        // include the shared strings file
-        $shstrsfile = $sharedstrings->write();
-        $zip->addFile($shstrsfile, 'xl/sharedStrings.xml');
-        $removefiles[] = $shstrsfile;
-        // end with zip
-        $zip->close();
-        // remove temp files
-        foreach ($removefiles as $file) {
-            unlink($file);
+        // validations end, create the file
+        $filename = tempnam(sys_get_temp_dir(), 'xlsx-');
+        $removefiles = [];
+        try {
+            $zip = new ZipArchive();
+            $zip->open($filename, ZipArchive::CREATE);
+            // folders
+            $zip->addEmptyDir('xl/');
+            $zip->addEmptyDir('xl/_rels/');
+            $zip->addEmptyDir('_rels/');
+            $zip->addEmptyDir('xl/worksheets/');
+            // simple files
+            $zip->addFromString('_rels/.rels', $this->xmlRels());
+            $zip->addFromString('[Content_Types].xml', $this->xmlContentTypes());
+            $zip->addFromString('xl/styles.xml', $this->xmlStyles());
+            $zip->addFromString('xl/workbook.xml', $this->xmlWorkbook());
+            $zip->addFromString('xl/_rels/workbook.xml.rels', $this->xmlWorkbookRels());
+            // create the sharedStrings object because worksheets use it
+            $sharedstrings = new SharedStrings();
+            $wsIndex = 1;
+            foreach ($this->worksheets as $worksheet) {
+                // write and include the sheet
+                $wsfile = $worksheet->write($sharedstrings);
+                $removefiles[] = $wsfile;
+                $zip->addFile($wsfile, $this->workSheetFilePath($wsIndex));
+                $wsIndex = $wsIndex + 1;
+            }
+            // include the shared strings file
+            $shstrsfile = $sharedstrings->write();
+            $removefiles[] = $shstrsfile;
+            $zip->addFile($shstrsfile, 'xl/sharedStrings.xml');
+            // end with zip
+            $zip->close();
+        } catch (\Exception $exception) {
+            throw $exception;
+        } finally {
+            // remove temporary files
+            foreach ($removefiles as $file) {
+                unlink($file);
+            }
         }
         return $filename;
     }
@@ -118,8 +126,8 @@ class WorkBook
             . ' ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/>'
             . '<Override PartName="/xl/sharedStrings.xml"'
             . ' ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sharedStrings+xml"/>'
-            . array_reduce(range(1, $this->worksheets->count()), function ($r, $index) {
-                return $r . '<Override PartName="/' . $this->workSheetFilePath($index)
+            . array_reduce(range(1, $this->worksheets->count()), function ($return, $index) {
+                return $return . '<Override PartName="/' . $this->workSheetFilePath($index)
                     . '" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>'
                 ;
             })

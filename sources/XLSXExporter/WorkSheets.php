@@ -2,19 +2,49 @@
 
 namespace XLSXExporter;
 
-class WorkSheets extends AbstractCollection
+class WorkSheets extends Collection
 {
     /**
+     * Add a WorkSheet to this collection
+     *
      * @param WorkSheet $item
      * @throws XLSXException
      */
     public function add($item)
     {
-        $this->addItem($item, ! $this->isValidInstance($item) ? null : $item->getName());
+        if (! $item instanceof WorkSheet) {
+            throw new XLSXException('Invalid WorkSheet object');
+        }
+        $this->collection[] = $item;
     }
 
-    public function isValidInstance($item)
+    /**
+     * Return the repeated worksheet names
+     *
+     * @return array
+     */
+    public function retrieveRepeatedNames()
     {
-        return ($item instanceof WorkSheet);
+        $names = [];
+        $repeated = [];
+        foreach ($this->collection as $worksheet) {
+            /* @var $worksheet WorkSheet */
+            if (! in_array($worksheet->getName(), $names)) {
+                $names[] = $worksheet->getName();
+                continue;
+            }
+            $repeated[] = $worksheet->getName();
+        }
+        return array_unique($repeated);
+    }
+
+    /**
+     * @param string $id
+     * @param WorkSheet $item
+     * @return bool
+     */
+    protected function elementMatchId($id, $item)
+    {
+        return ($id == $item->getName());
     }
 }
