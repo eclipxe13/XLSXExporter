@@ -2,6 +2,11 @@
 
 namespace XLSXExporter;
 
+/**
+ * Class Collection
+ * @access private
+ * @package XLSXExporter
+ */
 abstract class Collection implements \IteratorAggregate, \Countable
 {
     /**
