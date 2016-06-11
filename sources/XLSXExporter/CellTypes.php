@@ -2,7 +2,7 @@
 
 namespace XLSXExporter;
 
-abstract class CellTypes
+interface CellTypes
 {
     const TEXT = 'TEXT';
     const NUMBER = 'NUMBER';
