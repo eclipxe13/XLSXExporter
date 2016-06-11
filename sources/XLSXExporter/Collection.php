@@ -80,7 +80,7 @@ abstract class Collection implements \IteratorAggregate, \Countable
      */
     public function existsById($id, $start = 0)
     {
-        return (-1 !== $index = $this->searchById($id, $start));
+        return (-1 !== $this->searchById($id, $start));
     }
 
     /**

@@ -74,13 +74,13 @@ class WorkBook
             $zip->addFromString('xl/_rels/workbook.xml.rels', $this->xmlWorkbookRels());
             // create the sharedStrings object because worksheets use it
             $sharedstrings = new SharedStrings();
-            $i = 1;
+            $wsIndex = 1;
             foreach ($this->worksheets as $worksheet) {
                 // write and include the sheet
                 $wsfile = $worksheet->write($sharedstrings);
                 $removefiles[] = $wsfile;
-                $zip->addFile($wsfile, $this->workSheetFilePath($i));
-                $i = $i + 1;
+                $zip->addFile($wsfile, $this->workSheetFilePath($wsIndex));
+                $wsIndex = $wsIndex + 1;
             }
             // include the shared strings file
             $shstrsfile = $sharedstrings->write();
@@ -126,8 +126,8 @@ class WorkBook
             . ' ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/>'
             . '<Override PartName="/xl/sharedStrings.xml"'
             . ' ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sharedStrings+xml"/>'
-            . array_reduce(range(1, $this->worksheets->count()), function ($r, $index) {
-                return $r . '<Override PartName="/' . $this->workSheetFilePath($index)
+            . array_reduce(range(1, $this->worksheets->count()), function ($return, $index) {
+                return $return . '<Override PartName="/' . $this->workSheetFilePath($index)
                     . '" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>'
                 ;
             })
