@@ -2,34 +2,47 @@
 
 namespace XLSXExporter;
 
-abstract class AbstractCollection implements \IteratorAggregate
+abstract class AbstractCollection implements \IteratorAggregate, \Countable
 {
     /**
      * @param mixed $item
+     * @return void
+     */
+    abstract public function add($item);
+
+    /**
+     * Retrieve if an element match, this is used in searchById function
+     *
+     * @param string $id
+     * @param mixed $item
      * @return bool
      */
-    abstract public function isValidInstance($item);
-    abstract public function add($item);
+    abstract protected function elementMatchId($id, $item);
+
+    /**
+     * Get the index in the collection for an element
+     *
+     * @param string $id
+     * @param int $start
+     * @return int index of the element, -1 if not found
+     */
+    public function searchById($id, $start = 0)
+    {
+        $count = count($this->collection);
+        for ($index = max(0, $start); $index < $count; $index++) {
+            if ($this->elementMatchId($id, $this->collection[$index])) {
+                return $index;
+            }
+        }
+        return -1;
+    }
 
     /** @var array */
     protected $collection = [];
 
-    public function __construct($items = null)
+    public function __construct(array $items = [])
     {
-        if (is_array($items)) {
-            $this->addArray($items);
-        }
-    }
-
-    protected function addItem($item, $id)
-    {
-        if (! $this->isValidInstance($item)) {
-            throw new XLSXException('The item is not a valid object for the collection');
-        }
-        if ($this->exists($id)) {
-            throw new XLSXException('There is a item with the same id, ids must be unique');
-        }
-        $this->collection[$id] = $item;
+        $this->addArray($items);
     }
 
     /**
@@ -45,12 +58,55 @@ abstract class AbstractCollection implements \IteratorAggregate
 
     /**
      * Check if a item id exists
-     * @param string $id
+     * @param int $index
      * @return bool
      */
-    public function exists($id)
+    public function exists($index)
     {
-        return (array_key_exists((string) $id, $this->collection));
+        return (array_key_exists((string) $index, $this->collection));
+    }
+
+    /**
+     * Return if the item identified by id exists
+     *
+     * @param string $id
+     * @param int $start
+     * @return bool
+     */
+    public function existsById($id, $start = 0)
+    {
+        return (-1 !== $index = $this->searchById($id, $start));
+    }
+
+    /**
+     * Return one item by index
+     *
+     * @param string $index
+     * @return mixed
+     * @throws XLSXException
+     */
+    public function get($index)
+    {
+        if (! $this->exists($index)) {
+            throw new XLSXException("The item $index does not exists");
+        }
+        return $this->collection[$index];
+    }
+
+    /**
+     * Return one item by id
+     *
+     * @param string $id
+     * @param int $start
+     * @return mixed
+     * @throws XLSXException
+     */
+    public function getById($id, $start = 0)
+    {
+        if (-1 === $index = $this->searchById($id, $start)) {
+            throw new XLSXException("The item {$id} does not exists");
+        }
+        return $this->get($index);
     }
 
     /**
@@ -60,20 +116,6 @@ abstract class AbstractCollection implements \IteratorAggregate
     public function count()
     {
         return count($this->collection);
-    }
-
-    /**
-     * Return one item
-     * @param string $id
-     * @return mixed
-     * @throws XLSXException
-     */
-    public function get($id)
-    {
-        if (! $this->exists($id)) {
-            throw new XLSXException("The item $id does not exists");
-        }
-        return $this->collection[$id];
     }
 
     /**
