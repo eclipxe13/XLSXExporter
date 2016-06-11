@@ -16,18 +16,16 @@ class WorkBook
     /** @var Style default base style */
     protected $style;
 
-    public function __construct($worksheets = null, $style = null)
+    /**
+     * WorkBook constructor.
+     *
+     * @param WorkSheets|null $worksheets
+     * @param Style|null $style
+     */
+    public function __construct(WorkSheets $worksheets = null, Style $style = null)
     {
-        // wroksheets
-        if (! ($worksheets instanceof WorkSheets)) {
-            $worksheets = new WorkSheets();
-        }
-        $this->worksheets = $worksheets;
-        // style
-        if (! ($style instanceof Style)) {
-            $style = BasicStyles::defaultStyle();
-        }
-        $this->style = $style;
+        $this->worksheets = ($worksheets) ? : new WorkSheets();
+        $this->style = ($style) ? : BasicStyles::defaultStyle();
     }
 
     public function __get($name)
