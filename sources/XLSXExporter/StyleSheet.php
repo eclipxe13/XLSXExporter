@@ -4,7 +4,7 @@ namespace XLSXExporter;
 
 class StyleSheet
 {
-    /** @var Style|Style[] */
+    /** @var Style[] */
     protected $styles;
     /** @var array */
     protected $hashes;
@@ -22,7 +22,12 @@ class StyleSheet
             }
         }
         // mandatory styles
-        $this->styles = array_merge([
+        $this->styles = array_merge($this->mandatoryStyles(), $styles);
+    }
+
+    protected function mandatoryStyles()
+    {
+        return [
             new Style([
                 'format' => [
                     'code' => Styles\Format::FORMAT_GENERAL,
@@ -34,13 +39,13 @@ class StyleSheet
                     'horizontal' => Styles\Alignment::HORIZONTAL_GENERAL,
                     'vertical' => Styles\Alignment::VERTICAL_BOTTOM,
                 ],
-                ]),
+            ]),
             new Style([
                 'fill' => [
                     'pattern' => Styles\Fill::GRAY125,
                 ],
-                ]),
-            ], $styles);
+            ]),
+        ];
     }
 
     protected function processStylesFormat()
