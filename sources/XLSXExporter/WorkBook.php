@@ -50,6 +50,11 @@ class WorkBook
         if (! $this->worksheets->count()) {
             throw new XLSXException('Workbook does not contains any worksheet');
         }
+        // check that every sheet has a different name
+        $repeatedNames = $this->worksheets->retrieveRepeatedNames();
+        if (count($repeatedNames)) {
+            throw new XLSXException('Workbook has worksheets with the same name: ' . implode(',', $repeatedNames));
+        }
         // validations end, create the file
         $filename = tempnam(sys_get_temp_dir(), 'xlsx-');
         $removefiles = [];
