@@ -34,20 +34,26 @@ class ProviderIterator implements ProviderInterface
     public function __construct(Iterator $iterator, $count = -1)
     {
         $this->iterator = $iterator;
-        if ($count < 0) {
+        if (! is_int($count) || $count < 0) {
             $count = $this->obtainCountFromIterator();
         }
         $this->count = $count;
     }
 
+    /**
+     * Procedute to retrieve the count by traversing the iterator
+     * @return int
+     */
     private function obtainCountFromIterator()
     {
         $count = 0;
         $this->iterator->rewind();
         while ($this->iterator->valid()) {
             $count = $count + 1;
+            $this->iterator->next();
         }
         $this->iterator->rewind();
+        return $count;
     }
 
     public function get($key)
