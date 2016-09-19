@@ -177,8 +177,7 @@ class WorkSheet
         $styleindex = $this->getHeaderStyle()->getStyleIndex();
         foreach ($this->columns as $column) {
             // write cell
-            $s = $strings->add($column->getTitle());
-            $writer->writeCell(CellTypes::TEXT, $s, $styleindex);
+            $writer->writeCell(CellTypes::TEXT, $strings->add($column->getTitle()), $styleindex);
         }
         $writer->closeRow();
         // -- write cell contents
