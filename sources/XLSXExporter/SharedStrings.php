@@ -9,6 +9,7 @@ use XLSXExporter\Utils\XmlConverter;
  */
 class SharedStrings implements \Countable
 {
+    protected $count = 0;
     protected $strings = [];
 
     /**
@@ -23,8 +24,9 @@ class SharedStrings implements \Countable
         if (array_key_exists($string, $this->strings)) {
             return $this->strings[$string];
         }
-        $index = count($this->strings);
+        $index = $this->count;
         $this->strings[$string] = $index;
+        $this->count = $this->count + 1;
         return $index;
     }
 
@@ -46,11 +48,10 @@ class SharedStrings implements \Countable
      */
     protected function writeTo(SplFileObject $file)
     {
-        $count = count($this->strings);
         $file->fwrite(
             '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' . "\n"
             . '<sst xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"'
-            . ' count="' . $count . '" uniqueCount="' . $count . '">'
+            . ' count="' . $this->count . '" uniqueCount="' . $this->count . '">'
         );
         // Not using the index, is not needed
         // do not use array_keys, it (could?) duplicate the memory usage
@@ -62,6 +63,6 @@ class SharedStrings implements \Countable
 
     public function count()
     {
-        return count($this->strings);
+        return $this->count;
     }
 }
