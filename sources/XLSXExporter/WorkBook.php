@@ -44,6 +44,13 @@ class WorkBook
         return $this->worksheets;
     }
 
+    /**
+     * Write the workbook and return the temporary filename of the created file
+     *
+     * @return string
+     * @throws XLSXException if the workbook does not constains any worksheet
+     * @throws XLSXException if the workbook has two sheets with the same name
+     */
     public function write()
     {
         // check that there are worksheets
@@ -88,8 +95,6 @@ class WorkBook
             $zip->addFile($shstrsfile, 'xl/sharedStrings.xml');
             // end with zip
             $zip->close();
-        } catch (\Exception $exception) {
-            throw $exception;
         } finally {
             // remove temporary files
             foreach ($removefiles as $file) {
