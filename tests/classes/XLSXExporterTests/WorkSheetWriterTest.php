@@ -1,9 +1,10 @@
 <?php
 namespace XLSXExporterTests;
 
+use PHPUnit\Framework\TestCase;
 use XLSXExporter\WorkSheetWriter;
 
-class WorkSheetWriterTest extends \PHPUnit_Framework_TestCase
+class WorkSheetWriterTest extends TestCase
 {
     public function testStaticIntegerToColumn()
     {

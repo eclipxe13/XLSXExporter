@@ -12,6 +12,7 @@ use XLSXExporter\Styles\Alignment;
 use XLSXExporter\Styles\Format;
 use XLSXExporter\WorkBook;
 use XLSXExporter\WorkSheet;
+use XLSXExporter\XLSXException;
 
 class WorkBookExporter
 {
@@ -45,14 +46,19 @@ class WorkBookExporter
      * @param string $sheetName
      * @param array $headers
      * @param Style|null $defaultHeaderStyle
+     * @throws XLSXException when the recordset did not retrieve the fields collection
      */
     public function attach(Recordset $recordset, $sheetName, array $headers = [], Style $defaultHeaderStyle = null)
     {
+        $fields = $recordset->getFields();
+        if (! is_array($fields)) {
+            throw new XLSXException('The recordset did not retrieve the fields collection');
+        }
         $this->workbook->getWorkSheets()->add(
             new WorkSheet(
                 $sheetName,
                 new RecordsetProvider($recordset),
-                $this->createColumnsFromFields($recordset->getFields(), $headers),
+                $this->createColumnsFromFields($fields, $headers),
                 $defaultHeaderStyle ? : $this->defaultHeaderStyle
             )
         );
@@ -73,14 +79,14 @@ class WorkBookExporter
         $useheaders = count($headers);
         $columns = new Columns();
         foreach ($fields as $field) {
-            if ($useheaders and ! array_key_exists($field['name'], $headers)) {
+            if ($useheaders && ! array_key_exists($field['name'], $headers)) {
                 continue;
             }
             $columns->add(new Column(
                 $field['name'],
                 $field['name'],
-                static::getColumnTypeFromFieldType($field['commontype']),
-                static::getColumnStyleFromFieldType($field['commontype'])
+                self::getColumnTypeFromFieldType($field['commontype']),
+                self::getColumnStyleFromFieldType($field['commontype'])
             ));
         }
         if ($useheaders) {
@@ -92,13 +98,13 @@ class WorkBookExporter
                 $column = $columns->getById($fieldname);
                 // set title
                 if (array_key_exists('title', $properties)
-                    and is_string($properties['title'])) {
+                    && is_string($properties['title'])) {
                     $column->setTitle($properties['title']);
                 }
                 // set style
                 if (array_key_exists('style', $properties)
-                    and is_array($properties['style'])
-                    and count($properties['style'])) {
+                    && is_array($properties['style'])
+                    && count($properties['style'])) {
                     $column->getStyle()->setFromArray($properties['style']);
                 }
             }
@@ -128,7 +134,6 @@ class WorkBookExporter
             DBAL::TINT => ['format' => ['code' => Format::FORMAT_ZERO_0DECS]],
             DBAL::TBOOL => [
                 'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER],
-                'format' => ['code' => Format::FORMAT_YESNO],
             ],
             DBAL::TDATETIME => ['format' => ['code' => Format::FORMAT_DATE_YMDHM]],
             DBAL::TDATE => ['format' => ['code' => Format::FORMAT_DATE_YMD]],

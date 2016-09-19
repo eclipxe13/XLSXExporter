@@ -35,7 +35,7 @@ class WorkSheetWriter
             . '<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">'
             . '<dimension ref="' . $firstcell . ':' . $lastcell . '"/>'
             . '<sheetViews>'
-            . '<sheetView tabSelected="1" workbookViewId="0"><selection activeCell="A1" sqref="A1"/></sheetView>'
+            . '<sheetView tabSelected="0" workbookViewId="0"><selection activeCell="A1" sqref="A1"/></sheetView>'
             . '</sheetViews>'
             . '<sheetFormatPr baseColWidth="10" defaultRowHeight="15"/>'
             . '<sheetData>'

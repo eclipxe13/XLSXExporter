@@ -14,5 +14,6 @@
 /.scrutinizer.yml    export-ignore
 /.travis.yml         export-ignore
 /tests/              export-ignore
+/phpcs.xml           export-ignore
 /phpdox.xml.dist     export-ignore
 /phpunit.xml.dist    export-ignore

@@ -1,10 +1,13 @@
 <?php
 namespace XLSXExporterTests;
 
+use PHPUnit\Framework\TestCase;
 use XLSXExporter\Column;
+use XLSXExporter\Style;
 
-class ColumnTest extends \PHPUnit_Framework_TestCase
+class ColumnTest extends TestCase
 {
+    /** @var Column */
     private $column;
     private $id = 'foobar';
 
@@ -16,7 +19,7 @@ class ColumnTest extends \PHPUnit_Framework_TestCase
 
     public function testID()
     {
-        $this->assertEquals($this->id, $this->column->getID());
+        $this->assertEquals($this->id, $this->column->getId());
     }
 
     public function testTitle()
@@ -29,6 +32,6 @@ class ColumnTest extends \PHPUnit_Framework_TestCase
 
     public function testStyle()
     {
-        $this->assertInstanceOf('XLSXExporter\\Style', $this->column->getStyle());
+        $this->assertInstanceOf(Style::class, $this->column->getStyle());
     }
 }

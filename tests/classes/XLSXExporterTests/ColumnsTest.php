@@ -1,11 +1,12 @@
 <?php
 namespace XLSXExporterTests;
 
+use PHPUnit\Framework\TestCase;
 use XLSXExporter\Column;
 use XLSXExporter\Columns;
 use XLSXExporter\XLSXException;
 
-class ColumnsTest extends \PHPUnit_Framework_TestCase
+class ColumnsTest extends TestCase
 {
     public function testConstructMinimalParameters()
     {

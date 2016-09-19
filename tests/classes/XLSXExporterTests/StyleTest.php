@@ -1,11 +1,12 @@
 <?php
 namespace XLSXExporterTests;
 
+use PHPUnit\Framework\TestCase;
 use XLSXExporter\Style;
 use XLSXExporter\Styles\Font;
 use XLSXExporter\Styles\Format;
 
-class StyleTest extends \PHPUnit_Framework_TestCase
+class StyleTest extends TestCase
 {
     public function testConstructorGetterSetter()
     {
@@ -26,7 +27,7 @@ class StyleTest extends \PHPUnit_Framework_TestCase
             );
             $setter = 'set' . ucfirst($member);
             $chain = $s->$setter($s->$member);
-            $this->assertInstanceOf('\XLSXExporter\Style', $chain, 'The setter is not returning a Style object');
+            $this->assertInstanceOf(Style::class, $chain, 'The setter is not returning a Style object');
             $this->assertSame($s, $chain, 'The setter return a different instance of the object');
         }
     }
