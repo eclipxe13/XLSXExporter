@@ -1,6 +1,7 @@
 <?php
 namespace XLSXExporterTests;
 
+use PHPUnit\Framework\TestCase;
 use XLSXExporter\CellTypes;
 use XLSXExporter\Column;
 use XLSXExporter\Columns;
@@ -14,7 +15,7 @@ use XLSXExporter\WorkBook;
 use XLSXExporter\WorkSheet;
 use XLSXExporter\WorkSheets;
 
-class CompleteTest extends \PHPUnit_Framework_TestCase
+class CompleteTest extends TestCase
 {
     public function testComplete()
     {

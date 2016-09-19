@@ -1,11 +1,12 @@
 <?php
 namespace XLSXExporterTests;
 
+use PHPUnit\Framework\TestCase;
 use XLSXExporter\Style;
 use XLSXExporter\Styles\Font;
 use XLSXExporter\Styles\Format;
 
-class StyleTest extends \PHPUnit_Framework_TestCase
+class StyleTest extends TestCase
 {
     public function testConstructorGetterSetter()
     {

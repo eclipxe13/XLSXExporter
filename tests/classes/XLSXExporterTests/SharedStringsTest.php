@@ -1,9 +1,10 @@
 <?php
 namespace XLSXExporterTests;
 
+use PHPUnit\Framework\TestCase;
 use XLSXExporter\SharedStrings;
 
-class SharedStringsTest extends \PHPUnit_Framework_TestCase
+class SharedStringsTest extends TestCase
 {
     public function testConstructor()
     {

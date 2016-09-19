@@ -1,9 +1,10 @@
 <?php
 namespace XLSXExporterTests;
 
+use PHPUnit\Framework\TestCase;
 use XLSXExporter\DateConverter;
 
-class DateConverterTest extends \PHPUnit_Framework_TestCase
+class DateConverterTest extends TestCase
 {
     public function testTimeStampToTime()
     {
