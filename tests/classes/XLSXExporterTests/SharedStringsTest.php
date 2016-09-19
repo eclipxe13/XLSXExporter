@@ -9,7 +9,7 @@ class SharedStringsTest extends TestCase
     public function testConstructor()
     {
         $st = new SharedStrings();
-        $this->assertInstanceOf('\Countable', $st, 'SharedStrings must be a countable');
+        $this->assertInstanceOf(\Countable::class, $st, 'SharedStrings must be a countable');
         $this->assertCount(0, $st, 'Shared Strings must be empty on creation');
     }
 
@@ -31,6 +31,7 @@ class SharedStringsTest extends TestCase
     }
 
     /**
+     * @param SharedStrings $st
      * @depends testAddMultiple
      */
     public function testWrite(SharedStrings $st)

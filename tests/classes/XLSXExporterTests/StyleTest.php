@@ -27,7 +27,7 @@ class StyleTest extends TestCase
             );
             $setter = 'set' . ucfirst($member);
             $chain = $s->$setter($s->$member);
-            $this->assertInstanceOf('\XLSXExporter\Style', $chain, 'The setter is not returning a Style object');
+            $this->assertInstanceOf(Style::class, $chain, 'The setter is not returning a Style object');
             $this->assertSame($s, $chain, 'The setter return a different instance of the object');
         }
     }
