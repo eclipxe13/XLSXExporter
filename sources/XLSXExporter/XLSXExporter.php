@@ -30,7 +30,7 @@ class XLSXExporter
      * @param WorkBook $workbook
      * @throws XLSXException
      */
-    public function passtru(WorkBook $workbook)
+    public static function passtru(WorkBook $workbook)
     {
         $tempfile = $workbook->write();
         header('Content-type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
