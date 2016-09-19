@@ -23,6 +23,7 @@ class CompleteTest extends TestCase
         $dataArray = [
             ['fname' => 'Charles', 'amount' => 1234.561, 'visit' => strtotime('2014-01-13 13:14:15'), 'check' => 1],
             ['fname' => 'Foo', 'amount' => 6543.219, 'visit' => strtotime('2014-12-31 23:59:59'), 'check' => 0],
+            ['fname' => 'Derp', 'amount' => -999, 'visit' => null, 'check' => 0],
         ];
         $providerArray = new ProviderArray($dataArray);
         $providerIterator = new ProviderIterator(new \ArrayIterator($dataArray));
@@ -53,7 +54,6 @@ class CompleteTest extends TestCase
                 'Check',
                 CellTypes::BOOLEAN,
                 new Style([
-                    'format' => ['code' => Format::FORMAT_YESNO],
                     'alignment' => Alignment::HORIZONTAL_CENTER,
                 ])
             ),

@@ -134,7 +134,6 @@ class WorkBookExporter
             DBAL::TINT => ['format' => ['code' => Format::FORMAT_ZERO_0DECS]],
             DBAL::TBOOL => [
                 'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER],
-                'format' => ['code' => Format::FORMAT_YESNO],
             ],
             DBAL::TDATETIME => ['format' => ['code' => Format::FORMAT_DATE_YMDHM]],
             DBAL::TDATE => ['format' => ['code' => Format::FORMAT_DATE_YMD]],
