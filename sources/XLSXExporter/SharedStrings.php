@@ -20,14 +20,12 @@ class SharedStrings implements \Countable
      */
     public function add($string)
     {
-        // use the key instead of the content for faster access, it works like a bst
+        // use the key instead of the content for faster access, it works like a binary search tree
         if (array_key_exists($string, $this->strings)) {
             return $this->strings[$string];
         }
-        $index = $this->count;
-        $this->strings[$string] = $index;
-        $this->count = $this->count + 1;
-        return $index;
+        $this->strings[$string] = $this->count;
+        return $this->count++;
     }
 
     /**
