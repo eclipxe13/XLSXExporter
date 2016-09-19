@@ -1,5 +1,4 @@
 <?php
-
 namespace XLSXExporter;
 
 interface CellTypes

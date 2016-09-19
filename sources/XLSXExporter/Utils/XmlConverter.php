@@ -1,5 +1,4 @@
 <?php
-
 namespace XLSXExporter\Utils;
 
 class XmlConverter

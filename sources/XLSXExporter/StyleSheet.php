@@ -1,5 +1,4 @@
 <?php
-
 namespace XLSXExporter;
 
 class StyleSheet
@@ -11,6 +10,13 @@ class StyleSheet
     /** @var array */
     protected $objects;
 
+    /**
+     * StyleSheet constructor.
+     *
+     * @param Style[] $styles
+     * @throws XLSXException Error creating the stylesheet, no styles found
+     * @throws XLSXException Error creating the stylesheet, received an invalid style object
+     */
     public function __construct(array $styles)
     {
         if (! count($styles)) {
@@ -25,6 +31,11 @@ class StyleSheet
         $this->styles = array_merge($this->mandatoryStyles(), $styles);
     }
 
+    /**
+     * The mandatory styles, must be declared before any other style
+     *
+     * @return Style[]
+     */
     protected function mandatoryStyles()
     {
         return [
@@ -59,7 +70,7 @@ class StyleSheet
             if (! $format->hasValues()) {
                 $format->code = Styles\Format::FORMAT_GENERAL;
             }
-            if (false !== $builtin = $format->getBuiltInCodeByCode($format->code)) {
+            if (false !== $builtin = $format->getBuiltInCodeIdByCode($format->code)) {
                 $format->id = $builtin;
                 if (! in_array($format->code, $codes)) {
                     $codes[$format->id] = $format->code;
@@ -109,6 +120,11 @@ class StyleSheet
         }
     }
 
+    /**
+     * @param string $name
+     * @param string $tag
+     * @return string
+     */
     protected function xmlCollection($name, $tag)
     {
         return '<' . $tag . ' count="' . count($this->objects[$name]) . '">'
@@ -119,6 +135,9 @@ class StyleSheet
         ;
     }
 
+    /**
+     * @return string
+     */
     protected function xmlCellStylesXF()
     {
         return '<cellStyleXfs count="1">'
@@ -127,6 +146,9 @@ class StyleSheet
         ;
     }
 
+    /**
+     * @return string
+     */
     protected function xmlCellXfs()
     {
         $index = 0;
@@ -140,6 +162,11 @@ class StyleSheet
         ;
     }
 
+    /**
+     * Return the content of the style sheet in xml format
+     *
+     * @return string
+     */
     public function asXML()
     {
         $this->processStyles();
@@ -160,7 +187,7 @@ class StyleSheet
 
     /**
      * Styles collection
-     * @return Style|Style[]
+     * @return Style[]
      */
     public function getStyles()
     {
