@@ -51,7 +51,6 @@ function for the namespace `XLSXExporter\` and include the file only if it exist
 ## Example
 
 ```php
-<?php
 // create a simple array as example
 $a = new ProviderArray([
     ['fname' => 'Charles', 'amount' => 1234.561, 'visit' => strtotime('2014-01-13 13:14:15'), 'check' => 1],
