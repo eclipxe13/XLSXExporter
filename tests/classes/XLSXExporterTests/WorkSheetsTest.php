@@ -1,5 +1,4 @@
 <?php
-
 namespace classes\XLSXExporterTests;
 
 use PHPUnit\Framework\TestCase;
@@ -17,7 +16,6 @@ class WorkSheetsTest extends TestCase
     {
         $this->worksheets = new WorkSheets();
     }
-
 
     public function testConstructor()
     {

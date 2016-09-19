@@ -1,5 +1,4 @@
 <?php
-
 namespace XLSXExporter;
 
 class Columns extends Collection

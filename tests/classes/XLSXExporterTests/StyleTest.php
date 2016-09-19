@@ -11,7 +11,7 @@ class StyleTest extends \PHPUnit_Framework_TestCase
     {
         $s = new Style();
         $expectedMembers = $s->getMemberNames();
-        $this->assertGreaterThan(0, count($expectedMembers), "There are no members!");
+        $this->assertGreaterThan(0, count($expectedMembers), 'There are no members!');
         foreach ($expectedMembers as $member) {
             $this->assertInstanceOf(
                 '\XLSXExporter\Styles\\' . ucfirst($member),
@@ -26,8 +26,8 @@ class StyleTest extends \PHPUnit_Framework_TestCase
             );
             $setter = 'set' . ucfirst($member);
             $chain = $s->$setter($s->$member);
-            $this->assertInstanceOf('\XLSXExporter\Style', $chain, "The setter is not returning a Style object");
-            $this->assertSame($s, $chain, "The setter return a different instance of the object");
+            $this->assertInstanceOf('\XLSXExporter\Style', $chain, 'The setter is not returning a Style object');
+            $this->assertSame($s, $chain, 'The setter return a different instance of the object');
         }
     }
 
@@ -100,15 +100,14 @@ class StyleTest extends \PHPUnit_Framework_TestCase
         $s->{'setFormat'}(null, null);
     }
 
-
     protected function getFormatArray()
     {
         return [
-            "font" => [
-                "underline" => Font::UNDERLINE_DOUBLE,
+            'font' => [
+                'underline' => Font::UNDERLINE_DOUBLE,
             ],
-            "format" => [
-                "code" => Format::FORMAT_COMMA_2DECS,
+            'format' => [
+                'code' => Format::FORMAT_COMMA_2DECS,
             ],
         ];
     }
@@ -116,16 +115,16 @@ class StyleTest extends \PHPUnit_Framework_TestCase
     public function testConstructorWithArray()
     {
         $s = new Style($this->getFormatArray());
-        $this->assertSame(Format::FORMAT_COMMA_2DECS, $s->format->code, "Cannot set the style using constructor");
+        $this->assertSame(Format::FORMAT_COMMA_2DECS, $s->format->code, 'Cannot set the style using constructor');
     }
 
     public function testSetFromArray()
     {
         $s = new Style();
         $x = $s->setFromArray($this->getFormatArray());
-        $this->assertSame(Font::UNDERLINE_DOUBLE, $s->font->underline, "Cannot set the style using setFromArray");
-        $this->assertTrue($s->hasValues(), "It was expected that hasValues returns true");
-        $this->assertSame($s, $x, "The setFromArray method is not chained");
+        $this->assertSame(Font::UNDERLINE_DOUBLE, $s->font->underline, 'Cannot set the style using setFromArray');
+        $this->assertTrue($s->hasValues(), 'It was expected that hasValues returns true');
+        $this->assertSame($s, $x, 'The setFromArray method is not chained');
     }
 
     public function testHasValues()
@@ -133,28 +132,28 @@ class StyleTest extends \PHPUnit_Framework_TestCase
         $s = new Style();
         $this->assertFalse(
             $s->hasValues(),
-            "It was expected that hasValues returns false since there is no specification of style"
+            'It was expected that hasValues returns false since there is no specification of style'
         );
         $s->setFromArray($this->getFormatArray());
         $this->assertTrue(
             $s->hasValues(),
-            "It was expected that hasValues returns true since it was specified using setFromArray"
+            'It was expected that hasValues returns true since it was specified using setFromArray'
         );
     }
 
     public function testStyleIndexProperty()
     {
         $s = new Style();
-        $this->assertNull($s->getStyleIndex(), "styleindex must be null just after style creation");
+        $this->assertNull($s->getStyleIndex(), 'styleindex must be null just after style creation');
         $x = $s->setStyleIndex(5);
-        $this->assertSame(5, $s->getStyleIndex(), "The StyleIndex property does not match after setStyleIndex");
-        $this->assertSame($s, $x, "The setStyleIndex method is not chained");
+        $this->assertSame(5, $s->getStyleIndex(), 'The StyleIndex property does not match after setStyleIndex');
+        $this->assertSame($s, $x, 'The setStyleIndex method is not chained');
     }
 
     public function testAsXML()
     {
         $s = new Style();
-        $empty = '<'.'xf'
+        $empty = '<' . 'xf'
             . ' applyAlignment="false"'
             . ' applyBorder="false"'
             . ' applyFill="false"'
@@ -167,6 +166,6 @@ class StyleTest extends \PHPUnit_Framework_TestCase
             . ' numFmtId="0"'
             . ' xfId="0"/>'
         ;
-        $this->assertXmlStringEqualsXmlString($empty, $s->asXML(), "Style does not match with expected XML");
+        $this->assertXmlStringEqualsXmlString($empty, $s->asXML(), 'Style does not match with expected XML');
     }
 }

@@ -1,5 +1,4 @@
 <?php
-
 namespace classes\XLSXExporterTests\Utils;
 
 use ArrayObject;
@@ -8,7 +7,6 @@ use XLSXExporter\Utils\ProviderGetValue;
 
 class ProviderGetValueTest extends TestCase
 {
-
     public function providerProviderGetValue()
     {
         $arrayContainer = [

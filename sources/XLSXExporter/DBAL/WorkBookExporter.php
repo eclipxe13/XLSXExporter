@@ -1,5 +1,4 @@
 <?php
-
 namespace XLSXExporter\DBAL;
 
 use EngineWorks\DBAL\CommonTypes;

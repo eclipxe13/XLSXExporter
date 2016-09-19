@@ -1,5 +1,4 @@
 <?php
-
 namespace XLSXExporter;
 
 use XLSXExporter\Providers\NullProvider;

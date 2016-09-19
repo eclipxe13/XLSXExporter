@@ -1,5 +1,4 @@
 <?php
-
 namespace XLSXExporter\Styles;
 
 class Border extends AbstractStyle

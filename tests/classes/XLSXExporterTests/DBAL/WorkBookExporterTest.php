@@ -1,13 +1,12 @@
 <?php
-
 namespace XLSXExporterTests\DBAL;
 
+use EngineWorks\DBAL\CommonTypes;
+use PHPUnit\Framework\TestCase;
 use XLSXExporter\CellTypes;
 use XLSXExporter\Column;
 use XLSXExporter\Columns;
 use XLSXExporter\DBAL\WorkBookExporter;
-use EngineWorks\DBAL\CommonTypes;
-use PHPUnit\Framework\TestCase;
 use XLSXExporter\Styles\Font;
 
 class WorkBookExporterTest extends TestCase
