@@ -60,8 +60,8 @@ class SharedStrings implements \Countable
         $file->fwrite('</sst>');
     }
 
-    public function count($mode = 0)
+    public function count()
     {
-        return count($this->strings, $mode);
+        return count($this->strings);
     }
 }
