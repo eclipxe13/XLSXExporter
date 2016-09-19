@@ -39,7 +39,7 @@ Use composer, so please run `composer require eclipxe/xlsxexporter` or include t
 ```json
 {
     "require": {
-        "eclipxe/xlsxexporter": "dev-master"
+        "eclipxe/xlsxexporter": "@stable"
     }
 }
 ```
@@ -51,33 +51,28 @@ function for the namespace `XLSXExporter\` and include the file only if it exist
 ## Example
 
 ```php
+<?php
 // create a simple array as example
 $a = new ProviderArray([
-    ["fname" => "Charles", "amount" => 1234.561, "visit" => strtotime('2014-01-13 13:14:15'), "check" => 1],
-    ["fname" => "Foo", "amount" => 6543.219, "visit" => strtotime('2014-12-31 23:59:59'), "check" => 0],
+    ['fname' => 'Charles', 'amount' => 1234.561, 'visit' => strtotime('2014-01-13 13:14:15'), 'check' => 1],
+    ['fname' => 'Foo', 'amount' => 6543.219, 'visit' => strtotime('2014-12-31 23:59:59'), 'check' => 0],
 ]);
 
 // create the workbook with all the information
 $wb = new WorkBook(new WorkSheets([
-    new WorkSheet("sheet01", $a, new Columns([
-        new Column("fname", "Name"),
-        new Column("amount", "Amount", CellTypes::NUMBER,
-            (new Style())->setFromArray(["format" => ["code" => Format::FORMAT_COMMA_2DECS]])),
-        new Column("visit", "Visit", CellTypes::DATETIME,
-            (new Style())->setFromArray(["format" => ["code" => Format::FORMAT_DATE_YMDHM]])),
-        new Column("check", "Check", CellTypes::BOOLEAN,
-            (new Style())->setFromArray(["format" => ["code" => Format::FORMAT_YESNO]])),
+    new WorkSheet('sheet01', $a, new Columns([
+        new Column('fname', 'Name'),
+        new Column('amount', 'Amount', CellTypes::NUMBER,
+            (new Style())->setFromArray(['format' => ['code' => Format::FORMAT_COMMA_2DECS]])),
+        new Column('visit', 'Visit', CellTypes::DATETIME,
+            (new Style())->setFromArray(['format' => ['code' => Format::FORMAT_DATE_YMDHM]])),
+        new Column('check', 'Check', CellTypes::BOOLEAN,
+            (new Style())->setFromArray(['format' => ['code' => Format::FORMAT_YESNO]])),
     ]))
 ]));
 
 // call the write process
-$tempfile = $wb->write();
-
-// copy the file to a certain location
-copy($tempfile, "result.xlsx");
-
-// remove temporary file
-unlink($tempfile);
+XLSXExporter::save('result.xlsx');
 ```
 
 ## Development
@@ -99,7 +94,7 @@ All your help is very appreciated, please contribute with testing, ideas, code, 
 - Add borders style
 - Depend on interfaces and not on classes
 - Write samples with PDO
-- Find a better way to manage SharedStrings without so many memory and fast
+- Find a better way to manage SharedStrings without so many memory and faster
 - Depend on a class to create the temporary files
 - Document all the classes
 
