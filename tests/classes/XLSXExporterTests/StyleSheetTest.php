@@ -24,10 +24,9 @@ class StyleSheetTest extends TestCase
     public function testConstructWithGeneralStyle()
     {
         $general = new Style([
-            'format' => ['code' => Format::FORMAT_GENERAL]
+            'format' => ['code' => Format::FORMAT_GENERAL],
         ]);
         $ss = new StyleSheet([$general]);
-        file_put_contents('stylesheet.xml', $ss->asXML());
         $numFmts = $this->extractNumFmts($ss->asXML());
         $this->assertEquals(1, (int) $numFmts['count']);
         $this->assertEquals(1, count($numFmts->numFmt));
