@@ -72,17 +72,17 @@ class StyleSheet
             }
             if (false !== $builtin = $format->getBuiltInCodeIdByCode($format->code)) {
                 $format->id = $builtin;
-                if (! in_array($format->code, $codes)) {
+                if (! in_array($format->code, $codes, true)) {
                     $codes[$format->id] = $format->code;
-                    array_push($this->objects['format'], $format);
+                    $this->objects['format'][] = $format;
                 }
-            } elseif (false !== $numfmtid = array_search($format->code, $codes)) {
+            } elseif (false !== $numfmtid = array_search((string) $format->code, $codes, true)) {
                 $format->id = $numfmtid;
             } else {
                 $format->id = $fmtcounter;
                 $fmtcounter = $fmtcounter + 1;
                 $codes[$format->id] = $format->code;
-                array_push($this->objects['format'], $format);
+                $this->objects['format'][] = $format;
             }
         }
     }
