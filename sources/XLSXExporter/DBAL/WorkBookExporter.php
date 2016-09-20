@@ -90,6 +90,7 @@ class WorkBookExporter
             ));
         }
         if ($useheaders) {
+            $sorted = new Columns();
             foreach ($headers as $fieldname => $properties) {
                 if (! $columns->existsById($fieldname)) {
                     continue;
@@ -107,7 +108,9 @@ class WorkBookExporter
                     && count($properties['style'])) {
                     $column->getStyle()->setFromArray($properties['style']);
                 }
+                $sorted->add($column);
             }
+            $columns = $sorted;
         }
         return $columns;
     }
