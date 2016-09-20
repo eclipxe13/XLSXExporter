@@ -21,9 +21,27 @@ class CompleteTest extends TestCase
     {
         // The provider
         $dataArray = [
-            ['fname' => 'Charles', 'amount' => 1234.561, 'visit' => strtotime('2014-01-13 13:14:15'), 'check' => 1],
-            ['fname' => 'Foo', 'amount' => 6543.219, 'visit' => strtotime('2014-12-31 23:59:59'), 'check' => 0],
-            ['fname' => 'Derp', 'amount' => -999, 'visit' => null, 'check' => 0],
+            [
+                'fname' => 'Charles',
+                'amount' => 1234.561,
+                'visit' => strtotime('2014-01-13 13:14:15'),
+                'check' => 1,
+                'rate' => 1,
+            ],
+            [
+                'fname' => 'Foo',
+                'amount' => 6543.219,
+                'visit' => strtotime('2014-12-31 23:59:59'),
+                'check' => true,
+                'rate' => 1.9876543,
+            ],
+            [
+                'fname' => 'Derp',
+                'amount' => -999,
+                'visit' => null,
+                'check' => false,
+                'rate' => 1.2345,
+            ],
         ];
         $providerArray = new ProviderArray($dataArray);
         $providerIterator = new ProviderIterator(new \ArrayIterator($dataArray));
@@ -38,6 +56,14 @@ class CompleteTest extends TestCase
                 new Style([
                     'format' => ['code' => Format::FORMAT_COMMA_2DECS],
                     'font' => ['bold' => 1],
+                ])
+            ),
+            new Column(
+                'rate',
+                'Rate',
+                CellTypes::NUMBER,
+                new Style([
+                    'format' => ['code' => '0.0000'],
                 ])
             ),
             new Column(

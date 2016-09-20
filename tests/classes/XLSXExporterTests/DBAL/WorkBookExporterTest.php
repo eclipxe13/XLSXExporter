@@ -30,11 +30,27 @@ class WorkBookExporterTest extends TestCase
     {
         $fields = $this->getFieldsSample();
         $headers = [
-            'firstname' => [],
             'counter' => ['title' => 'Counter'],
+            'firstname' => [],
             'lastrecord' => ['style' => ['font' => ['underline' => Font::UNDERLINE_DOUBLE]]],
             'atime' => ['title' => 'The Time', 'style' => ['font' => ['underline' => Font::UNDERLINE_DOUBLE]]],
+            'invalid' => [],
         ];
+        // create columns
+        $columns = WorkBookExporter::createColumnsFromFields($fields, $headers);
+        $this->assertCount(4, $columns);
+        // 'invalid' does not exists
+        $this->assertFalse($columns->existsById('invalid'));
+        unset($headers['invalid']);
+
+        // the order must be the same
+        $columnsOrder = [];
+        foreach ($columns as $column) {
+            $columnsOrder[] = $column->getId();
+        }
+        $this->assertEquals(array_keys($headers), $columnsOrder);
+
+        // check that title and underline was set
         $expectedProperties = [
             'firstname' => [
                 'title' => 'firstname',
@@ -52,12 +68,7 @@ class WorkBookExporterTest extends TestCase
                 'title' => 'The Time',
                 'underline' => Font::UNDERLINE_DOUBLE,
             ],
-            'invalid' => [],
         ];
-        $columns = WorkBookExporter::createColumnsFromFields($fields, $headers);
-        $this->assertCount(4, $columns);
-        $this->assertFalse($columns->existsById('invalid'));
-        unset($expectedProperties['invalid']);
         foreach ($expectedProperties as $fieldname => $properties) {
             $this->assertTrue($columns->existsById($fieldname));
             /* @var $column Column */
