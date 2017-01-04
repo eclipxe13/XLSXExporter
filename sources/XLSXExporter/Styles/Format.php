@@ -47,6 +47,8 @@ class Format extends AbstractStyle
     const FORMAT_CURRENCY_USD_SIMPLE = '"$"#,##0.00_-';
     const FORMAT_CURRENCY_USD = '$#,##0_-';
     const FORMAT_CURRENCY_EUR_SIMPLE = '[$EUR ]#,##0.00_-';
+    const FORMAT_ACCOUNTING_00 = '_-"$"* #,##0.00_-;\-"$"* #,##0.00_-;_-"$"* "-"??_-;_-@_-';
+    const FORMAT_ACCOUNTING = '_-"$"* #,##0_-;\-"$"* #,##0_-;_-"$"* "-"??_-;_-@_-';
     // custom formats
     const FORMAT_COMMA_0DECS = '#,##0';
     const FORMAT_COMMA_2DECS = '#,##0.00';
@@ -74,8 +76,8 @@ class Format extends AbstractStyle
     {
         return [
             0 => self::FORMAT_GENERAL,
-            1 => '0',
-            2 => '0.00',
+            1 => self::FORMAT_NUMBER,
+            2 => self::FORMAT_NUMBER_00,
             3 => '#,##0',
             4 => '#,##0.00',
             9 => '0%',
@@ -96,7 +98,7 @@ class Format extends AbstractStyle
             38 => '#,##0 ;[Red](#,##0)',
             39 => '#,##0.00;(#,##0.00)',
             40 => '#,##0.00;[Red](#,##0.00)',
-            44 => '_("$"* #,##0.00_);_("$"* \(#,##0.00\);_("$"* "-"??_);_(@_)',
+            44 => self::FORMAT_ACCOUNTING_00,
             45 => 'mm:ss',
             46 => '[h]:mm:ss',
             47 => 'mmss.0',
