@@ -1,3 +1,8 @@
+# Version 1.4.2
+- Add accounting format (FORMAT_ACCOUNTING & FORMAT_ACCOUNTING_00)
+- Upgrade to PHP CS Fixer version 2.0.0
+- Copyright 2017
+
 # Version 1.4.1
 - When exporting using DBAL boundle the headers order must remain
   Check your code for possible breaks

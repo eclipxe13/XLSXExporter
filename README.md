@@ -99,7 +99,7 @@ All your help is very appreciated, please contribute with testing, ideas, code, 
 
 ## License
 
-License MIT - Copyright (c) 2014 - 2016 Carlos Cortés Soto
+License MIT - Copyright (c) 2014 - 2017 Carlos Cortés Soto
 
 [source]: https://github.com/eclipxe13/XLSXExporter
 [release]: https://github.com/eclipxe13/XLSXExporter/releases

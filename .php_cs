@@ -1,36 +1,41 @@
 <?php
-return Symfony\CS\Config\Config::create()
-    ->level(Symfony\CS\FixerInterface::PSR2_LEVEL)
-    ->fixers([
-        '-psr0', // do not enforce psr-0, it rewrites 'namespace Test\' to 'namespace test\'
+return PhpCsFixer\Config::create()
+    ->setRiskyAllowed(false)
+    ->setCacheFile(__DIR__.'/build/.php_cs.cache')
+    ->setRules([
+        '@PSR2' => true,
+        'psr0' => false, // do not enforce psr-0, it rewrites 'namespace Test\' to 'namespace test\'
         // symfony
-        'array_element_white_space_after_comma',
-        'duplicate_semicolon',
-        'extra_empty_lines',
-        'function_typehint_space',
-        'join_function',
-        'multiline_array_trailing_comma',
-        'new_with_braces',
-        'no_blank_lines_after_class_opening',
-        'no_empty_lines_after_phpdocs',
-        'object_operator',
-        'operators_spaces',
-        'phpdoc_scalar',
-        'self_accessor',
-        'single_array_no_trailing_comma',
-        'single_quote',
-        'spaces_before_semicolon',
-        'unused_use',
-        'whitespacy_lines',
+        'whitespace_after_comma_in_array' => true,
+        'no_empty_statement' => true,
+        'no_extra_consecutive_blank_lines' => true,
+        'function_typehint_space' => true,
+        'no_alias_functions' => true,
+        'trailing_comma_in_multiline_array' => true,
+        'new_with_braces' => true,
+        'no_blank_lines_after_class_opening' => true,
+        'no_blank_lines_after_phpdoc' => true,
+        'object_operator_without_whitespace' => true,
+        'binary_operator_spaces' => true,
+        'phpdoc_scalar' => true,
+        'self_accessor' => true,
+        'no_trailing_comma_in_singleline_array' => true,
+        'single_quote' => true,
+        'no_singleline_whitespace_before_semicolons' => true,
+        'no_unused_imports' => true,
+        'no_whitespace_in_blank_line' => true,
         // contrib
-        'concat_with_spaces',
-        'logical_not_operators_with_successor_space',
-        'no_blank_lines_before_namespace',
-        'newline_after_open_tag',
-        'ordered_use',
-        'short_array_syntax',
+        'concat_space' => ['spacing' => 'one'],
+        'not_operator_with_successor_space' => true,
+        'no_blank_lines_before_namespace' => true,
+        'linebreak_after_opening_tag' => true,
+        'ordered_imports' => true,
+        'array_syntax' => ['syntax' => 'short'],
     ])
-    ->finder(
-        Symfony\CS\Finder\DefaultFinder::create()->in([__DIR__ . '/sources', __DIR__ . '/tests'])
+    ->setFinder(
+        PhpCsFixer\Finder::create()->in([
+            __DIR__ . '/sources',
+            __DIR__ . '/tests',
+        ])
     )
 ;
