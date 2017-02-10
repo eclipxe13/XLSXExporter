@@ -86,7 +86,7 @@ License MIT - Copyright (c) 2014 - 2017 Carlos Cortés Soto
 [source]: https://github.com/eclipxe13/XLSXExporter
 [release]: https://github.com/eclipxe13/XLSXExporter/releases
 [license]: https://github.com/eclipxe13/XLSXExporter/blob/master/LICENSE
-[build]: https://travis-ci.org/eclipxe13/XLSXExporter
+[build]: https://travis-ci.org/eclipxe13/XLSXExporter?branch=master
 [quality]: https://scrutinizer-ci.com/g/eclipxe13/XLSXExporter/
 [sensiolabs]: https://insight.sensiolabs.com/projects/4bddd94b-1f59-4e22-8053-b6e98712da50
 [coverage]: https://coveralls.io/github/eclipxe13/XLSXExporter?branch=master

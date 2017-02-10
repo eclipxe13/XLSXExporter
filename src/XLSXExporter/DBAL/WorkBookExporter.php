@@ -72,7 +72,7 @@ class WorkBookExporter
      *
      * @param array $fields
      * @param array $headers
-     * @return Columns|Column[]
+     * @return Columns
      */
     public static function createColumnsFromFields(array $fields, array $headers = [])
     {

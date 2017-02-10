@@ -175,7 +175,7 @@ class StyleSheet
             . $this->xmlCollection('format', 'numFmts')
             . $this->xmlCollection('font', 'fonts')
             . $this->xmlCollection('fill', 'fills')
-            //.$this->xmlCollection("border", "borders")
+            // .$this->xmlCollection("border", "borders")
             . '<borders count="1"><border><left/><right/><top/><bottom/><diagonal/></border></borders>'
             . $this->xmlCellStylesXF()
             . $this->xmlCellXfs()

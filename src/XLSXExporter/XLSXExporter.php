@@ -37,12 +37,12 @@ class XLSXExporter
     {
         $tempfile = $workbook->write();
         try {
-            if (false === $f = fopen($tempfile, 'r')) {
+            if (false === $file = fopen($tempfile, 'r')) {
                 throw new XLSXException("Can not open file $tempfile");
             }
             header('Content-type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-            $passthru = fpassthru($f);
-            fclose($f);
+            $passthru = fpassthru($file);
+            fclose($file);
             if (false === $passthru) {
                 throw new XLSXException("Can not passthru $tempfile");
             }

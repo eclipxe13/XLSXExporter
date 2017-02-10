@@ -6,7 +6,7 @@ filter:
 checks:
     php:
         code_rating: true
-        duplication: true
+        duplication: false
 
 tools:
     php_code_sniffer:

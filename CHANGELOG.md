@@ -1,3 +1,7 @@
+# Version 1.5.2
+- Fix code following recommendations from scrutinizer, disallow duplication
+- Allow fail travis on version 7.1 due engineworks-dbal
+
 # Version 1.5.1
 - Now depends on eclipxe13/engineworks-progress-status to report progress
 - Add `const DateConverter::PRECISION_TIME = 6` to define seconds precision of `1/8600` as `0.000012`

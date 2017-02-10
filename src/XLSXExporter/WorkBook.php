@@ -133,7 +133,7 @@ class WorkBook
             $zip->addFromString('xl/workbook.xml', $this->xmlWorkbook());
             $zip->addFromString('xl/_rels/workbook.xml.rels', $this->xmlWorkbookRels());
             // create the sharedStrings object because worksheets use it
-            $sharedstrings = new SharedStrings($detailedProgress);
+            $sharedstrings = new SharedStrings();
             $wsIndex = 1;
             foreach ($this->worksheets as $worksheet) {
                 $globalProgress->update('Add worksheet ' . $worksheet->getName() . '...', $wsIndex);
@@ -219,9 +219,9 @@ class WorkBook
             . ' xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">'
             . '<bookViews><workbookView/></bookViews>' // without the bookviews the user in MS Excel cannot copy paste
             . '<sheets>'
-            . array_reduce($this->worksheets->all(), function ($r, WorkSheet $worksheet) use (&$index) {
+            . array_reduce($this->worksheets->all(), function ($return, WorkSheet $worksheet) use (&$index) {
                 $index = $index + 1;
-                return $r . '<sheet name="' . $worksheet->getName() . '"'
+                return $return . '<sheet name="' . $worksheet->getName() . '"'
                     . ' sheetId="' . $index . '" r:id="rId' . $index . '"/>';
             })
             . '</sheets>'
@@ -233,8 +233,8 @@ class WorkBook
     {
         return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' . "\n"
             . '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
-            . array_reduce(range(1, $this->worksheets->count()), function ($r, $index) {
-                return $r . '<Relationship Id="rId' . $index . '"'
+            . array_reduce(range(1, $this->worksheets->count()), function ($return, $index) {
+                return $return . '<Relationship Id="rId' . $index . '"'
                     . ' Target="' . $this->workSheetFilePath($index, '') . '"'
                     . ' Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet"/>'
                 ;
