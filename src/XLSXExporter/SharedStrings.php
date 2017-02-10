@@ -52,6 +52,7 @@ class SharedStrings implements \Countable
      */
     protected function writeTo(SplFileObject $file, ProgressInterface $progress = null)
     {
+        $progress = $progress ? : new NullProgress();
         $progress->update('', 1, 1 + $this->count);
         $file->fwrite(
             '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' . "\n"
