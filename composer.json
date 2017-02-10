@@ -12,7 +12,8 @@
     ],
     "require": {
         "php": ">=5.6",
-        "ext-zip": "*"
+        "ext-zip": "*",
+        "eclipxe/engineworks-progress-status": "@stable"
     },
     "suggest": {
         "eclipxe/engineworks-dbal": "Export recordsets as worksheets in a workbook"
@@ -27,7 +28,7 @@
     },
     "autoload": {
         "psr-4": {
-            "XLSXExporter\\": "sources/XLSXExporter/"
+            "XLSXExporter\\": "src/XLSXExporter/"
         }
     },
     "autoload-dev": {

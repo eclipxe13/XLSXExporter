@@ -2,3 +2,7 @@
 /vendor
 /build
 /composer.lock
+/phpcs.xml           export-ignore
+/.php_cs             export-ignore
+/phpunit.xml         export-ignore
+/phpdox.xml          export-ignore

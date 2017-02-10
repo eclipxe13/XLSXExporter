@@ -44,10 +44,6 @@ Use composer, so please run `composer require eclipxe/xlsxexporter` or include t
 }
 ```
 
-You can download a copy and include the `autoloader.php` file, it will register the autoloading feature using `spl_autoload_register`
-function for the namespace `XLSXExporter\` and include the file only if it exists and is readable.
-
-
 ## Example
 
 ```php
@@ -74,32 +70,18 @@ $wb = new WorkBook(new WorkSheets([
 XLSXExporter::save('result.xlsx');
 ```
 
-## Development
+## Contributing
 
-I will be using this project for a while, so, I will maintain it and improve it.
-In this stage you can consider it as a testing project (even when it's used in production).
-I want to do several modifications:
-
-- Follow PSR-2 http://www.php-fig.org/psr/psr-2/
-- Better documentation
-- Better tests
-- Apply Inversion of Control Principle, depending on Interfaces and not on classes and use Factories
-- Feel free to contribute to this project!
-
-## TODO
-
-All your help is very appreciated, please contribute with testing, ideas, code, documentation, coffees, etc.
-
-- Add borders style
-- Depend on interfaces and not on classes
-- Write samples with PDO
-- Find a better way to manage SharedStrings without so many memory and faster
-- Depend on a class to create the temporary files
-- Document all the classes
+Contributions are welcome! Please read [CONTRIBUTING][] for details
+and don't forget to take a look in the [TODO][] and [CHANGELOG][] files.
 
 ## License
 
 License MIT - Copyright (c) 2014 - 2017 Carlos Cortés Soto
+
+[contributing]: https://github.com/eclipxe13/XLSXExporter/blob/master/CONTRIBUTING.md
+[todo]: https://github.com/eclipxe13/XLSXExporter/blob/master/TODO.md
+[changelog]: https://github.com/eclipxe13/XLSXExporter/blob/master/CHANGELOG.md
 
 [source]: https://github.com/eclipxe13/XLSXExporter
 [release]: https://github.com/eclipxe13/XLSXExporter/releases

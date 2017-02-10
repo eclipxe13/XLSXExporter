@@ -1,3 +1,14 @@
+# Version 1.5.1
+- Now depends on eclipxe13/engineworks-progress-status to report progress
+- Add `const DateConverter::PRECISION_TIME = 6` to define seconds precision of `1/8600` as `0.000012`
+- Move code from `source/` to `src/` following `php-pds/skeleton`
+- Move code from `tests/classes/` to `tests/`
+- Travis: include 7.1, run parallel-lint, run php-cs-fixer
+- Git: update .gitattributes and .gitignore
+- Remove autoloader.php, use composer please
+- Increase code coverage
+- Improve documentation
+
 # Version 1.4.2
 - Add accounting format (FORMAT_ACCOUNTING & FORMAT_ACCOUNTING_00)
 - Upgrade to PHP CS Fixer version 2.0.0
