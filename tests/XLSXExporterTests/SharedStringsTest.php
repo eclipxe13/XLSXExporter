@@ -38,7 +38,7 @@ class SharedStringsTest extends TestCase
     {
         $filename = $st->write();
         $this->assertFileExists($filename, 'The shared strings file was not created');
-        $this->assertXmlFileEqualsXmlFile($filename, __DIR__ . '/assets/sharedstrings-test.xml');
+        $this->assertXmlFileEqualsXmlFile($filename, TestUtils::assetsPath('sharedstrings-test.xml'));
         unlink($filename);
     }
 }

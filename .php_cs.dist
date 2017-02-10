@@ -1,10 +1,10 @@
 <?php
 return PhpCsFixer\Config::create()
-    ->setRiskyAllowed(false)
+    ->setRiskyAllowed(true)
     ->setCacheFile(__DIR__.'/build/.php_cs.cache')
     ->setRules([
         '@PSR2' => true,
-        'psr0' => false, // do not enforce psr-0, it rewrites 'namespace Test\' to 'namespace test\'
+        'psr0' => false, // do not enforce psr-0, it rewrites 'namespace Test\' to 'namespace tests\'
         // symfony
         'whitespace_after_comma_in_array' => true,
         'no_empty_statement' => true,
@@ -34,7 +34,7 @@ return PhpCsFixer\Config::create()
     ])
     ->setFinder(
         PhpCsFixer\Finder::create()->in([
-            __DIR__ . '/sources',
+            __DIR__ . '/src',
             __DIR__ . '/tests',
         ])
     )

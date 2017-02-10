@@ -1,6 +1,8 @@
 <?php
 namespace XLSXExporter;
 
+use EngineWorks\ProgressStatus\NullProgress;
+use EngineWorks\ProgressStatus\ProgressInterface;
 use XLSXExporter\Providers\NullProvider;
 
 /**
@@ -163,14 +165,18 @@ class WorkSheet
      * Write the contents of the worksheet, it requires a SharedStrings object
      *
      * @param SharedStrings $strings
+     * @param ProgressInterface $progress
      * @return string
      * @throws XLSXException
      */
-    public function write(SharedStrings $strings)
+    public function write(SharedStrings $strings, ProgressInterface $progress = null)
     {
         $tempfile = tempnam(sys_get_temp_dir(), 'ws-');
         $writer = new WorkSheetWriter();
-        $writer->createSheet($tempfile, $this->columns->count(), $this->provider->count());
+        $rowsCount = $this->provider->count();
+        $progress = $progress ? : new NullProgress();
+        $progress->update('', 0, $rowsCount + 1);
+        $writer->createSheet($tempfile, $this->columns->count(), $rowsCount);
         $writer->openSheet();
         // -- write headers contents
         $writer->openRow();
@@ -180,6 +186,7 @@ class WorkSheet
             $writer->writeCell(CellTypes::TEXT, $strings->add($column->getTitle()), $styleindex);
         }
         $writer->closeRow();
+        $progress->increase();
         // -- write cell contents
         while ($this->provider->valid()) {
             // write new row
@@ -195,6 +202,7 @@ class WorkSheet
             $writer->closeRow();
             // move to the next record
             $this->provider->next();
+            $progress->increase();
         }
         $writer->closeSheet();
         return $tempfile;

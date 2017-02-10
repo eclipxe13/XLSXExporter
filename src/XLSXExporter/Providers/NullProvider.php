@@ -5,8 +5,6 @@ use XLSXExporter\ProviderInterface;
 
 /**
  * This is a NullProvider
- *
- * @package XLSXExporter\Providers
  */
 class NullProvider implements ProviderInterface
 {

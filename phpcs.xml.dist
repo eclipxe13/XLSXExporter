@@ -22,4 +22,3 @@
     <rule ref="Squiz.WhiteSpace.OperatorSpacing"/>
     <rule ref="Zend.Files.ClosingTag"/>
 </ruleset>
-

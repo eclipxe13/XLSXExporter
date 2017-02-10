@@ -72,16 +72,16 @@ class DateConverterTest extends TestCase
     public function testTimeStampToDateTime()
     {
         $a = [
-            ['s' => '2014-01-13 14:15:16', 'e' => 41652.5939351852],
-            ['s' => '2014-12-31 23:59:59', 'e' => 42004.9999884259],
+            ['s' => '2014-01-13 14:15:16', 'e' => 41652.593935],
+            ['s' => '2014-12-31 23:59:59', 'e' => 42004.999988],
             ['s' => '2015-01-01 00:00:00', 'e' => 42005],
-            ['s' => '2014-10-26 00:15:00', 'e' => 41938.0104166667],
-            ['s' => '2014-10-26 01:15:00', 'e' => 41938.0520833333],
+            ['s' => '2014-10-26 00:15:00', 'e' => 41938.010417],
+            ['s' => '2014-10-26 01:15:00', 'e' => 41938.052083],
             ['s' => '2014-10-26 02:15:00', 'e' => 41938.09375],
-            ['s' => '2014-10-26 03:15:00', 'e' => 41938.1354166667],
-            ['s' => '2014-10-26 04:15:00', 'e' => 41938.1770833333],
+            ['s' => '2014-10-26 03:15:00', 'e' => 41938.135417],
+            ['s' => '2014-10-26 04:15:00', 'e' => 41938.177083],
             ['s' => '1900-01-01 00:00:00', 'e' => 1.0], // first date
-            ['s' => '1900-01-01 01:00:00', 'e' => 1.04166666666667],
+            ['s' => '1900-01-01 01:00:00', 'e' => 1.041667],
         ];
         foreach ($a as $test) {
             $ts = strtotime($test['s']);
@@ -89,7 +89,7 @@ class DateConverterTest extends TestCase
                 round($test['e'], 9),
                 round(DateConverter::tsToExcelDateTime($ts), 9),
                 'Checking ' . $test['s'] . ', TS: ' . $ts,
-                1 / 86000
+                round(1 / 86000, DateConverter::PRECISION_TIME)
             );
         }
     }
@@ -97,13 +97,16 @@ class DateConverterTest extends TestCase
     public function providerTimeStampToExcel()
     {
         return [
-            ['2014-12-31', DateConverter::DATE, 42004],
-            ['2014-10-26 01:15:00', DateConverter::DATETIME, 41938.0520833333],
-            ['01:15:00', DateConverter::TIME, 0.0520833333],
+            ['2014-12-31', DateConverter::DATE, '42004'],
+            ['2014-10-26 01:15:00', DateConverter::DATETIME, '41938.052083'],
+            ['01:15:00', DateConverter::TIME, '0.052083'],
         ];
     }
 
     /**
+     * @param $ts
+     * @param $type
+     * @param $expected
      * @dataProvider providerTimeStampToExcel
      */
     public function testTimeStampToExcel($ts, $type, $expected)

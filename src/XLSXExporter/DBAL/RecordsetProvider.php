@@ -21,7 +21,16 @@ class RecordsetProvider implements ProviderInterface
 
     public function get($key)
     {
-        return array_key_exists($key, $this->recordset->values) ? $this->recordset->values[$key] : null;
+        /*
+        print_r([
+            '$key' => $key,
+            '$this->recordset->values' => $this->recordset->values,
+            'exists' => (array_key_exists($key, $this->recordset->values)) ? 'true' : 'false',
+            'return' => (array_key_exists($key, $this->recordset->values)) ? $this->recordset->values[$key] : null,
+        ]);
+        die();
+        */
+        return (array_key_exists($key, $this->recordset->values)) ? $this->recordset->values[$key] : null;
     }
 
     public function next()

@@ -93,8 +93,8 @@ class CompleteTest extends TestCase
         $tempfile = $wb->write();
         $this->assertFileExists($tempfile);
         // copy the file to a certain location
-        $build = __DIR__ . '/../../../build/';
-        if (is_dir($build)) {
+        $build = TestUtils::buildPath();
+        if ('' !== $build) {
             copy($tempfile, $build . '/complete-test.xlsx');
         }
         // remove temporary file

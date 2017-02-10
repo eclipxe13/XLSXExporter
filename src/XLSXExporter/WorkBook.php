@@ -1,6 +1,8 @@
 <?php
 namespace XLSXExporter;
 
+use EngineWorks\ProgressStatus\NullProgress;
+use EngineWorks\ProgressStatus\ProgressInterface;
 use ZipArchive;
 
 /**
@@ -15,22 +17,36 @@ class WorkBook
     /** @var Style default base style */
     protected $style;
 
+    /** @var ProgressInterface */
+    protected $globalProgress;
+
+    /** @var ProgressInterface */
+    protected $detailedProgress;
+
     /**
      * WorkBook constructor.
      *
      * @param WorkSheets|null $worksheets
      * @param Style|null $style
+     * @param ProgressInterface $globalProgress
+     * @param ProgressInterface $detailedProgress
      */
-    public function __construct(WorkSheets $worksheets = null, Style $style = null)
-    {
+    public function __construct(
+        WorkSheets $worksheets = null,
+        Style $style = null,
+        ProgressInterface $globalProgress = null,
+        ProgressInterface $detailedProgress = null
+    ) {
         $this->worksheets = ($worksheets) ? : new WorkSheets();
         $this->style = ($style) ? : BasicStyles::defaultStyle();
+        $this->setGlobalProgress($globalProgress ? : new NullProgress());
+        $this->setDetailedProgress($detailedProgress ? : new NullProgress());
     }
 
     public function __get($name)
     {
         // read-only properties
-        $props = ['worksheets', 'style'];
+        $props = ['worksheets', 'style', 'globalProgress', 'detailedProgress'];
         if (! in_array($name, $props)) {
             throw new XLSXException("Invalid property name $name");
         }
@@ -38,9 +54,44 @@ class WorkBook
         return $this->$method();
     }
 
+    /**
+     * @return WorkSheet[]|WorkSheets
+     */
     public function getWorkSheets()
     {
         return $this->worksheets;
+    }
+
+    /**
+     * @return ProgressInterface
+     */
+    public function getGlobalProgress()
+    {
+        return $this->globalProgress;
+    }
+
+    /**
+     * @return ProgressInterface
+     */
+    public function getDetailedProgress()
+    {
+        return $this->detailedProgress;
+    }
+
+    /**
+     * @param ProgressInterface $globalProgress
+     */
+    public function setGlobalProgress(ProgressInterface $globalProgress)
+    {
+        $this->globalProgress = $globalProgress;
+    }
+
+    /**
+     * @param ProgressInterface $detailedProgress
+     */
+    public function setDetailedProgress(ProgressInterface $detailedProgress)
+    {
+        $this->detailedProgress = $detailedProgress;
     }
 
     /**
@@ -65,6 +116,9 @@ class WorkBook
         $filename = tempnam(sys_get_temp_dir(), 'xlsx-');
         $removefiles = [];
         try {
+            $globalProgress = $this->getGlobalProgress();
+            $detailedProgress = $this->getDetailedProgress();
+            $globalProgress->update('Building structures...', 0, 2 + $this->worksheets->count());
             $zip = new ZipArchive();
             $zip->open($filename, ZipArchive::CREATE);
             // folders
@@ -79,21 +133,24 @@ class WorkBook
             $zip->addFromString('xl/workbook.xml', $this->xmlWorkbook());
             $zip->addFromString('xl/_rels/workbook.xml.rels', $this->xmlWorkbookRels());
             // create the sharedStrings object because worksheets use it
-            $sharedstrings = new SharedStrings();
+            $sharedstrings = new SharedStrings($detailedProgress);
             $wsIndex = 1;
             foreach ($this->worksheets as $worksheet) {
+                $globalProgress->update('Add worksheet ' . $worksheet->getName() . '...', $wsIndex);
                 // write and include the sheet
-                $wsfile = $worksheet->write($sharedstrings);
+                $wsfile = $worksheet->write($sharedstrings, $detailedProgress);
                 $removefiles[] = $wsfile;
                 $zip->addFile($wsfile, $this->workSheetFilePath($wsIndex));
                 $wsIndex = $wsIndex + 1;
             }
             // include the shared strings file
-            $shstrsfile = $sharedstrings->write();
+            $globalProgress->update('Add shared strings...', $wsIndex);
+            $shstrsfile = $sharedstrings->write($detailedProgress);
             $removefiles[] = $shstrsfile;
             $zip->addFile($shstrsfile, 'xl/sharedStrings.xml');
             // end with zip
             $zip->close();
+            $globalProgress->update('Done', $wsIndex + 1);
         } finally {
             // remove temporary files
             foreach ($removefiles as $file) {
