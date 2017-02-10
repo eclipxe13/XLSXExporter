@@ -95,7 +95,7 @@ License MIT - Copyright (c) 2014 - 2017 Carlos Cortés Soto
 [badge-source]: http://img.shields.io/badge/source-eclipxe13/XLSXExporter-blue.svg?style=flat-square
 [badge-release]: https://img.shields.io/github/release/eclipxe13/XLSXExporter.svg?style=flat-square
 [badge-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
-[badge-build]: https://img.shields.io/travis/eclipxe13/XLSXExporter.svg?style=flat-square
+[badge-build]: https://img.shields.io/travis/eclipxe13/XLSXExporter/master.svg?style=flat-square
 [badge-quality]: https://img.shields.io/scrutinizer/g/eclipxe13/XLSXExporter/master.svg?style=flat-square
 [badge-sensiolabs]: https://img.shields.io/sensiolabs/i/4bddd94b-1f59-4e22-8053-b6e98712da50.svg?style=flat-square
 [badge-coverage]: https://coveralls.io/repos/github/eclipxe13/XLSXExporter/badge.svg?branch=master
