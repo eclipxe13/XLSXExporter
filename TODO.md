@@ -2,7 +2,6 @@
 
 All your help is very appreciated, please contribute with testing, ideas, code, documentation, coffee, etc.
 
-- [ ] Don't allow to fail version 7.1 on travis due to engineworks-dbal
 - [ ] Add borders style
 - [ ] Depend on interfaces and not on classes
 - [ ] Find a better way to manage SharedStrings without so many memory and faster

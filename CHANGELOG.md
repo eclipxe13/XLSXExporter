@@ -1,3 +1,9 @@
+# Version 1.5.3
+- Enable php 7.1 due engineworks-dbal works again
+- Drop coveralls
+- Fix sensiolabs badge
+- Improve documentation
+
 # Version 1.5.2
 - Fix code following recommendations from scrutinizer, disallow duplication
 - Allow fail travis on version 7.1 due engineworks-dbal
