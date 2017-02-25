@@ -5,9 +5,9 @@
 [![Software License][badge-license]][license]
 [![Build Status][badge-build]][build]
 [![Scrutinizer][badge-quality]][quality]
-[![SensioLabsInsight][badge-sensiolabs]][sensiolabs]
 [![Coverage Status][badge-coverage]][coverage]
 [![Total Downloads][badge-downloads]][downloads]
+[![SensioLabsInsight][badge-sensiolabs]][sensiolabs]
 
 PHP Office Open XML Spreadsheet (xlsx) Exporter is a project to write xlsx files using PHP.
 I recommend you to checkout the project [PHPExcel](https://github.com/PHPOffice/PHPExcel)
@@ -97,6 +97,6 @@ License MIT - Copyright (c) 2014 - 2017 Carlos Cortés Soto
 [badge-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
 [badge-build]: https://img.shields.io/travis/eclipxe13/XLSXExporter/master.svg?style=flat-square
 [badge-quality]: https://img.shields.io/scrutinizer/g/eclipxe13/XLSXExporter/master.svg?style=flat-square
-[badge-sensiolabs]: https://img.shields.io/sensiolabs/i/4bddd94b-1f59-4e22-8053-b6e98712da50.svg?style=flat-square
+[badge-sensiolabs]: https://insight.sensiolabs.com/projects/4bddd94b-1f59-4e22-8053-b6e98712da50/mini.png
 [badge-coverage]: https://coveralls.io/repos/github/eclipxe13/XLSXExporter/badge.svg?branch=master
 [badge-downloads]: https://img.shields.io/packagist/dt/eclipxe/xlsxexporter.svg?style=flat-square
