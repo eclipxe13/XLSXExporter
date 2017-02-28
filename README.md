@@ -77,11 +77,12 @@ and don't forget to take a look in the [TODO][] and [CHANGELOG][] files.
 
 ## License
 
-License MIT - Copyright (c) 2014 - 2017 Carlos Cortés Soto
+The eclipxe/buzoncfdi-cfdireader library is copyright © [Carlos C Soto](https://eclipxe.com.mx/)
+and licensed for use under the MIT License (MIT). Please see [LICENSE][] for more information.
 
 [contributing]: https://github.com/eclipxe13/XLSXExporter/blob/master/CONTRIBUTING.md
-[todo]: https://github.com/eclipxe13/XLSXExporter/blob/master/TODO.md
 [changelog]: https://github.com/eclipxe13/XLSXExporter/blob/master/CHANGELOG.md
+[todo]: https://github.com/eclipxe13/XLSXExporter/blob/master/TODO.md
 
 [source]: https://github.com/eclipxe13/XLSXExporter
 [release]: https://github.com/eclipxe13/XLSXExporter/releases
@@ -89,7 +90,7 @@ License MIT - Copyright (c) 2014 - 2017 Carlos Cortés Soto
 [build]: https://travis-ci.org/eclipxe13/XLSXExporter?branch=master
 [quality]: https://scrutinizer-ci.com/g/eclipxe13/XLSXExporter/
 [sensiolabs]: https://insight.sensiolabs.com/projects/4bddd94b-1f59-4e22-8053-b6e98712da50
-[coverage]: https://coveralls.io/github/eclipxe13/XLSXExporter?branch=master
+[coverage]: https://scrutinizer-ci.com/g/eclipxe13/XLSXExporter/code-structure/master
 [downloads]: https://packagist.org/packages/eclipxe/xlsxexporter
 
 [badge-source]: http://img.shields.io/badge/source-eclipxe13/XLSXExporter-blue.svg?style=flat-square
@@ -98,5 +99,5 @@ License MIT - Copyright (c) 2014 - 2017 Carlos Cortés Soto
 [badge-build]: https://img.shields.io/travis/eclipxe13/XLSXExporter/master.svg?style=flat-square
 [badge-quality]: https://img.shields.io/scrutinizer/g/eclipxe13/XLSXExporter/master.svg?style=flat-square
 [badge-sensiolabs]: https://insight.sensiolabs.com/projects/4bddd94b-1f59-4e22-8053-b6e98712da50/mini.png
-[badge-coverage]: https://coveralls.io/repos/github/eclipxe13/XLSXExporter/badge.svg?branch=master
+[badge-coverage]: https://img.shields.io/scrutinizer/coverage/g/eclipxe13/XLSXExporter/master.svg?style=flat-square
 [badge-downloads]: https://img.shields.io/packagist/dt/eclipxe/xlsxexporter.svg?style=flat-square
