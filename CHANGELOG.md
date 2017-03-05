@@ -2,7 +2,9 @@
 - Enable php 7.1 due engineworks-dbal works again
 - Drop coveralls
 - Fix sensiolabs badge
-- Improve documentation
+- Improve README.md
+- Add CoC and contributing guide lines
+- Changed sensiolabs project code
 
 # Version 1.5.2
 - Fix code following recommendations from scrutinizer, disallow duplication
