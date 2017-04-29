@@ -1,3 +1,6 @@
+# Version 1.5.4
+- Fix bad namespace used on dome tests files
+
 # Version 1.5.3
 - Enable php 7.1 due engineworks-dbal works again
 - Drop coveralls
