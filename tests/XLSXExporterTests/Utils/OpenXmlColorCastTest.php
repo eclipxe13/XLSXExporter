@@ -1,5 +1,5 @@
 <?php
-namespace classes\XLSXExporterTests\Utils;
+namespace XLSXExporterTests\Utils;
 
 use PHPUnit\Framework\TestCase;
 use XLSXExporter\Utils\OpenXmlColor;

@@ -1,5 +1,5 @@
 <?php
-namespace classes\XLSXExporterTests;
+namespace XLSXExporterTests;
 
 use PHPUnit\Framework\TestCase;
 use XLSXExporter\Collection;
