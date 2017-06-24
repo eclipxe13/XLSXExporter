@@ -11,7 +11,7 @@ class ProviderArray implements ProviderInterface
 
     public function __construct(array $dataset)
     {
-        $this->dataset = $dataset;
+        $this->dataset = array_values($dataset);
         $this->index = 0;
     }
 
