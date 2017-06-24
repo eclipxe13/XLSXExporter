@@ -23,8 +23,7 @@
         "phpunit/phpunit": "^6.1",
         "jakub-onderka/php-parallel-lint": "^0.9",
         "squizlabs/php_codesniffer": "^3.0",
-        "friendsofphp/php-cs-fixer": "^2.3.2",
-        "scrutinizer/ocular": "@stable"
+        "friendsofphp/php-cs-fixer": "^2.3.2"
     },
     "autoload": {
         "psr-4": {
