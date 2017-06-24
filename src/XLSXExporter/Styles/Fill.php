@@ -7,6 +7,8 @@ use XLSXExporter\XLSXException;
 /**
  * @property string $pattern Fill pattern
  * @property string $color Fill color
+ *
+ * @package XLSXExporter\Styles
  */
 class Fill extends AbstractStyle
 {

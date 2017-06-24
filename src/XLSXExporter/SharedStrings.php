@@ -13,6 +13,7 @@ class SharedStrings implements \Countable
 {
     /** @var int */
     protected $count = 0;
+
     /** @var string[] */
     protected $strings = [];
 

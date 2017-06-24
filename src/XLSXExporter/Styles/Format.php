@@ -11,6 +11,7 @@ use XLSXExporter\Utils\XmlConverter;
  * http://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.numberingformat%28v=office.14%29.aspx
  * https://github.com/PHPOffice/PHPExcel/blob/develop/Classes/PHPExcel/Style/NumberFormat.php
  *
+ * @package XLSXExporter\Styles
  */
 class Format extends AbstractStyle
 {

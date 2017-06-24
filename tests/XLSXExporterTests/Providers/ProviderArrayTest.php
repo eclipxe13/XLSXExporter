@@ -41,5 +41,4 @@ class ProviderArrayTest extends TestCase
         $provider->next();
         $this->assertFalse($provider->valid());
     }
-
 }

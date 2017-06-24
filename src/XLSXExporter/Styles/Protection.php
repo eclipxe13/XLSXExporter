@@ -4,6 +4,8 @@ namespace XLSXExporter\Styles;
 /**
  * @property bool $hidden
  * @property bool $locked
+ *
+ * @package XLSXExporter\Styles
  */
 class Protection extends AbstractStyle
 {

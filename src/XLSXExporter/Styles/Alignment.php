@@ -7,6 +7,8 @@ use XLSXExporter\XLSXException;
  * @property string $horizontal Horizontal alignment
  * @property string $vertical Vertical alignment
  * @property bool $wraptext Wrap text
+ *
+ * @package XLSXExporter\Styles
  */
 class Alignment extends AbstractStyle
 {

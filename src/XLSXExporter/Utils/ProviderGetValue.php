@@ -4,7 +4,7 @@ namespace XLSXExporter\Utils;
 class ProviderGetValue
 {
     /**
-     * Retrieve a key from an array-key, ArrayAccess object or a object property
+     * Retrieve a value from a key-value array, an ArrayAccess object or an object property
      *
      * @param mixed $values
      * @param string $key

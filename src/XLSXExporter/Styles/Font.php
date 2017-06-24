@@ -13,6 +13,8 @@ use XLSXExporter\XLSXException;
  * @property string $underline Underline value (use constants)
  * @property bool $wordwrap Font is strike
  * @property string $color Font color
+ *
+ * @package XLSXExporter\Styles
  */
 class Font extends AbstractStyle
 {
