@@ -13,17 +13,17 @@
     "require": {
         "php": ">=5.6",
         "ext-zip": "*",
-        "eclipxe/engineworks-progress-status": "@stable"
+        "eclipxe/engineworks-progress-status": "^1.0"
     },
     "suggest": {
         "eclipxe/engineworks-dbal": "Export recordsets as worksheets in a workbook"
     },
     "require-dev": {
-        "eclipxe/engineworks-dbal": "@stable",
-        "phpunit/phpunit": "@stable",
-        "jakub-onderka/php-parallel-lint": "@stable",
-        "squizlabs/php_codesniffer": "@stable",
-        "friendsofphp/php-cs-fixer": "@stable",
+        "eclipxe/engineworks-dbal": "^1.6",
+        "phpunit/phpunit": "^6.1",
+        "jakub-onderka/php-parallel-lint": "^0.9",
+        "squizlabs/php_codesniffer": "^3.0",
+        "friendsofphp/php-cs-fixer": "^2.3.2",
         "scrutinizer/ocular": "@stable"
     },
     "autoload": {
