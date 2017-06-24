@@ -23,6 +23,8 @@ class ProviderIterator implements ProviderInterface
 {
     /** @var Iterator */
     private $iterator;
+
+    /** @var int */
     private $count;
 
     /**
@@ -34,7 +36,11 @@ class ProviderIterator implements ProviderInterface
     {
         $this->iterator = $iterator;
         if (! is_int($count) || $count < 0) {
-            $count = $this->obtainCountFromIterator();
+            if ($this->iterator instanceof \Countable) {
+                $count = $this->iterator->count();
+            } else {
+                $count = $this->obtainCountFromIterator();
+            }
         }
         $this->count = $count;
     }

@@ -4,6 +4,12 @@ namespace XLSXExporter\DBAL;
 use EngineWorks\DBAL\Recordset;
 use XLSXExporter\ProviderInterface;
 
+/**
+ * The RecordsetProvider uses a Recordset object as a Provider
+ * Important: This class will not move the current record but forward (it will not rewind)
+ *
+ * @package XLSXExporter\DBAL
+ */
 class RecordsetProvider implements ProviderInterface
 {
     /** @var Recordset */

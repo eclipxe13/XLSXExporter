@@ -1,5 +1,11 @@
+# Version 1.5.5
+- Fix bug when the array in the ProviderArray has non consecutive keys
+- Improve ProviderIterator, use count() method if the $iterator parameter is an instance of \Countable
+- Set composer specific versions, remove scrutinizer/ocular from dev, install only on inside travis build
+- Minor changes in typos, dockblocks and code style
+
 # Version 1.5.4
-- Fix bad namespace used on dome tests files
+- Fix bad namespace used on some tests files
 
 # Version 1.5.3
 - Enable php 7.1 due engineworks-dbal works again

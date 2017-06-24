@@ -4,8 +4,7 @@ namespace XLSXExporter\Styles;
 use XLSXExporter\XLSXException;
 
 /**
- * Abstract implementation of the StyleInterface
- * Use this class
+ * Abstract implementation of the StyleInterface for internal use
  *
  * @package XLSXExporter\Styles
  */
@@ -27,9 +26,6 @@ abstract class AbstractStyle implements StyleInterface
      */
     abstract protected function properties();
 
-    /**
-     * @inheritdoc
-     */
     abstract public function asXML();
 
     public function setValues(array $array)

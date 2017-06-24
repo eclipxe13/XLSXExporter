@@ -1,6 +1,32 @@
 <?php
 namespace XLSXExporter;
 
+/**
+ * Interface ProviderInterface
+ *
+ * The providers are very similar to Iterator but its not the same.
+ * The objects that implement this interface will be used like:
+ *
+ * $totalRecords = $provider->count();
+ * while($provider->valid()) {
+ *     $provider->get($key);
+ *     $provider->next();
+ * }
+ *
+ * If the provider does not implement correctly the total count the resulting
+ * xlsx file could warning for an error in the file.
+ *
+ * Be aware that there are some very generic providers already implemented:
+ * ProviderArray: To be used with an array
+ * ProviderIterator: To be used with an iterator.
+ * In both cases, to retrieve a value the helper ProviderGetValue::get() will be used.
+ *
+ * @see \XLSXExporter\Providers\ProviderArray
+ * @see \XLSXExporter\Providers\ProviderIterator
+ * @see \XLSXExporter\Utils\ProviderGetValue::get()
+ *
+ * @package XLSXExporter
+ */
 interface ProviderInterface
 {
     /**
