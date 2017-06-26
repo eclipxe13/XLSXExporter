@@ -60,5 +60,4 @@ class AlignmentTest extends TestCase
         $expectedXml = '<alignment horizontal="right" vertical="bottom" wrapText="1" />';
         $this->assertXmlStringEqualsXmlString($expectedXml, $xml);
     }
-
 }
