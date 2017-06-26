@@ -16,7 +16,6 @@ class ResultProvider extends ProviderIterator implements ProviderInterface
 {
     public function __construct(Result $result)
     {
-        /* @var \Iterator $iterator */
         $iterator = $result->getIterator();
         if (! $iterator->valid()) {
             $iterator->rewind();
