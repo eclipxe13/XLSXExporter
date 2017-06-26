@@ -16,6 +16,7 @@ class RecordsetProviderTest extends TestCase
         $provider = new RecordsetProvider($recordset);
 
         $this->assertInstanceOf(ProviderInterface::class, $provider);
+        $this->assertTrue($provider->valid());
         $this->assertSame(3, $provider->count());
         $expectedResults = [
             ['EmployeeId' => 3, 'FirstName' => 'Jane', 'LastName' => 'Peacock', 'Null' => null],
