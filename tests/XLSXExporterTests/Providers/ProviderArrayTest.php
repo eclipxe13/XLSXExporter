@@ -13,6 +13,7 @@ class ProviderArrayTest extends TestCase
             ['a' => 'bar', 'b' => 2],
         ]);
 
+        // simulate loop in iterator
         $this->assertTrue($provider->valid());
         $this->assertEquals('foo', $provider->get('a'));
         $this->assertEquals(1, $provider->get('b'));
@@ -22,6 +23,9 @@ class ProviderArrayTest extends TestCase
         $this->assertEquals(2, $provider->get('b'));
         $provider->next();
         $this->assertFalse($provider->valid());
+
+        // get returns null when not valid
+        $this->assertNull($provider->get('a'));
     }
 
     public function testProviderArrayWithKeys()
@@ -31,6 +35,7 @@ class ProviderArrayTest extends TestCase
             'x' => ['a' => 'bar', 'b' => 2],
         ]);
 
+        // simulate loop in iterator
         $this->assertTrue($provider->valid());
         $this->assertEquals('foo', $provider->get('a'));
         $this->assertEquals(1, $provider->get('b'));
@@ -40,5 +45,8 @@ class ProviderArrayTest extends TestCase
         $this->assertEquals(2, $provider->get('b'));
         $provider->next();
         $this->assertFalse($provider->valid());
+
+        // get returns null when not valid
+        $this->assertNull($provider->get('a'));
     }
 }
