@@ -2,18 +2,18 @@
 namespace XLSXExporterTests\DBAL;
 
 use PHPUnit\Framework\TestCase;
-use XLSXExporter\DBAL\RecordsetProvider;
+use XLSXExporter\DBAL\ResultProvider;
 use XLSXExporter\ProviderInterface;
 use XLSXExporterTests\TestUtils;
 
-class RecordsetProviderTest extends TestCase
+class ResultProviderTest extends TestCase
 {
     public function testProviderImplementation()
     {
         $dbal = TestUtils::getDBAL();
         $sql = 'SELECT ' . 'EmployeeId, FirstName, LastName FROM employees WHERE ReportsTo = 2 ORDER BY EmployeeId;';
-        $recordset = $dbal->queryRecordset($sql);
-        $provider = new RecordsetProvider($recordset);
+        $result = $dbal->queryResult($sql);
+        $provider = new ResultProvider($result);
 
         $this->assertInstanceOf(ProviderInterface::class, $provider);
         $this->assertTrue($provider->valid());

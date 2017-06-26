@@ -36,7 +36,7 @@ class Alignment extends AbstractStyle
         return '<alignment'
             . (($this->horizontal) ? ' horizontal="' . $this->horizontal . '"' : '')
             . (($this->vertical) ? ' vertical="' . $this->vertical . '"' : '')
-            . (($this->wraptext) ? ' wrapText="' . (($this->wraptext) ? '1' : '0') . '"' : '')
+            . ((null !== $this->wraptext) ? ' wrapText="' . (($this->wraptext) ? '1' : '0') . '"' : '')
             . '/>'
         ;
     }

@@ -27,7 +27,7 @@ namespace XLSXExporter;
  *
  * @package XLSXExporter
  */
-interface ProviderInterface
+interface ProviderInterface extends \Countable
 {
     /**
      * Get a value of the current tuple based on the key

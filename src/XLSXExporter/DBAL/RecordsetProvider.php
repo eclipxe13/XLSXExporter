@@ -3,40 +3,18 @@ namespace XLSXExporter\DBAL;
 
 use EngineWorks\DBAL\Recordset;
 use XLSXExporter\ProviderInterface;
+use XLSXExporter\Providers\ProviderIterator;
 
 /**
  * The RecordsetProvider uses a Recordset object as a Provider
- * Important: This class will not move the current record but forward (it will not rewind)
+ * Important: This class will export from the current record and move forward, it will not move first
  *
  * @package XLSXExporter\DBAL
  */
-class RecordsetProvider implements ProviderInterface
+class RecordsetProvider extends ProviderIterator implements ProviderInterface
 {
-    /** @var Recordset */
-    private $recordset;
-
     public function __construct(Recordset $recordset)
     {
-        $this->recordset = $recordset;
-    }
-
-    public function count()
-    {
-        return $this->recordset->getRecordCount();
-    }
-
-    public function get($key)
-    {
-        return (array_key_exists($key, $this->recordset->values)) ? $this->recordset->values[$key] : null;
-    }
-
-    public function next()
-    {
-        $this->recordset->moveNext();
-    }
-
-    public function valid()
-    {
-        return (! $this->recordset->eof());
+        parent::__construct($recordset->getIterator(), $recordset->getRecordCount());
     }
 }
