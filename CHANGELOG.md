@@ -1,10 +1,11 @@
 # Version 1.5.6
 - Add ResultProvider to use a DBAL\Result as the source of a Provider
 - ResultProvider does not implement its own methods, it simply extends ProviderIterator
-- RecordsetProvider does not use its own implementarion, now it extends ProviderIterator
+- RecordsetProvider does not use its own implementation, now it extends ProviderIterator
   since the DBAL\Ŗecordset objects implements the \IteratorAggregate interface
 - ProviderInterface has a method count, make it extends \Countable
 - Styles\Alignment write wrapText attribute if it was set, was only written if was true
+- Remove docblock for casting \DBAL\Result->getIterator to \Iterator (fixed in upstream)
 
 # Version 1.5.5
 - Fix bug when the array in the ProviderArray has non consecutive keys
