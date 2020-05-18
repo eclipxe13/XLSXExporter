@@ -70,7 +70,6 @@ The following tests must pass before we will accept a pull request. If any of th
 it will result in a complete build failure. Before you can run these, be sure to `composer install`.
 
 ```
-vendor/bin/parallel-lint src/ tests/
 vendor/bin/phpcs -sp src/ tests/
 vendor/bin/phpunit --coverage-text
 ```
