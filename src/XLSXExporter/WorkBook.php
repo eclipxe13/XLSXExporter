@@ -120,7 +120,10 @@ class WorkBook
             $detailedProgress = $this->getDetailedProgress();
             $globalProgress->update('Building structures...', 0, 2 + $this->worksheets->count());
             $zip = new ZipArchive();
-            $zip->open($filename, ZipArchive::CREATE);
+            $zipOpenResult = $zip->open($filename, ZipArchive::CREATE | ZipArchive::OVERWRITE);
+            if (true !== $zipOpenResult) {
+                throw new XLSXException(sprintf('Unable to create zip file %s (err: %d)', $filename, $zipOpenResult));
+            }
             // folders
             $zip->addEmptyDir('xl/');
             $zip->addEmptyDir('xl/_rels/');

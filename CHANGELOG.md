@@ -1,3 +1,8 @@
+# Version 1.5.7
+- Fix bug when creating a zip archive using a temporary empty file, some php versions return
+  `ZipArchive::ER_NOZIP (19)`, to fix it the library open the archive using flag `ZipArchive::OVERWRITE`.
+  This bug could be caused by new libzip version 1.6.0.
+
 # Version 1.5.6
 - Add ResultProvider to use a DBAL\Result as the source of a Provider
 - ResultProvider does not implement its own methods, it simply extends ProviderIterator
