@@ -1,13 +1,13 @@
 # Version 1.5.8
+- Fix date formats that where using a single `"y"` instead of double `"yy"`.
+- Fix `FORMAT_DATE_TIME7`: minutes where not displayed and milliseconds error.
 - Improve README file:
     - Install instructions.
     - Fix "bug" in example.
-    - Expand example tiwh `use` sentences and better readability.
+    - Expand example with `use` imports and better readability.
     - Fix badges.
 - Fix build instructions on CONTRIBUTING.
-- Use PHP 7.2, 7.3, 7.4 on Travis-CI.
-- Fix date formats that where using a single `"y"` instead of double `"y"`.
-- Fix `FORMAT_DATE_TIME7`: minutes where not displayed and milliseconds error.
+- Use PHP 7.2, 7.3, 7.4 and nightly versions on Travis-CI.
 
 # Version 1.5.7
 - Fix bug when creating a zip archive using a temporary empty file, some php versions return
