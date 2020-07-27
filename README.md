@@ -39,30 +39,55 @@ Use [composer](https://getcomposer.org/), run:
 composer require eclipxe/xlsxexporter
 ```
 
-## Example
+## Basic usage example
 
 ```php
+<?php
+use XLSXExporter\CellTypes;
+use XLSXExporter\Column;
+use XLSXExporter\Columns;
+use XLSXExporter\Providers\ProviderArray;
+use XLSXExporter\Style;
+use XLSXExporter\Styles\Format;
+use XLSXExporter\WorkBook;
+use XLSXExporter\WorkSheet;
+use XLSXExporter\WorkSheets;
+use XLSXExporter\XLSXException;
+use XLSXExporter\XLSXExporter;
+
 // create a simple array as example
-$a = new ProviderArray([
+$provider = new ProviderArray([
     ['fname' => 'Charles', 'amount' => 1234.561, 'visit' => strtotime('2014-01-13 13:14:15'), 'check' => 1],
     ['fname' => 'Foo', 'amount' => 6543.219, 'visit' => strtotime('2014-12-31 23:59:59'), 'check' => 0],
 ]);
 
+// create some special formats
+$formatNumber2Decs = (new Style())->setFromArray(['format' => ['code' => Format::FORMAT_COMMA_2DECS]]);
+$formatDateTime = (new Style())->setFromArray(['format' => ['code' => Format::FORMAT_DATE_YMDHM]]);
+$formatYesNo = (new Style())->setFromArray(['format' => ['code' => Format::FORMAT_YESNO]]);
+
 // create the workbook with all the information
-$wb = new WorkBook(new WorkSheets([
-    new WorkSheet('sheet01', $a, new Columns([
-        new Column('fname', 'Name'),
-        new Column('amount', 'Amount', CellTypes::NUMBER,
-            (new Style())->setFromArray(['format' => ['code' => Format::FORMAT_COMMA_2DECS]])),
-        new Column('visit', 'Visit', CellTypes::DATETIME,
-            (new Style())->setFromArray(['format' => ['code' => Format::FORMAT_DATE_YMDHM]])),
-        new Column('check', 'Check', CellTypes::BOOLEAN,
-            (new Style())->setFromArray(['format' => ['code' => Format::FORMAT_YESNO]])),
-    ]))
-]));
+$workbook = new WorkBook(
+    new WorkSheets([
+        new WorkSheet(
+            'sheet01',
+            $provider,
+            new Columns([
+                new Column('fname', 'Name'),
+                new Column('amount', 'Amount', CellTypes::NUMBER, $formatNumber2Decs),
+                new Column('visit', 'Visit', CellTypes::DATETIME, $formatDateTime),
+                new Column('check', 'Check', CellTypes::BOOLEAN, $formatYesNo),
+            ])
+        ),
+    ])
+);
 
 // call the write process
-XLSXExporter::save('result.xlsx');
+try{
+    XLSXExporter::save($workbook, __DIR__ . '/result.xlsx');
+} catch (XLSXException $exception) {
+    echo 'Export error: ', $exception->getMessage(), PHP_EOL;
+}
 ```
 
 ## Contributing
