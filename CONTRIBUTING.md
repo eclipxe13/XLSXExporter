@@ -71,5 +71,6 @@ it will result in a complete build failure. Before you can run these, be sure to
 
 ```
 vendor/bin/phpcs -sp src/ tests/
-vendor/bin/phpunit --coverage-text
+vendor/bin/php-cs-fixer fix --using-cache=no --dry-run --verbose
+vendor/bin/phpunit
 ```

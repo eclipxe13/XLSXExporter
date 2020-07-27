@@ -1,3 +1,14 @@
+# Version 1.5.8
+- Improve README file:
+    - Install instructions.
+    - Fix "bug" in example.
+    - Expand example tiwh `use` sentences and better readability.
+    - Fix badges.
+- Fix build instructions on CONTRIBUTING.
+- Use PHP 7.2, 7.3, 7.4 on Travis-CI.
+- Fix date formats that where using a single `"y"` instead of double `"y"`.
+- Fix `FORMAT_DATE_TIME7`: minutes where not displayed and milliseconds error.
+
 # Version 1.5.7
 - Fix bug when creating a zip archive using a temporary empty file, some php versions return
   `ZipArchive::ER_NOZIP (19)`, to fix it the library open the archive using flag `ZipArchive::OVERWRITE`.
