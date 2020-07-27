@@ -26,7 +26,7 @@ script:
   - vendor/bin/phpunit --coverage-text --coverage-clover=build/tests/coverage.xml
 
 after_script:
-  - if [[ $TRAVIS_PHP_VERSION == '7.0' ]]; then php vendor/bin/ocular code-coverage:upload --format=php-clover build/tests/coverage.xml; fi
+  - if [[ $TRAVIS_PHP_VERSION == '7.4' ]]; then php vendor/bin/ocular code-coverage:upload --format=php-clover build/tests/coverage.xml; fi
 
 notifications:
   email: false
