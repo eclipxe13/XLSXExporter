@@ -33,14 +33,10 @@ Projects that does something like this and I use it as reference:
 
 ## Installation
 
-Use composer, so please run `composer require eclipxe/xlsxexporter` or include this on your `composer.json` file:
-
-```json
-{
-    "require": {
-        "eclipxe/xlsxexporter": "@stable"
-    }
-}
+Use [composer](https://getcomposer.org/), run:
+ 
+```shell
+composer require eclipxe/xlsxexporter
 ```
 
 ## Example
