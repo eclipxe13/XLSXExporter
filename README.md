@@ -7,7 +7,6 @@
 [![Scrutinizer][badge-quality]][quality]
 [![Coverage Status][badge-coverage]][coverage]
 [![Total Downloads][badge-downloads]][downloads]
-[![SensioLabsInsight][badge-sensiolabs]][sensiolabs]
 
 PHP Office Open XML Spreadsheet (xlsx) Exporter is a project to write xlsx files using PHP.
 I recommend you to checkout the project [PHPExcel](https://github.com/PHPOffice/PHPExcel)
@@ -89,7 +88,6 @@ and licensed for use under the MIT License (MIT). Please see [LICENSE][] for mor
 [license]: https://github.com/eclipxe13/XLSXExporter/blob/master/LICENSE
 [build]: https://travis-ci.org/eclipxe13/XLSXExporter?branch=master
 [quality]: https://scrutinizer-ci.com/g/eclipxe13/XLSXExporter/
-[sensiolabs]: https://insight.sensiolabs.com/projects/fe9b5ce9-a6c5-4d7d-9cd0-7d0a3affe098
 [coverage]: https://scrutinizer-ci.com/g/eclipxe13/XLSXExporter/code-structure/master
 [downloads]: https://packagist.org/packages/eclipxe/xlsxexporter
 
@@ -98,6 +96,5 @@ and licensed for use under the MIT License (MIT). Please see [LICENSE][] for mor
 [badge-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
 [badge-build]: https://img.shields.io/travis/eclipxe13/XLSXExporter/master.svg?style=flat-square
 [badge-quality]: https://img.shields.io/scrutinizer/g/eclipxe13/XLSXExporter/master.svg?style=flat-square
-[badge-sensiolabs]: https://insight.sensiolabs.com/projects/fe9b5ce9-a6c5-4d7d-9cd0-7d0a3affe098/mini.png
 [badge-coverage]: https://img.shields.io/scrutinizer/coverage/g/eclipxe13/XLSXExporter/master.svg?style=flat-square
 [badge-downloads]: https://img.shields.io/packagist/dt/eclipxe/xlsxexporter.svg?style=flat-square
