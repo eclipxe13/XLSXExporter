@@ -42,7 +42,7 @@ class Format extends AbstractStyle
     const FORMAT_DATE_TIME4 = 'h:mm:ss';
     const FORMAT_DATE_TIME5 = 'mm:ss';
     const FORMAT_DATE_TIME6 = 'h:mm:ss';
-    const FORMAT_DATE_TIME7 = 'i:s.S';
+    const FORMAT_DATE_TIME7 = 'm:s.000000';
     const FORMAT_DATE_TIME8 = 'h:mm:ss;@';
     const FORMAT_DATE_YYYYMMDDSLASH = 'yy/mm/dd;@';
     const FORMAT_CURRENCY_USD_SIMPLE = '"$"#,##0.00_-';
