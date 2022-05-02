@@ -15,7 +15,6 @@ class TestUtils
         if (! is_dir($path)) {
             if (file_exists($path)) {
                 trigger_error("Build path $path exists but is not a directory", E_USER_ERROR);
-                return '';
             }
             mkdir($path);
         }

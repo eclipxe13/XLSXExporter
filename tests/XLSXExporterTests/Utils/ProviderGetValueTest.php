@@ -32,9 +32,6 @@ class ProviderGetValueTest extends TestCase
     }
 
     /**
-     * @param $expected
-     * @param $container
-     * @param $key
      * @dataProvider providerProviderGetValue
      */
     public function testProviderGetValue($expected, $container, $key)

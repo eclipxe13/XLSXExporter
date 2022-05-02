@@ -1,6 +1,9 @@
 <?php
 namespace XLSXExporter;
 
+/**
+ * @extends Collection<Column>
+ */
 class Columns extends Collection
 {
     /**

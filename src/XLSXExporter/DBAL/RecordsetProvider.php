@@ -1,6 +1,7 @@
 <?php
 namespace XLSXExporter\DBAL;
 
+use EngineWorks\DBAL\Iterators\RecordsetIterator;
 use EngineWorks\DBAL\Recordset;
 use XLSXExporter\ProviderInterface;
 use XLSXExporter\Providers\ProviderIterator;
@@ -15,6 +16,8 @@ class RecordsetProvider extends ProviderIterator implements ProviderInterface
 {
     public function __construct(Recordset $recordset)
     {
-        parent::__construct($recordset->getIterator(), $recordset->getRecordCount());
+        /** @phpstan-var RecordsetIterator $iterator */
+        $iterator = $recordset->getIterator();
+        parent::__construct($iterator, $recordset->getRecordCount());
     }
 }

@@ -26,21 +26,22 @@ class Style
 {
     protected $styleindex;
 
-    /** @var Styles\StyleInterface[] */
-    protected $members = [
-        'format' => null,
-        'font' => null,
-        'fill' => null,
-        'alignment' => null,
-        'border' => null,
-        'protection' => null,
-    ];
+    /** @var array<string, Styles\StyleInterface> */
+    protected $members;
 
     public function __construct(array $arrayStyles = null)
     {
-        foreach (array_keys($this->members) as $stylename) {
+        $defaultmembers = [
+            'format',
+            'font',
+            'fill',
+            'alignment',
+            'border',
+            'protection',
+        ];
+        foreach ($defaultmembers as $stylename) {
             $styleclass = '\XLSXExporter\Styles\\' . ucfirst($stylename);
-            $this->$stylename = new $styleclass();
+            $this->{$stylename} = new $styleclass();
         }
         if (null !== $arrayStyles) {
             $this->setFromArray($arrayStyles);
@@ -71,11 +72,10 @@ class Style
     {
         $getter = (0 === strpos($name, 'get'));
         $setter = (0 === strpos($name, 'set'));
-        if ($getter || $setter) {
-            $name = lcfirst(substr($name, 3));
-        } elseif (! $getter && ! $setter) {
+        if (! $getter && ! $setter) {
             throw new \LogicException("Invalid method name $name");
         }
+        $name = lcfirst(substr($name, 3));
         if (! array_key_exists($name, $this->members)) {
             throw new \LogicException("Invalid setter/getter name $name");
         }
@@ -98,11 +98,11 @@ class Style
      * Set styles from an array of key-values
      * Keys: format, font, fill, alignment, border, protection
      * @param array $array
-     * @return \XLSXExporter\Style
+     * @return $this
      */
     public function setFromArray(array $array)
     {
-        if (! count($array)) {
+        if ([] === $array) {
             return $this;
         }
         foreach ($this->members as $key => $style) {
@@ -129,7 +129,7 @@ class Style
 
     /**
      * @param int $index
-     * @return \XLSXExporter\Style
+     * @return $this
      */
     public function setStyleIndex($index)
     {
@@ -138,7 +138,6 @@ class Style
     }
 
     /**
-     *
      * @return int
      */
     public function getStyleIndex()
@@ -152,7 +151,7 @@ class Style
      *
      * @param int $xfId
      * @return string
-     * @access private
+     * @internal
      */
     public function asXML($xfId = 0)
     {

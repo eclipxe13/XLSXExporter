@@ -32,6 +32,7 @@ class WorkSheetsTest extends TestCase
         $this->assertSame([$foo, $bar], $this->worksheets->all());
     }
 
+    /** @return array<array<mixed>> */
     public function providerAddThrowsException()
     {
         return [[null], [new \stdClass()], ['foo']];
@@ -39,10 +40,10 @@ class WorkSheetsTest extends TestCase
 
     /**
      * @dataProvider providerAddThrowsException
-     * @param $element
      */
     public function testAddThrowsException($element)
     {
+        /** @var WorkSheet $element */
         $this->expectException(XLSXException::class);
         $this->expectExceptionMessage('Invalid WorkSheet object');
         $this->worksheets->add($element);

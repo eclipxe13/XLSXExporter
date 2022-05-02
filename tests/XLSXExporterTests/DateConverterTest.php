@@ -18,7 +18,7 @@ class DateConverterTest extends TestCase
             $ts = strtotime($test['s']);
             $this->assertEquals(
                 round($test['e'], 9),
-                round(DateConverter::tsToExcelTime($ts), 9),
+                round((float) DateConverter::tsToExcelTime($ts), 9),
                 'Checking ' . $test['s'] . ', TS: ' . $ts . ' - ' . date('H:i:s', $ts),
                 1 / 86000
             );
@@ -37,7 +37,7 @@ class DateConverterTest extends TestCase
             $ts = strtotime($test['s']);
             $this->assertEquals(
                 round($test['e'], 9),
-                round(DateConverter::tsToExcelDateTime($ts), 9),
+                round((float) DateConverter::tsToExcelDateTime($ts), 9),
                 'Checking ' . $test['s'] . ', TS: ' . $ts,
                 1 / 86000
             );
@@ -62,7 +62,7 @@ class DateConverterTest extends TestCase
             $ts = strtotime($test['s']);
             $this->assertEquals(
                 round($test['e'], 9),
-                round(DateConverter::tsToExcelDateTime($ts), 9),
+                round((float) DateConverter::tsToExcelDateTime($ts), 9),
                 'Checking ' . $test['s'] . ', TS: ' . $ts,
                 1 / 86000
             );
@@ -87,7 +87,7 @@ class DateConverterTest extends TestCase
             $ts = strtotime($test['s']);
             $this->assertEquals(
                 round($test['e'], 9),
-                round(DateConverter::tsToExcelDateTime($ts), 9),
+                round((float) DateConverter::tsToExcelDateTime($ts), 9),
                 'Checking ' . $test['s'] . ', TS: ' . $ts,
                 round(1 / 86000, DateConverter::PRECISION_TIME)
             );
@@ -104,9 +104,6 @@ class DateConverterTest extends TestCase
     }
 
     /**
-     * @param $ts
-     * @param $type
-     * @param $expected
      * @dataProvider providerTimeStampToExcel
      */
     public function testTimeStampToExcel($ts, $type, $expected)

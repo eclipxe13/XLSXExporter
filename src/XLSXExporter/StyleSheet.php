@@ -5,9 +5,11 @@ class StyleSheet
 {
     /** @var Style[] */
     protected $styles;
-    /** @var array */
+
+    /** @var array<string, array<int, string>> */
     protected $hashes;
-    /** @var array */
+
+    /** @var array<string, array<int, Styles\StyleInterface>> */
     protected $objects;
 
     /**
@@ -19,7 +21,7 @@ class StyleSheet
      */
     public function __construct(array $styles)
     {
-        if (! count($styles)) {
+        if ([] === $styles) {
             throw new XLSXException('Error creating the stylesheet, no styles found');
         }
         foreach ($styles as $style) {
@@ -34,7 +36,7 @@ class StyleSheet
     /**
      * The mandatory styles, must be declared before any other style
      *
-     * @return Style[]
+     * @return array<int, Style>
      */
     protected function mandatoryStyles()
     {
@@ -87,15 +89,15 @@ class StyleSheet
         }
     }
 
-    protected function processAddToArray($name, Styles\StyleInterface $generic)
+    protected function processAddToArray(string $name, Styles\StyleInterface $generic)
     {
         $generic->setIndex(0);
         if ($generic->hasValues()) {
             $hash = $generic->getHash();
             if (false === $index = array_search($hash, $this->hashes[$name], true)) {
                 $index = count($this->hashes[$name]);
-                array_push($this->hashes[$name], $hash);
-                array_push($this->objects[$name], $generic);
+                $this->hashes[$name][] = $hash;
+                $this->objects[$name][] = $generic;
             }
             $generic->setIndex($index);
         }

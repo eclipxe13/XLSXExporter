@@ -84,19 +84,15 @@ class WorkSheet
      * @param string $name
      * @throws XLSXException
      */
-    public function setName($name)
+    public function setName(string $name)
     {
-        if (! is_string($name)) {
-            throw new XLSXException('Invalid worksheet name, is not a string');
-        }
         if ('' === $name) {
             throw new XLSXException('Invalid worksheet name, is empty');
         }
-        $castedName = preg_replace('/[\'\/\\\\:\?\*\[\]\n\r\t\0]/', '', $name);
-        if ($name !== $castedName) {
+        if (preg_match('/[\'\/\\\\:\?\*\[\]\n\r\t\0]/', '', $name)) {
             throw new XLSXException('Invalid worksheet name, contains invalid chars');
         }
-        if (strlen($castedName) > 31) {
+        if (strlen($name) > 31) {
             throw new XLSXException('Invalid worksheet name, is more than 31 chars length');
         }
         $this->name = $name;

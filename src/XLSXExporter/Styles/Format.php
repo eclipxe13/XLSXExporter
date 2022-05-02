@@ -124,7 +124,7 @@ class Format extends AbstractStyle
     /**
      * Get the code for a built in id, if not found return an empty string
      *
-     * @param $id
+     * @param int $id
      * @return string
      */
     public static function getBuiltInCodeById($id)

@@ -1,7 +1,9 @@
 <?php
 namespace XLSXExporterTests;
 
+use LogicException;
 use PHPUnit\Framework\TestCase;
+use stdClass;
 use XLSXExporter\Style;
 use XLSXExporter\Styles\Font;
 use XLSXExporter\Styles\Format;
@@ -32,73 +34,67 @@ class StyleTest extends TestCase
         }
     }
 
-    /**
-     * @expectedException \LogicException
-     * @expectedExceptionMessage Invalid property name invalidpropertyname
-     */
     public function testGetterThrowException()
     {
-        (new Style())->invalidpropertyname;
+        /** @var stdClass $style */
+        $style = new Style();
+
+        $this->expectException(LogicException::class);
+        $this->expectExceptionMessage("Invalid property name invalidpropertyname");
+        echo $style->{'invalidpropertyname'};
     }
 
-    /**
-     * @expectedException \LogicException
-     * @expectedExceptionMessage Invalid property name invalidpropertyname
-     */
     public function testSetterThrowExceptionPropertyName()
     {
-        $s = new Style();
-        $s->{'invalidpropertyname'} = 0;
+        /** @var stdClass $style */
+        $style = new Style();
+
+        $this->expectException(LogicException::class);
+        $this->expectExceptionMessage("Invalid property name invalidpropertyname");
+        $style->{'invalidpropertyname'} = 0;
     }
 
-    /**
-     * @expectedException \LogicException
-     * @expectedExceptionMessage The value must be an instance of \XLSXExporter\Styles\Format
-     */
     public function testSetterThrowExceptionType()
     {
-        $s = new Style();
-        $s->format = new Font();
+        $style = new Style();
+        /** @var Format $notFormatObject */
+        $notFormatObject = new Font();
+
+        $this->expectException(LogicException::class);
+        $this->expectExceptionMessage("The value must be an instance of \XLSXExporter\Styles\Format");
+        $style->format = $notFormatObject;
     }
 
-    /**
-     * @expectedException \LogicException
-     * @expectedExceptionMessage Invalid method name invalidMethodName
-     */
     public function testMagicCallInvalidMethodName()
     {
-        $s = new Style();
-        $s->{'invalidMethodName'}();
+        $this->expectException(LogicException::class);
+        $this->expectExceptionMessage("Invalid method name invalidMethodName");
+        $style = new Style();
+        $style->{'invalidMethodName'}();
     }
 
-    /**
-     * @expectedException \LogicException
-     * @expectedExceptionMessage Invalid setter/getter name someInvalid
-     */
     public function testMagicCallInvalidMethodGetSet()
     {
-        $s = new Style();
-        $s->{'setSomeInvalid'}();
+        $this->expectException(LogicException::class);
+        $this->expectExceptionMessage("Invalid setter/getter name someInvalid");
+        $style = new Style();
+        $style->{'setSomeInvalid'}();
     }
 
-    /**
-     * @expectedException \LogicException
-     * @expectedExceptionMessage Invalid setter argument
-     */
     public function testMagicCallInvalidMethodSetNoArguments()
     {
-        $s = new Style();
-        $s->{'setFormat'}();
+        $this->expectException(LogicException::class);
+        $this->expectExceptionMessage("Invalid setter argument");
+        $style = new Style();
+        $style->{'setFormat'}();
     }
 
-    /**
-     * @expectedException \LogicException
-     * @expectedExceptionMessage Invalid setter argument
-     */
     public function testMagicCallInvalidMethodSetMoreThanOne()
     {
-        $s = new Style();
-        $s->{'setFormat'}(null, null);
+        $this->expectException(LogicException::class);
+        $this->expectExceptionMessage("Invalid setter argument");
+        $style = new Style();
+        $style->{'setFormat'}(null, null);
     }
 
     protected function getFormatArray()
@@ -115,45 +111,45 @@ class StyleTest extends TestCase
 
     public function testConstructorWithArray()
     {
-        $s = new Style($this->getFormatArray());
-        $this->assertSame(Format::FORMAT_COMMA_2DECS, $s->format->code, 'Cannot set the style using constructor');
+        $style = new Style($this->getFormatArray());
+        $this->assertSame(Format::FORMAT_COMMA_2DECS, $style->format->code, 'Cannot set the style using constructor');
     }
 
     public function testSetFromArray()
     {
-        $s = new Style();
-        $x = $s->setFromArray($this->getFormatArray());
-        $this->assertSame(Font::UNDERLINE_DOUBLE, $s->font->underline, 'Cannot set the style using setFromArray');
-        $this->assertTrue($s->hasValues(), 'It was expected that hasValues returns true');
-        $this->assertSame($s, $x, 'The setFromArray method is not chained');
+        $style = new Style();
+        $array = $style->setFromArray($this->getFormatArray());
+        $this->assertSame(Font::UNDERLINE_DOUBLE, $style->font->underline, 'Cannot set the style using setFromArray');
+        $this->assertTrue($style->hasValues(), 'It was expected that hasValues returns true');
+        $this->assertSame($style, $array, 'The setFromArray method is not chained');
     }
 
     public function testHasValues()
     {
-        $s = new Style();
+        $style = new Style();
         $this->assertFalse(
-            $s->hasValues(),
+            $style->hasValues(),
             'It was expected that hasValues returns false since there is no specification of style'
         );
-        $s->setFromArray($this->getFormatArray());
+        $style->setFromArray($this->getFormatArray());
         $this->assertTrue(
-            $s->hasValues(),
+            $style->hasValues(),
             'It was expected that hasValues returns true since it was specified using setFromArray'
         );
     }
 
     public function testStyleIndexProperty()
     {
-        $s = new Style();
-        $this->assertNull($s->getStyleIndex(), 'styleindex must be null just after style creation');
-        $x = $s->setStyleIndex(5);
-        $this->assertSame(5, $s->getStyleIndex(), 'The StyleIndex property does not match after setStyleIndex');
-        $this->assertSame($s, $x, 'The setStyleIndex method is not chained');
+        $style = new Style();
+        $this->assertNull($style->getStyleIndex(), 'styleindex must be null just after style creation');
+        $fluent = $style->setStyleIndex(5);
+        $this->assertSame(5, $style->getStyleIndex(), 'The StyleIndex property does not match after setStyleIndex');
+        $this->assertSame($style, $fluent, 'The setStyleIndex method is not chained');
     }
 
     public function testAsXML()
     {
-        $s = new Style();
+        $style = new Style();
         $empty = '<' . 'xf'
             . ' applyAlignment="false"'
             . ' applyBorder="false"'
@@ -167,6 +163,6 @@ class StyleTest extends TestCase
             . ' numFmtId="0"'
             . ' xfId="0"/>'
         ;
-        $this->assertXmlStringEqualsXmlString($empty, $s->asXML(), 'Style does not match with expected XML');
+        $this->assertXmlStringEqualsXmlString($empty, $style->asXML(), 'Style does not match with expected XML');
     }
 }

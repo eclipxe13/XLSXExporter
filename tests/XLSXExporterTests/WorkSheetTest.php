@@ -28,13 +28,6 @@ class WorkSheetTest extends TestCase
         $this->assertSame('foo', $this->worksheet->getName());
     }
 
-    public function testWorkSheetSetNameWithNotAString()
-    {
-        $this->expectException(XLSXException::class);
-        $this->expectExceptionMessage('Invalid worksheet name, is not a string');
-        $this->worksheet->setName(null);
-    }
-
     public function testWorkSheetSetNameWithEmptyString()
     {
         $this->expectException(XLSXException::class);
@@ -58,7 +51,6 @@ class WorkSheetTest extends TestCase
     }
 
     /**
-     * @param $name
      * @dataProvider providerWorkSheetSetNameWithInvalidString
      */
     public function testWorkSheetSetNameWithInvalidString($name)

@@ -1,17 +1,30 @@
 <?php
 namespace XLSXExporter;
 
+use ArrayIterator;
+use Countable;
+use IteratorAggregate;
+
 /**
  * Class Collection
- * @access private
- *
- * @package XLSXExporter
+ * @internal
+ * @template TValue
+ * @implements IteratorAggregate<TValue>
  */
-abstract class Collection implements \IteratorAggregate, \Countable
+abstract class Collection implements IteratorAggregate, Countable
 {
+    /** @var array<int, TValue> */
+    protected $collection = [];
+
+    public function __construct(array $items = [])
+    {
+        $this->addArray($items);
+    }
+
     /**
-     * @param mixed $item
+     * @param TValue $item
      * @return void
+     * @throws XLSXException if $item does not have correct type
      */
     abstract public function add($item);
 
@@ -19,7 +32,7 @@ abstract class Collection implements \IteratorAggregate, \Countable
      * Retrieve if an element match, this is used in searchById function
      *
      * @param string $id
-     * @param mixed $item
+     * @param TValue $item
      * @return bool
      */
     abstract protected function elementMatchId($id, $item);
@@ -28,26 +41,17 @@ abstract class Collection implements \IteratorAggregate, \Countable
      * Get the index in the collection for an element
      *
      * @param string $id
-     * @param int $start
      * @return int index of the element, -1 if not found
      */
-    public function searchById($id, $start = 0)
+    public function searchById($id)
     {
-        $count = count($this->collection);
-        for ($index = max(0, $start); $index < $count; $index++) {
-            if ($this->elementMatchId($id, $this->collection[$index])) {
+        foreach ($this->collection as $index => $item) {
+            if ($this->elementMatchId($id, $item)) {
                 return $index;
             }
         }
+
         return -1;
-    }
-
-    /** @var array */
-    protected $collection = [];
-
-    public function __construct(array $items = [])
-    {
-        $this->addArray($items);
     }
 
     /**
@@ -68,26 +72,25 @@ abstract class Collection implements \IteratorAggregate, \Countable
      */
     public function exists($index)
     {
-        return (array_key_exists((string) $index, $this->collection));
+        return (array_key_exists($index, $this->collection));
     }
 
     /**
      * Return if the item identified by id exists
      *
      * @param string $id
-     * @param int $start
      * @return bool
      */
-    public function existsById($id, $start = 0)
+    public function existsById($id)
     {
-        return (-1 !== $this->searchById($id, $start));
+        return (-1 !== $this->searchById($id));
     }
 
     /**
      * Return one item by index
      *
-     * @param string $index
-     * @return mixed
+     * @param int $index
+     * @return TValue
      * @throws XLSXException
      */
     public function get($index)
@@ -102,13 +105,12 @@ abstract class Collection implements \IteratorAggregate, \Countable
      * Return one item by id
      *
      * @param string $id
-     * @param int $start
-     * @return mixed
+     * @return TValue
      * @throws XLSXException
      */
-    public function getById($id, $start = 0)
+    public function getById($id)
     {
-        if (-1 === $index = $this->searchById($id, $start)) {
+        if (-1 === $index = $this->searchById($id)) {
             throw new XLSXException("The item {$id} does not exists");
         }
         return $this->get($index);
@@ -118,25 +120,25 @@ abstract class Collection implements \IteratorAggregate, \Countable
      * Number of items
      * @return int
      */
-    public function count()
+    public function count(): int
     {
         return count($this->collection);
     }
 
     /**
      * Return all the items
-     * @return array
+     * @return array<TValue>
      */
-    public function all()
+    public function all(): array
     {
         return $this->collection;
     }
 
     /**
-     * @return \ArrayIterator
+     * @return ArrayIterator<TValue>
      */
     public function getIterator()
     {
-        return new \ArrayIterator($this->collection);
+        return new ArrayIterator($this->collection);
     }
 }

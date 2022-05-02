@@ -22,7 +22,9 @@ class XLSXExporter
                 throw new XLSXException("Cannot copy $tempfile to $filename");
             }
         } finally {
-            unlink($tempfile);
+            if (isset($tempfile)) {
+                unlink($tempfile);
+            }
         }
     }
 

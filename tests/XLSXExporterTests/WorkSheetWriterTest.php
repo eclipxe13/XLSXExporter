@@ -45,10 +45,6 @@ class WorkSheetWriterTest extends TestCase
     }
 
     /**
-     * @param $cellType
-     * @param $value
-     * @param $style
-     * @param $expectedContent
      * @dataProvider providerWriteCell
      */
     public function testWriteCell($cellType, $value, $style, $expectedContent)

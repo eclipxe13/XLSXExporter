@@ -48,7 +48,6 @@ class WorkSheetWriter
             . '</sheetData>'
             . '<pageMargins left="0.7" right="0.7" top="0.75" bottom="0.75" header="0.3" footer="0.3"/>'
             . '</worksheet>');
-        $this->file = null;
     }
 
     public function openRow()
@@ -66,7 +65,7 @@ class WorkSheetWriter
     /**
      * @param string $type one constant of CellTypes class
      * @param mixed $value the value to write
-     * @param string $style the cell style
+     * @param int $style the cell style
      */
     public function writeCell($type, $value, $style)
     {

@@ -2,6 +2,7 @@
 namespace XLSXExporterTests;
 
 use PHPUnit\Framework\TestCase;
+use SimpleXMLElement;
 use XLSXExporter\Style;
 use XLSXExporter\Styles\Format;
 use XLSXExporter\StyleSheet;
@@ -18,7 +19,9 @@ class StyleSheetTest extends TestCase
     public function testConstructWithInvalidStyles()
     {
         $this->expectException(XLSXException::class);
-        new StyleSheet([new \stdClass()]);
+        /** @var Style $notValidStyle */
+        $notValidStyle = new \stdClass();
+        new StyleSheet([$notValidStyle]);
     }
 
     public function testConstructWithGeneralStyle()
@@ -53,7 +56,7 @@ class StyleSheetTest extends TestCase
         $this->compareFmt('165', '0.0000%', $numFmts->numFmt[5]);
     }
 
-    private function compareFmt($numFmtId, $formatCode, \SimpleXMLElement $node)
+    private function compareFmt($numFmtId, $formatCode, SimpleXMLElement $node)
     {
         $this->assertEquals(
             $numFmtId,
@@ -69,7 +72,7 @@ class StyleSheetTest extends TestCase
 
     private function extractNumFmts($xmlContent)
     {
-        $xml = new \SimpleXMLElement($xmlContent);
+        $xml = new SimpleXMLElement($xmlContent);
         if (isset($xml->numFmts)) {
             return $xml->numFmts;
         }

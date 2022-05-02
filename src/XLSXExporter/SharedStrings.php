@@ -14,7 +14,7 @@ class SharedStrings implements \Countable
     /** @var int */
     protected $count = 0;
 
-    /** @var string[] */
+    /** @var array<string, int> */
     protected $strings = [];
 
     /**
