@@ -14,25 +14,50 @@
         "php": ">=7.4",
         "ext-zip": "*",
         "ext-simplexml": "*",
-        "eclipxe/engineworks-progress-status": "^1.0"
+        "eclipxe/engineworks-progress-status": "^2.0.0"
     },
     "suggest": {
         "eclipxe/engineworks-dbal": "Export recordsets as worksheets in a workbook"
     },
     "require-dev": {
-        "eclipxe/engineworks-dbal": "^1.6",
-        "phpunit/phpunit": "^5.7",
-        "squizlabs/php_codesniffer": "^3.0",
-        "friendsofphp/php-cs-fixer": "^2.3.2"
+        "ext-xmlwriter": "*",
+        "eclipxe/engineworks-dbal": "^2.3.2",
+        "phpunit/phpunit": "^9.5.20"
     },
     "autoload": {
         "psr-4": {
-            "XLSXExporter\\": "src/XLSXExporter/"
+            "Eclipxe\\XLSXExporter\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "XLSXExporterTests\\": "tests/XLSXExporterTests/"
+            "Eclipxe\\XLSXExporter\\Tests\\": "tests/"
         }
+    },
+    "scripts": {
+        "dev:build": ["@dev:fix-style", "@dev:test"],
+        "dev:check-style": [
+            "@php tools/php-cs-fixer fix --dry-run --verbose",
+            "@php tools/phpcs --colors -sp"
+        ],
+        "dev:fix-style": [
+            "@php tools/php-cs-fixer fix --verbose",
+            "@php tools/phpcbf --colors -sp"
+        ],
+        "dev:test": [
+            "@dev:check-style",
+            "@php vendor/bin/phpunit --testdox --verbose --stop-on-failure",
+            "@php tools/phpstan analyse --no-progress"
+        ],
+        "dev:coverage": [
+            "@php -dzend_extension=xdebug.so -dxdebug.mode=coverage vendor/bin/phpunit --verbose --coverage-html build/coverage/html/"
+        ]
+    },
+    "scripts-descriptions": {
+        "dev:build": "DEV: run dev:fix-style dev:tests and dev:docs, run before pull request",
+        "dev:check-style": "DEV: search for code style errors using php-cs-fixer and phpcs",
+        "dev:fix-style": "DEV: fix code style errors using php-cs-fixer and phpcbf",
+        "dev:test": "DEV: run dev:fix-style, dev:check-style, phpunit and phpstan",
+        "dev:coverage": "DEV: run phpunit with xdebug and storage coverage in build/coverage/html/"
     }
 }

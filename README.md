@@ -1,4 +1,4 @@
-# eclipxe13/XLSXExporter
+# eclipxe/xlsxexporter
 
 [![Source Code][badge-source]][source]
 [![Latest Version][badge-release]][release]
@@ -9,7 +9,7 @@
 [![Total Downloads][badge-downloads]][downloads]
 
 PHP Office Open XML Spreadsheet (xlsx) Exporter is a project to write xlsx files using PHP.
-I recommend you to checkout the project [PHPExcel](https://github.com/PHPOffice/PHPExcel)
+I recommend you to check out the project [PHPExcel](https://github.com/PHPOffice/PHPExcel)
 that has an excellent support for this kind of files.
 
 I create this project because PHPExcel does not fit my needs.
@@ -17,10 +17,10 @@ Specifically, I use this tool to export big amount of data to spreadsheets
 files to be exported and processed by the end user.
 Using PHPExcel consume a lot of memory and raising the "memory exhausted error".
 
-Projects that does something like this and I use it as reference:
+Projects that does something similar, and I use it as reference:
 
- - https://github.com/PHPOffice/PHPExcel
- - https://github.com/mk-j/PHP_XLSXWriter
+ - [phpoffice/phpspreadsheet](https://github.com/PHPOffice/PhpSpreadsheet)
+ - [mk-j/php_xlsxwriter](https://github.com/mk-j/PHP_XLSXWriter)
 
 ## How it works
 
@@ -43,43 +43,39 @@ composer require eclipxe/xlsxexporter
 
 ```php
 <?php
-use XLSXExporter\CellTypes;
-use XLSXExporter\Column;
-use XLSXExporter\Columns;
-use XLSXExporter\Providers\ProviderArray;
-use XLSXExporter\Style;
-use XLSXExporter\Styles\Format;
-use XLSXExporter\WorkBook;
-use XLSXExporter\WorkSheet;
-use XLSXExporter\WorkSheets;
-use XLSXExporter\XLSXException;
-use XLSXExporter\XLSXExporter;
+use Eclipxe\XLSXExporter;
+use Eclipxe\XLSXExporter\CellTypes;
+use Eclipxe\XLSXExporter\Column;
+use Eclipxe\XLSXExporter\Columns;
+use Eclipxe\XLSXExporter\Providers\ProviderArray;
+use Eclipxe\XLSXExporter\Style;
+use Eclipxe\XLSXExporter\Styles\Format;
+use Eclipxe\XLSXExporter\WorkBook;
+use Eclipxe\XLSXExporter\WorkSheet;
+use Eclipxe\XLSXExporter\WorkSheets;
+use Eclipxe\XLSXExporter\Exceptions\XLSXException;
 
 // create a simple array as example
 $provider = new ProviderArray([
-    ['fname' => 'Charles', 'amount' => 1234.561, 'visit' => strtotime('2014-01-13 13:14:15'), 'check' => 1],
-    ['fname' => 'Foo', 'amount' => 6543.219, 'visit' => strtotime('2014-12-31 23:59:59'), 'check' => 0],
+    ['first_name' => 'Charles', 'amount' => 1234.561, 'visit' => strtotime('2014-01-13 13:14:15'), 'check' => 1],
+    ['first_name' => 'Foo', 'amount' => 6543.219, 'visit' => strtotime('2014-12-31 23:59:59'), 'check' => 0],
 ]);
 
 // create some special formats
-$formatNumber2Decs = (new Style())->setFromArray(['format' => ['code' => Format::FORMAT_COMMA_2DECS]]);
-$formatDateTime = (new Style())->setFromArray(['format' => ['code' => Format::FORMAT_DATE_YMDHM]]);
-$formatYesNo = (new Style())->setFromArray(['format' => ['code' => Format::FORMAT_YESNO]]);
+$formatNumber2Decimals = new Style(['format' => ['code' => Format::FORMAT_COMMA_2DECS]]);
+$formatDateTime = new Style(['format' => ['code' => Format::FORMAT_DATE_YMDHM]]);
+$formatYesNo = new Style(['format' => ['code' => Format::FORMAT_YESNO]]);
 
 // create the workbook with all the information
 $workbook = new WorkBook(
-    new WorkSheets([
-        new WorkSheet(
-            'sheet01',
-            $provider,
-            new Columns([
-                new Column('fname', 'Name'),
-                new Column('amount', 'Amount', CellTypes::NUMBER, $formatNumber2Decs),
-                new Column('visit', 'Visit', CellTypes::DATETIME, $formatDateTime),
-                new Column('check', 'Check', CellTypes::BOOLEAN, $formatYesNo),
-            ])
-        ),
-    ])
+    new WorkSheets(
+        new WorkSheet('sheet01', $provider, new Columns(
+            new Column('first_name', 'Name'),
+            new Column('amount', 'Amount', CellTypes::NUMBER, $formatNumber2Decimals),
+            new Column('visit', 'Visit', CellTypes::DATETIME, $formatDateTime),
+            new Column('check', 'Check', CellTypes::BOOLEAN, $formatYesNo),
+        )),
+    )
 );
 
 // call the write process
@@ -93,16 +89,16 @@ try{
 ## Contributing
 
 Contributions are welcome! Please read [CONTRIBUTING][] for details
-and don't forget to take a look in the [TODO][] and [CHANGELOG][] files.
+and don't forget to take a look the [TODO][] and [CHANGELOG][] files.
 
 ## License
 
-The eclipxe13/XLSXExporter library is copyright © [Carlos C Soto](https://eclipxe.com.mx/)
+The `eclipxe/xlsxexporter` library is copyright © [Carlos C Soto](https://eclipxe.com.mx/)
 and licensed for use under the MIT License (MIT). Please see [LICENSE][] for more information.
 
 [contributing]: https://github.com/eclipxe13/XLSXExporter/blob/master/CONTRIBUTING.md
-[changelog]: https://github.com/eclipxe13/XLSXExporter/blob/master/CHANGELOG.md
-[todo]: https://github.com/eclipxe13/XLSXExporter/blob/master/TODO.md
+[changelog]: https://github.com/eclipxe13/XLSXExporter/blob/master/docs/CHANGELOG.md
+[todo]: https://github.com/eclipxe13/XLSXExporter/blob/master/docs/TODO.md
 
 [source]: https://github.com/eclipxe13/XLSXExporter
 [release]: https://github.com/eclipxe13/XLSXExporter/releases
