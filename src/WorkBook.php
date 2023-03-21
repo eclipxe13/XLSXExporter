@@ -219,7 +219,7 @@ class WorkBook
             })
             . '</sheets>'
             . '</workbook>'
-            ;
+        ;
     }
 
     protected function xmlWorkbookRels(): string
@@ -237,6 +237,6 @@ class WorkBook
             . '<Relationship Id="shs1" Target="sharedStrings.xml"'
             . ' Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/sharedStrings"/>'
             . '</Relationships>'
-            ;
+        ;
     }
 }
