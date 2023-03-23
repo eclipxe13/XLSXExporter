@@ -1,4 +1,4 @@
-# eclipxe/xlsxexporter
+# `eclipxe/xlsxexporter`
 
 [![Source Code][badge-source]][source]
 [![Latest Version][badge-release]][release]
@@ -19,17 +19,17 @@ Using PHPExcel consume a lot of memory and raising the "memory exhausted error".
 
 Projects that does something similar, and I use it as reference:
 
- - [phpoffice/phpspreadsheet](https://github.com/PHPOffice/PhpSpreadsheet)
- - [mk-j/php_xlsxwriter](https://github.com/mk-j/PHP_XLSXWriter)
+ - [`phpoffice/phpspreadsheet`](https://github.com/PHPOffice/PhpSpreadsheet)
+ - [`mk-j/php_xlsxwriter`](https://github.com/mk-j/PHP_XLSXWriter)
 
 ## How it works
 
 1. Your main object is a workbook.
-1. A workbook contains at least 1 spreadsheet.
-1. Every spreadsheet (worksheet) has a collection of columns and a DataProvider object.
-1. When the structure information (workbook, worksheets, columns and providers) has been set you can write the xlsx file.
-1. Every time a worksheet will be created, the headers are written first, then every row of data is written. The data is extracted using the Provider. In this way, you don't need all your data stored on memory, you can use a PDO reader implementing the Provider interface.
-1. The data is written to a temporary files (including the final zip), so no large amount of data is being used.
+2. A workbook contains at least 1 spreadsheet.
+3. Every spreadsheet (worksheet) has a collection of columns and a DataProvider object.
+4. When the structure information (workbook, worksheets, columns and providers) has been set you can write the xlsx file.
+5. Every time a worksheet will be created, the headers are written first, then every row of data is written. The data is extracted using the Provider. In this way, you don't need all your data stored on memory, you can use a PDO reader implementing the Provider interface.
+6. The data is written to a temporary files (including the final zip), so no large amount of data is being used.
 
 ## Installation
 

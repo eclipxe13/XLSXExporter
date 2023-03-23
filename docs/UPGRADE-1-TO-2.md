@@ -6,7 +6,7 @@ Version 2.x requires PHP 7.4 or higher.
 
 ## Namespace
 
-Library namespace has been changed from `XLSXExporter` to `Eclipxe\XlsxExporter`
+Library namespace has been changed from `XLSXExporter` to `Eclipxe\XlsxExporter`.
 
 ## Types
 
@@ -15,7 +15,7 @@ Library namespace has been changed from `XLSXExporter` to `Eclipxe\XlsxExporter`
 
 ## Exceptions
 
-- All exceptions are explicit and implement `Exceptions\XLSXException` interface.
+- All exceptions are explicit and implement `Eclipxe\XlsxExporter\Exceptions\XlsxException` interface.
 - Previous generic exception `XLSXException` has been removed.
 
 ## Custom autoloader
