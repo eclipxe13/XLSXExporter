@@ -1,6 +1,7 @@
 # `eclipxe/xlsxexporter`
 
 [![Source Code][badge-source]][source]
+[![Packagist PHP Version Support][badge-php-version]][php-version]
 [![Latest Version][badge-release]][release]
 [![Software License][badge-license]][license]
 [![Build Status][badge-build]][build]
@@ -101,6 +102,7 @@ and licensed for use under the MIT License (MIT). Please see [LICENSE][] for mor
 [todo]: https://github.com/eclipxe13/XlsxExporter/blob/master/docs/TODO.md
 
 [source]: https://github.com/eclipxe13/XlsxExporter
+[php-version]: https://packagist.org/packages/eclipxe/xlsxexporter
 [release]: https://github.com/eclipxe13/XlsxExporter/releases
 [license]: https://github.com/eclipxe13/XlsxExporter/blob/master/LICENSE
 [build]: x
@@ -109,6 +111,7 @@ and licensed for use under the MIT License (MIT). Please see [LICENSE][] for mor
 [downloads]: https://packagist.org/packages/eclipxe/xlsxexporter
 
 [badge-source]: http://img.shields.io/badge/source-eclipxe13/XlsxExporter-blue.svg?style=flat-square
+[badge-php-version]: https://img.shields.io/packagist/php-v/eclipxe/xlsxexporter?logo=php
 [badge-release]: https://img.shields.io/github/release/eclipxe13/XlsxExporter.svg?style=flat-square
 [badge-license]: https://img.shields.io/github/license/eclipxe13/XlsxExporter.svg?style=flat-square
 [badge-build]: x
