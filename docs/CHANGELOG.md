@@ -14,6 +14,17 @@ There are no unreleased changes.
 The whole project has been modernized and has a lot of internal refactors.
 See [`UPGRADE-1-TO-2.md`](UPGRADE-1-TO-2.md) for instructions on how to migrate.
 
+### Main changes
+
+- Library namespace has been changed from `XLSXExporter` to `Eclipxe\XlsxExporter`.
+- Change `XlsxException` class to `XlsxException` interface.
+- Compatible with PHP versions 7.4 to 8.2.
+
+### Development changes
+
+- Replace Travis-CI with GitHub Workflows. Thanks Travis-CI!
+- Manage development tools using Phive.
+
 ## Version 1.5.8
 
 - Fix date formats that where using a single `"y"` instead of double `"yy"`.
