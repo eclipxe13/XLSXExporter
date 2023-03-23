@@ -2,7 +2,7 @@
     "name": "eclipxe/xlsxexporter",
     "description": "PHP Office Open XML Spreadsheet (xlsx) exporter",
     "keywords": ["excel", "xlsx", "office-open-xml"],
-    "homepage": "https://github.com/eclipxe13/XLSXExporter",
+    "homepage": "https://github.com/eclipxe13/XlsxExporter",
     "license": "MIT",
     "authors": [
         {
@@ -26,12 +26,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Eclipxe\\XLSXExporter\\": "src/"
+            "Eclipxe\\XlsxExporter\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Eclipxe\\XLSXExporter\\Tests\\": "tests/"
+            "Eclipxe\\XlsxExporter\\Tests\\": "tests/"
         }
     },
     "scripts": {

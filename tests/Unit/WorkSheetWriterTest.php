@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Eclipxe\XLSXExporter\Tests\Unit;
+namespace Eclipxe\XlsxExporter\Tests\Unit;
 
-use Eclipxe\XLSXExporter\CellTypes;
-use Eclipxe\XLSXExporter\Tests\TestCase;
-use Eclipxe\XLSXExporter\Utils\TemporaryFile;
-use Eclipxe\XLSXExporter\WorkSheetWriter;
+use Eclipxe\XlsxExporter\CellTypes;
+use Eclipxe\XlsxExporter\Tests\TestCase;
+use Eclipxe\XlsxExporter\Utils\TemporaryFile;
+use Eclipxe\XlsxExporter\WorkSheetWriter;
 
 final class WorkSheetWriterTest extends TestCase
 {

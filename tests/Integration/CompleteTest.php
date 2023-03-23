@@ -2,23 +2,23 @@
 
 declare(strict_types=1);
 
-namespace Eclipxe\XLSXExporter\Tests\Integration;
+namespace Eclipxe\XlsxExporter\Tests\Integration;
 
 use ArrayIterator;
-use Eclipxe\XLSXExporter\CellTypes;
-use Eclipxe\XLSXExporter\Column;
-use Eclipxe\XLSXExporter\Columns;
-use Eclipxe\XLSXExporter\Providers\NullProvider;
-use Eclipxe\XLSXExporter\Providers\ProviderArray;
-use Eclipxe\XLSXExporter\Providers\ProviderIterator;
-use Eclipxe\XLSXExporter\Style;
-use Eclipxe\XLSXExporter\Styles\Alignment;
-use Eclipxe\XLSXExporter\Styles\Format;
-use Eclipxe\XLSXExporter\Tests\TestCase;
-use Eclipxe\XLSXExporter\WorkBook;
-use Eclipxe\XLSXExporter\WorkSheet;
-use Eclipxe\XLSXExporter\WorkSheets;
-use Eclipxe\XLSXExporter\XLSXExporter;
+use Eclipxe\XlsxExporter\CellTypes;
+use Eclipxe\XlsxExporter\Column;
+use Eclipxe\XlsxExporter\Columns;
+use Eclipxe\XlsxExporter\Providers\NullProvider;
+use Eclipxe\XlsxExporter\Providers\ProviderArray;
+use Eclipxe\XlsxExporter\Providers\ProviderIterator;
+use Eclipxe\XlsxExporter\Style;
+use Eclipxe\XlsxExporter\Styles\Alignment;
+use Eclipxe\XlsxExporter\Styles\Format;
+use Eclipxe\XlsxExporter\Tests\TestCase;
+use Eclipxe\XlsxExporter\WorkBook;
+use Eclipxe\XlsxExporter\WorkSheet;
+use Eclipxe\XlsxExporter\WorkSheets;
+use Eclipxe\XlsxExporter\XlsxExporter;
 use ZipArchive;
 
 final class CompleteTest extends TestCase
@@ -101,7 +101,7 @@ final class CompleteTest extends TestCase
             unlink($exportedFilePath);
         }
 
-        $exporter = new XLSXExporter();
+        $exporter = new XlsxExporter();
         $exporter->save($wb, $exportedFilePath);
         $this->assertFileExists($exportedFilePath);
 

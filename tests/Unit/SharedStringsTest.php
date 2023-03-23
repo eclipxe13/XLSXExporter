@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Eclipxe\XLSXExporter\Tests\Unit;
+namespace Eclipxe\XlsxExporter\Tests\Unit;
 
 use Countable;
-use Eclipxe\XLSXExporter\SharedStrings;
-use Eclipxe\XLSXExporter\Tests\TestCase;
-use Eclipxe\XLSXExporter\Utils\TemporaryFile;
+use Eclipxe\XlsxExporter\SharedStrings;
+use Eclipxe\XlsxExporter\Tests\TestCase;
+use Eclipxe\XlsxExporter\Utils\TemporaryFile;
 
 final class SharedStringsTest extends TestCase
 {

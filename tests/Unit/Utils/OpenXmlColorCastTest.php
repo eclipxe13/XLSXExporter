@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Eclipxe\XLSXExporter\Tests\Unit\Utils;
+namespace Eclipxe\XlsxExporter\Tests\Unit\Utils;
 
-use Eclipxe\XLSXExporter\Tests\TestCase;
-use Eclipxe\XLSXExporter\Utils\OpenXmlColor;
+use Eclipxe\XlsxExporter\Tests\TestCase;
+use Eclipxe\XlsxExporter\Utils\OpenXmlColor;
 use stdClass;
 
 final class OpenXmlColorCastTest extends TestCase

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Eclipxe\XLSXExporter\Providers;
+namespace Eclipxe\XlsxExporter\Providers;
 
-use Eclipxe\XLSXExporter\ProviderInterface;
+use Eclipxe\XlsxExporter\ProviderInterface;
 
 /**
  * This is a NullProvider

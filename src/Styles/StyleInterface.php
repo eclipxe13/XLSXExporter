@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Eclipxe\XLSXExporter\Styles;
+namespace Eclipxe\XlsxExporter\Styles;
 
 /**
  * Interface StyleInterface

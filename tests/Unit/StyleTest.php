@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Eclipxe\XLSXExporter\Tests\Unit;
+namespace Eclipxe\XlsxExporter\Tests\Unit;
 
-use Eclipxe\XLSXExporter\Style;
-use Eclipxe\XLSXExporter\Styles\Font;
-use Eclipxe\XLSXExporter\Styles\Format;
-use Eclipxe\XLSXExporter\Tests\TestCase;
+use Eclipxe\XlsxExporter\Style;
+use Eclipxe\XlsxExporter\Styles\Font;
+use Eclipxe\XlsxExporter\Styles\Format;
+use Eclipxe\XlsxExporter\Tests\TestCase;
 use LogicException;
 use stdClass;
 
@@ -20,7 +20,7 @@ final class StyleTest extends TestCase
         $this->assertGreaterThan(0, count($expectedMembers), 'There are no members!');
         foreach ($expectedMembers as $member) {
             /** @phpstan-var class-string $memberClass */
-            $memberClass = '\Eclipxe\XLSXExporter\Styles\\' . ucfirst($member);
+            $memberClass = '\Eclipxe\XlsxExporter\Styles\\' . ucfirst($member);
             $this->assertInstanceOf($memberClass, $s->$member, "$member is bad instanced");
             $getter = 'get' . ucfirst($member);
             $this->assertSame(
@@ -65,7 +65,7 @@ final class StyleTest extends TestCase
         $notFormatObject = new Font();
 
         $this->expectException(LogicException::class);
-        $this->expectExceptionMessage('The value must be an instance of \Eclipxe\XLSXExporter\Styles\Format');
+        $this->expectExceptionMessage('The value must be an instance of \Eclipxe\XlsxExporter\Styles\Format');
         $style->format = $notFormatObject;
     }
 

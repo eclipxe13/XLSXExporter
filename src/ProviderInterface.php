@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Eclipxe\XLSXExporter;
+namespace Eclipxe\XlsxExporter;
 
 use Countable;
 
@@ -26,9 +26,9 @@ use Countable;
  * ProviderIterator: To be used with an iterator.
  * In both cases, to retrieve a value the helper ProviderGetValue::get() will be used.
  *
- * @see \Eclipxe\XLSXExporter\Providers\ProviderArray
- * @see \Eclipxe\XLSXExporter\Providers\ProviderIterator
- * @see \Eclipxe\XLSXExporter\Utils\ProviderGetValue::get()
+ * @see \Eclipxe\XlsxExporter\Providers\ProviderArray
+ * @see \Eclipxe\XlsxExporter\Providers\ProviderIterator
+ * @see \Eclipxe\XlsxExporter\Utils\ProviderGetValue::get()
  */
 interface ProviderInterface extends Countable
 {

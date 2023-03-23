@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Eclipxe\XLSXExporter\Providers;
+namespace Eclipxe\XlsxExporter\Providers;
 
-use Eclipxe\XLSXExporter\ProviderInterface;
-use Eclipxe\XLSXExporter\Utils\ProviderGetValue;
+use Eclipxe\XlsxExporter\ProviderInterface;
+use Eclipxe\XlsxExporter\Utils\ProviderGetValue;
 
 class ProviderArray implements ProviderInterface
 {

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Eclipxe\XLSXExporter\Styles;
+namespace Eclipxe\XlsxExporter\Styles;
 
-use Eclipxe\XLSXExporter\Utils\XmlConverter;
+use Eclipxe\XlsxExporter\Utils\XmlConverter;
 
 /**
  * @property int $id numeric identification for the format

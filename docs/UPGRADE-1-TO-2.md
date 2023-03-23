@@ -6,7 +6,7 @@ Version 2.x requires PHP 7.4 or higher.
 
 ## Namespace
 
-Library namespace has been changed from `XLSXExporter` to `Eclipxe\XLSXExporter`
+Library namespace has been changed from `XLSXExporter` to `Eclipxe\XlsxExporter`
 
 ## Types
 

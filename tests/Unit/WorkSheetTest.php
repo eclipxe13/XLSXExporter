@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Eclipxe\XLSXExporter\Tests\Unit;
+namespace Eclipxe\XlsxExporter\Tests\Unit;
 
-use Eclipxe\XLSXExporter\Exceptions\InvalidWorkSheetNameException;
-use Eclipxe\XLSXExporter\Tests\TestCase;
-use Eclipxe\XLSXExporter\WorkSheet;
+use Eclipxe\XlsxExporter\Exceptions\InvalidWorkSheetNameException;
+use Eclipxe\XlsxExporter\Tests\TestCase;
+use Eclipxe\XlsxExporter\WorkSheet;
 
 final class WorkSheetTest extends TestCase
 {

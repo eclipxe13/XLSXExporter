@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Eclipxe\XLSXExporter\Tests\Unit\Styles;
+namespace Eclipxe\XlsxExporter\Tests\Unit\Styles;
 
-use Eclipxe\XLSXExporter\Exceptions\InvalidPropertyValueException;
-use Eclipxe\XLSXExporter\Styles\Alignment;
-use Eclipxe\XLSXExporter\Styles\StyleInterface;
-use Eclipxe\XLSXExporter\Tests\TestCase;
+use Eclipxe\XlsxExporter\Exceptions\InvalidPropertyValueException;
+use Eclipxe\XlsxExporter\Styles\Alignment;
+use Eclipxe\XlsxExporter\Styles\StyleInterface;
+use Eclipxe\XlsxExporter\Tests\TestCase;
 
 final class AlignmentTest extends TestCase
 {

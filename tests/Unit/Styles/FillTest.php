@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Eclipxe\XLSXExporter\Tests\Unit\Styles;
+namespace Eclipxe\XlsxExporter\Tests\Unit\Styles;
 
-use Eclipxe\XLSXExporter\Exceptions\InvalidPropertyValueException;
-use Eclipxe\XLSXExporter\Styles\AbstractStyle;
-use Eclipxe\XLSXExporter\Styles\Fill;
-use Eclipxe\XLSXExporter\Styles\StyleInterface;
-use Eclipxe\XLSXExporter\Tests\TestCase;
+use Eclipxe\XlsxExporter\Exceptions\InvalidPropertyValueException;
+use Eclipxe\XlsxExporter\Styles\AbstractStyle;
+use Eclipxe\XlsxExporter\Styles\Fill;
+use Eclipxe\XlsxExporter\Styles\StyleInterface;
+use Eclipxe\XlsxExporter\Tests\TestCase;
 
 final class FillTest extends TestCase
 {

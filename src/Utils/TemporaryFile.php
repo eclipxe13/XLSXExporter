@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Eclipxe\XLSXExporter\Utils;
+namespace Eclipxe\XlsxExporter\Utils;
 
-use Eclipxe\XLSXExporter\Exceptions\TemporaryFileException;
+use Eclipxe\XlsxExporter\Exceptions\TemporaryFileException;
 
 /**
  * Class to create a temporary file and remove it on object destruction

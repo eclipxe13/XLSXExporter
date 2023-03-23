@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Eclipxe\XLSXExporter\Exceptions;
+namespace Eclipxe\XlsxExporter\Exceptions;
 
 use RuntimeException;
 
-final class WorkBookCreateZipFileException extends RuntimeException implements XLSXException
+final class WorkBookCreateZipFileException extends RuntimeException implements XlsxException
 {
     private string $path;
 

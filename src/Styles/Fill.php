@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Eclipxe\XLSXExporter\Styles;
+namespace Eclipxe\XlsxExporter\Styles;
 
-use Eclipxe\XLSXExporter\Exceptions\InvalidPropertyValueException;
-use Eclipxe\XLSXExporter\Utils\OpenXmlColor;
+use Eclipxe\XlsxExporter\Exceptions\InvalidPropertyValueException;
+use Eclipxe\XlsxExporter\Utils\OpenXmlColor;
 
 /**
  * @property string $pattern Fill pattern

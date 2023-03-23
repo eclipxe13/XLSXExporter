@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Eclipxe\XLSXExporter;
+namespace Eclipxe\XlsxExporter;
 
-use Eclipxe\XLSXExporter\Exceptions\InvalidPropertyNameException;
+use Eclipxe\XlsxExporter\Exceptions\InvalidPropertyNameException;
 
 /**
  * @property-read string $id Column identifier

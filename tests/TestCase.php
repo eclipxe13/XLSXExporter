@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Eclipxe\XLSXExporter\Tests;
+namespace Eclipxe\XlsxExporter\Tests;
 
 use EngineWorks\DBAL\DBAL;
 use EngineWorks\DBAL\Factory as DBALFactory;

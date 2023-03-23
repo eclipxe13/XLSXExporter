@@ -6,16 +6,16 @@
 
 declare(strict_types=1);
 
-namespace Eclipxe\XLSXExporter\DBAL;
+namespace Eclipxe\XlsxExporter\DBAL;
 
-use Eclipxe\XLSXExporter\CellTypes;
-use Eclipxe\XLSXExporter\Column;
-use Eclipxe\XLSXExporter\Columns;
-use Eclipxe\XLSXExporter\Style;
-use Eclipxe\XLSXExporter\Styles\Alignment;
-use Eclipxe\XLSXExporter\Styles\Format;
-use Eclipxe\XLSXExporter\WorkBook;
-use Eclipxe\XLSXExporter\WorkSheet;
+use Eclipxe\XlsxExporter\CellTypes;
+use Eclipxe\XlsxExporter\Column;
+use Eclipxe\XlsxExporter\Columns;
+use Eclipxe\XlsxExporter\Style;
+use Eclipxe\XlsxExporter\Styles\Alignment;
+use Eclipxe\XlsxExporter\Styles\Format;
+use Eclipxe\XlsxExporter\WorkBook;
+use Eclipxe\XlsxExporter\WorkSheet;
 use EngineWorks\DBAL\CommonTypes;
 use EngineWorks\DBAL\DBAL;
 use EngineWorks\DBAL\Recordset;

@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Eclipxe\XLSXExporter\Tests\Unit;
+namespace Eclipxe\XlsxExporter\Tests\Unit;
 
-use Eclipxe\XLSXExporter\Column;
-use Eclipxe\XLSXExporter\Exceptions\InvalidPropertyNameException;
-use Eclipxe\XLSXExporter\Style;
-use Eclipxe\XLSXExporter\Tests\TestCase;
+use Eclipxe\XlsxExporter\Column;
+use Eclipxe\XlsxExporter\Exceptions\InvalidPropertyNameException;
+use Eclipxe\XlsxExporter\Style;
+use Eclipxe\XlsxExporter\Tests\TestCase;
 
 final class ColumnTest extends TestCase
 {

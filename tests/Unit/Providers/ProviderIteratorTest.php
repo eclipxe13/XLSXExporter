@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Eclipxe\XLSXExporter\Tests\Unit\Providers;
+namespace Eclipxe\XlsxExporter\Tests\Unit\Providers;
 
 use ArrayIterator;
 use Countable;
-use Eclipxe\XLSXExporter\Providers\ProviderIterator;
-use Eclipxe\XLSXExporter\Tests\TestCase;
+use Eclipxe\XlsxExporter\Providers\ProviderIterator;
+use Eclipxe\XlsxExporter\Tests\TestCase;
 use Iterator;
 use IteratorIterator;
 

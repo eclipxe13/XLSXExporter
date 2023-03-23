@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Eclipxe\XLSXExporter\Tests\Unit\Providers;
+namespace Eclipxe\XlsxExporter\Tests\Unit\Providers;
 
-use Eclipxe\XLSXExporter\Providers\ProviderArray;
-use Eclipxe\XLSXExporter\Tests\TestCase;
+use Eclipxe\XlsxExporter\Providers\ProviderArray;
+use Eclipxe\XlsxExporter\Tests\TestCase;
 
 final class ProviderArrayTest extends TestCase
 {

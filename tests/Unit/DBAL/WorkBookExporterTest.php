@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Eclipxe\XLSXExporter\Tests\Unit\DBAL;
+namespace Eclipxe\XlsxExporter\Tests\Unit\DBAL;
 
 use DateTime;
-use Eclipxe\XLSXExporter\CellTypes;
-use Eclipxe\XLSXExporter\Columns;
-use Eclipxe\XLSXExporter\DBAL\WorkBookExporter;
-use Eclipxe\XLSXExporter\Styles\Font;
-use Eclipxe\XLSXExporter\Tests\TestCase;
+use Eclipxe\XlsxExporter\CellTypes;
+use Eclipxe\XlsxExporter\Columns;
+use Eclipxe\XlsxExporter\DBAL\WorkBookExporter;
+use Eclipxe\XlsxExporter\Styles\Font;
+use Eclipxe\XlsxExporter\Tests\TestCase;
 use EngineWorks\DBAL\CommonTypes;
 
 final class WorkBookExporterTest extends TestCase

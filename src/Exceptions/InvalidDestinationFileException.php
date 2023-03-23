@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Eclipxe\XLSXExporter\Exceptions;
+namespace Eclipxe\XlsxExporter\Exceptions;
 
 use LogicException;
 
-final class InvalidDestinationFileException extends LogicException implements XLSXException
+final class InvalidDestinationFileException extends LogicException implements XlsxException
 {
     private string $path;
 

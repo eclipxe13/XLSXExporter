@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Eclipxe\XLSXExporter\Tests\Integration;
+namespace Eclipxe\XlsxExporter\Tests\Integration;
 
-use Eclipxe\XLSXExporter\DBAL\WorkBookExporter;
-use Eclipxe\XLSXExporter\Tests\TestCase;
-use Eclipxe\XLSXExporter\Utils\TemporaryFile;
+use Eclipxe\XlsxExporter\DBAL\WorkBookExporter;
+use Eclipxe\XlsxExporter\Tests\TestCase;
+use Eclipxe\XlsxExporter\Utils\TemporaryFile;
 
 final class DbalExportTest extends TestCase
 {

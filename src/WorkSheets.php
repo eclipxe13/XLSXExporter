@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Eclipxe\XLSXExporter;
+namespace Eclipxe\XlsxExporter;
 
 use ArrayIterator;
 use Countable;

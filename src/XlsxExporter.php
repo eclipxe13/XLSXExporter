@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Eclipxe\XLSXExporter;
+namespace Eclipxe\XlsxExporter;
 
-use Eclipxe\XLSXExporter\Exceptions\InvalidDestinationFileException;
-use Eclipxe\XLSXExporter\Exceptions\TemporaryFileException;
-use Eclipxe\XLSXExporter\Exceptions\WorkBookCreateZipFileException;
-use Eclipxe\XLSXExporter\Exceptions\WorkBookWithoutWorkSheetsException;
-use Eclipxe\XLSXExporter\Exceptions\WorkBookWithRepeatedNamesException;
-use Eclipxe\XLSXExporter\Utils\TemporaryFile;
+use Eclipxe\XlsxExporter\Exceptions\InvalidDestinationFileException;
+use Eclipxe\XlsxExporter\Exceptions\TemporaryFileException;
+use Eclipxe\XlsxExporter\Exceptions\WorkBookCreateZipFileException;
+use Eclipxe\XlsxExporter\Exceptions\WorkBookWithoutWorkSheetsException;
+use Eclipxe\XlsxExporter\Exceptions\WorkBookWithRepeatedNamesException;
+use Eclipxe\XlsxExporter\Utils\TemporaryFile;
 
-class XLSXExporter
+class XlsxExporter
 {
     /**
      * Save the workbook as a specified file

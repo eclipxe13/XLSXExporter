@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Eclipxe\XLSXExporter\Tests\Unit\DBAL;
+namespace Eclipxe\XlsxExporter\Tests\Unit\DBAL;
 
-use Eclipxe\XLSXExporter\DBAL\RecordsetProvider;
-use Eclipxe\XLSXExporter\ProviderInterface;
-use Eclipxe\XLSXExporter\Tests\TestCase;
+use Eclipxe\XlsxExporter\DBAL\RecordsetProvider;
+use Eclipxe\XlsxExporter\ProviderInterface;
+use Eclipxe\XlsxExporter\Tests\TestCase;
 
 final class RecordsetProviderTest extends TestCase
 {

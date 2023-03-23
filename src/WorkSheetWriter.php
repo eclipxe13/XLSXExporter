@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Eclipxe\XLSXExporter;
+namespace Eclipxe\XlsxExporter;
 
-use Eclipxe\XLSXExporter\Utils\XmlConverter;
+use Eclipxe\XlsxExporter\Utils\XmlConverter;
 use SplFileObject;
 
 class WorkSheetWriter

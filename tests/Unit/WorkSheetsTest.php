@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Eclipxe\XLSXExporter\Tests\Unit;
+namespace Eclipxe\XlsxExporter\Tests\Unit;
 
 use Countable;
-use Eclipxe\XLSXExporter\Tests\TestCase;
-use Eclipxe\XLSXExporter\WorkSheet;
-use Eclipxe\XLSXExporter\WorkSheets;
+use Eclipxe\XlsxExporter\Tests\TestCase;
+use Eclipxe\XlsxExporter\WorkSheet;
+use Eclipxe\XlsxExporter\WorkSheets;
 use Traversable;
 
 final class WorkSheetsTest extends TestCase

@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Eclipxe\XLSXExporter;
+namespace Eclipxe\XlsxExporter;
 
 use BadMethodCallException;
-use Eclipxe\XLSXExporter\Exceptions\InvalidPropertyNameException;
-use Eclipxe\XLSXExporter\Exceptions\InvalidPropertyValueException;
-use Eclipxe\XLSXExporter\Styles\StyleInterface;
+use Eclipxe\XlsxExporter\Exceptions\InvalidPropertyNameException;
+use Eclipxe\XlsxExporter\Exceptions\InvalidPropertyValueException;
+use Eclipxe\XlsxExporter\Styles\StyleInterface;
 
 /**
  * Class to access the style specification

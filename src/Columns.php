@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Eclipxe\XLSXExporter;
+namespace Eclipxe\XlsxExporter;
 
 use ArrayIterator;
 use Countable;
-use Eclipxe\XLSXExporter\Exceptions\ItemNotFoundException;
+use Eclipxe\XlsxExporter\Exceptions\ItemNotFoundException;
 use IteratorAggregate;
 use ReturnTypeWillChange;
 use Traversable;

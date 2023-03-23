@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Eclipxe\XLSXExporter\Tests\Unit;
+namespace Eclipxe\XlsxExporter\Tests\Unit;
 
-use Eclipxe\XLSXExporter\Style;
-use Eclipxe\XLSXExporter\Styles\Format;
-use Eclipxe\XLSXExporter\StyleSheet;
-use Eclipxe\XLSXExporter\Tests\TestCase;
+use Eclipxe\XlsxExporter\Style;
+use Eclipxe\XlsxExporter\Styles\Format;
+use Eclipxe\XlsxExporter\StyleSheet;
+use Eclipxe\XlsxExporter\Tests\TestCase;
 use LogicException;
 use RuntimeException;
 use SimpleXMLElement;

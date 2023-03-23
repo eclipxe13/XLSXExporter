@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Eclipxe\XLSXExporter\Styles;
+namespace Eclipxe\XlsxExporter\Styles;
 
-use Eclipxe\XLSXExporter\Exceptions\InvalidPropertyNameException;
+use Eclipxe\XlsxExporter\Exceptions\InvalidPropertyNameException;
 
 /**
  * Abstract implementation of the StyleInterface for internal use

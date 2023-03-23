@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Eclipxe\XLSXExporter\DBAL;
+namespace Eclipxe\XlsxExporter\DBAL;
 
-use Eclipxe\XLSXExporter\ProviderInterface;
-use Eclipxe\XLSXExporter\Providers\ProviderIterator;
+use Eclipxe\XlsxExporter\ProviderInterface;
+use Eclipxe\XlsxExporter\Providers\ProviderIterator;
 use EngineWorks\DBAL\Iterators\ResultIterator;
 use EngineWorks\DBAL\Result;
 

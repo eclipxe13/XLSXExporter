@@ -1,25 +1,25 @@
 # Contributing
 
-Contributions are welcome. We accept pull requests on [GitHub](https://github.com/eclipxe13/XLSXExporter).
+Contributions are welcome. We accept pull requests on [GitHub](https://github.com/eclipxe13/XlsxExporter).
 
 This project adheres to a
-[Contributor Code of Conduct](https://github.com/eclipxe13/XLSXExporter/blob/master/CODE_OF_CONDUCT.md).
+[Contributor Code of Conduct](https://github.com/eclipxe13/XlsxExporter/blob/master/CODE_OF_CONDUCT.md).
 By participating in this project and its community, you are expected to uphold this code.
 
 ## Team members
 
 * [Carlos C Soto](https://github.com/eclipxe13) - original author and maintainer
-* [GitHub constributors](https://github.com/eclipxe13/XLSXExporter/graphs/contributors)
+* [GitHub constributors](https://github.com/eclipxe13/XlsxExporter/graphs/contributors)
 
 ## Communication Channels
 
 You can find help and discussion in the following places:
 
-* GitHub Issues: <https://github.com/eclipxe13/XLSXExporter/issues>
+* GitHub Issues: <https://github.com/eclipxe13/XlsxExporter/issues>
 
 ## Reporting Bugs
 
-Bugs are tracked in our project's [issue tracker](https://github.com/eclipxe13/XLSXExporter/issues).
+Bugs are tracked in our project's [issue tracker](https://github.com/eclipxe13/XlsxExporter/issues).
 
 When submitting a bug report, please include enough information for us to reproduce the bug.
 A good bug report includes the following sections:
@@ -42,8 +42,8 @@ section below, you may create bugfix branches and send us pull requests.
 ## Adding New Features
 
 If you have an idea for a new feature, it's a good idea to check out our
-[issues](https://github.com/eclipxe13/XLSXExporter/issues) or active
-[pull requests](https://github.com/eclipxe13/XLSXExporter/pulls)
+[issues](https://github.com/eclipxe13/XlsxExporter/issues) or active
+[pull requests](https://github.com/eclipxe13/XlsxExporter/pulls)
 first to see if we are being working on the feature.
 If not, feel free to submit an issue first, asking whether the feature is beneficial to the project.
 This will save you from doing a lot of development work only to have your feature rejected.

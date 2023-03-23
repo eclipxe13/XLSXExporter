@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Eclipxe\XLSXExporter\Exceptions;
+namespace Eclipxe\XlsxExporter\Exceptions;
 
 use LogicException;
 
-final class ItemNotFoundException extends LogicException implements XLSXException
+final class ItemNotFoundException extends LogicException implements XlsxException
 {
     /** @var scalar */
     private $search;

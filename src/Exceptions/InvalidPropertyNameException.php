@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Eclipxe\XLSXExporter\Exceptions;
+namespace Eclipxe\XlsxExporter\Exceptions;
 
 use LogicException;
 
-final class InvalidPropertyNameException extends LogicException implements XLSXException
+final class InvalidPropertyNameException extends LogicException implements XlsxException
 {
     private string $propertyName;
 

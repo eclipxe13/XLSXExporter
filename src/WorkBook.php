@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Eclipxe\XLSXExporter;
+namespace Eclipxe\XlsxExporter;
 
-use Eclipxe\XLSXExporter\Exceptions\InvalidPropertyNameException;
-use Eclipxe\XLSXExporter\Exceptions\TemporaryFileException;
-use Eclipxe\XLSXExporter\Exceptions\WorkBookCreateZipFileException;
-use Eclipxe\XLSXExporter\Exceptions\WorkBookWithoutWorkSheetsException;
-use Eclipxe\XLSXExporter\Exceptions\WorkBookWithRepeatedNamesException;
-use Eclipxe\XLSXExporter\Utils\TemporaryFile;
-use Eclipxe\XLSXExporter\Utils\TemporaryFiles;
+use Eclipxe\XlsxExporter\Exceptions\InvalidPropertyNameException;
+use Eclipxe\XlsxExporter\Exceptions\TemporaryFileException;
+use Eclipxe\XlsxExporter\Exceptions\WorkBookCreateZipFileException;
+use Eclipxe\XlsxExporter\Exceptions\WorkBookWithoutWorkSheetsException;
+use Eclipxe\XlsxExporter\Exceptions\WorkBookWithRepeatedNamesException;
+use Eclipxe\XlsxExporter\Utils\TemporaryFile;
+use Eclipxe\XlsxExporter\Utils\TemporaryFiles;
 use EngineWorks\ProgressStatus\NullProgress;
 use EngineWorks\ProgressStatus\ProgressInterface;
 use ZipArchive;

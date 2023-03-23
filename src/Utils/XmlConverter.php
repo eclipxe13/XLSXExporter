@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Eclipxe\XLSXExporter\Utils;
+namespace Eclipxe\XlsxExporter\Utils;
 
 class XmlConverter
 {

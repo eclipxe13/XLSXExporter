@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Eclipxe\XLSXExporter;
+namespace Eclipxe\XlsxExporter;
 
 use Countable;
-use Eclipxe\XLSXExporter\Utils\TemporaryFile;
-use Eclipxe\XLSXExporter\Utils\XmlConverter;
+use Eclipxe\XlsxExporter\Utils\TemporaryFile;
+use Eclipxe\XlsxExporter\Utils\XmlConverter;
 use EngineWorks\ProgressStatus\NullProgress;
 use EngineWorks\ProgressStatus\ProgressInterface;
 use SplFileObject;

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Eclipxe\XLSXExporter\Styles;
+namespace Eclipxe\XlsxExporter\Styles;
 
-use Eclipxe\XLSXExporter\Exceptions\InvalidPropertyValueException;
+use Eclipxe\XlsxExporter\Exceptions\InvalidPropertyValueException;
 
 /**
  * @property string $horizontal Horizontal alignment

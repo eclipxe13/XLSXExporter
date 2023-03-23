@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Eclipxe\XLSXExporter;
+namespace Eclipxe\XlsxExporter;
 
-use Eclipxe\XLSXExporter\Exceptions\InvalidPropertyNameException;
-use Eclipxe\XLSXExporter\Exceptions\InvalidWorkSheetNameException;
-use Eclipxe\XLSXExporter\Providers\NullProvider;
-use Eclipxe\XLSXExporter\Utils\TemporaryFile;
+use Eclipxe\XlsxExporter\Exceptions\InvalidPropertyNameException;
+use Eclipxe\XlsxExporter\Exceptions\InvalidWorkSheetNameException;
+use Eclipxe\XlsxExporter\Providers\NullProvider;
+use Eclipxe\XlsxExporter\Utils\TemporaryFile;
 use EngineWorks\ProgressStatus\NullProgress;
 use EngineWorks\ProgressStatus\ProgressInterface;
 

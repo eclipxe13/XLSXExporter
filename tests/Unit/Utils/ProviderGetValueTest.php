@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Eclipxe\XLSXExporter\Tests\Unit\Utils;
+namespace Eclipxe\XlsxExporter\Tests\Unit\Utils;
 
 use ArrayAccess;
 use ArrayObject;
-use Eclipxe\XLSXExporter\Tests\TestCase;
-use Eclipxe\XLSXExporter\Utils\ProviderGetValue;
+use Eclipxe\XlsxExporter\Tests\TestCase;
+use Eclipxe\XlsxExporter\Utils\ProviderGetValue;
 use stdClass;
 
 final class ProviderGetValueTest extends TestCase

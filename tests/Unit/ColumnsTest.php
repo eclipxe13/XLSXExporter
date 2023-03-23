@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Eclipxe\XLSXExporter\Tests\Unit;
+namespace Eclipxe\XlsxExporter\Tests\Unit;
 
 use Countable;
-use Eclipxe\XLSXExporter\Column;
-use Eclipxe\XLSXExporter\Columns;
-use Eclipxe\XLSXExporter\Exceptions\ItemNotFoundException;
-use Eclipxe\XLSXExporter\Tests\TestCase;
+use Eclipxe\XlsxExporter\Column;
+use Eclipxe\XlsxExporter\Columns;
+use Eclipxe\XlsxExporter\Exceptions\ItemNotFoundException;
+use Eclipxe\XlsxExporter\Tests\TestCase;
 use Traversable;
 
 final class ColumnsTest extends TestCase

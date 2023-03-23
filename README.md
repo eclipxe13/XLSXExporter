@@ -43,17 +43,17 @@ composer require eclipxe/xlsxexporter
 
 ```php
 <?php
-use Eclipxe\XLSXExporter;
-use Eclipxe\XLSXExporter\CellTypes;
-use Eclipxe\XLSXExporter\Column;
-use Eclipxe\XLSXExporter\Columns;
-use Eclipxe\XLSXExporter\Providers\ProviderArray;
-use Eclipxe\XLSXExporter\Style;
-use Eclipxe\XLSXExporter\Styles\Format;
-use Eclipxe\XLSXExporter\WorkBook;
-use Eclipxe\XLSXExporter\WorkSheet;
-use Eclipxe\XLSXExporter\WorkSheets;
-use Eclipxe\XLSXExporter\Exceptions\XLSXException;
+use Eclipxe\XlsxExporter;
+use Eclipxe\XlsxExporter\CellTypes;
+use Eclipxe\XlsxExporter\Column;
+use Eclipxe\XlsxExporter\Columns;
+use Eclipxe\XlsxExporter\Providers\ProviderArray;
+use Eclipxe\XlsxExporter\Style;
+use Eclipxe\XlsxExporter\Styles\Format;
+use Eclipxe\XlsxExporter\WorkBook;
+use Eclipxe\XlsxExporter\WorkSheet;
+use Eclipxe\XlsxExporter\WorkSheets;
+use Eclipxe\XlsxExporter\Exceptions\XlsxException;
 
 // create a simple array as example
 $provider = new ProviderArray([
@@ -80,8 +80,8 @@ $workbook = new WorkBook(
 
 // call the write process
 try{
-    XLSXExporter::save($workbook, __DIR__ . '/result.xlsx');
-} catch (XLSXException $exception) {
+    XlsxExporter::save($workbook, __DIR__ . '/result.xlsx');
+} catch (XlsxException $exception) {
     echo 'Export error: ', $exception->getMessage(), PHP_EOL;
 }
 ```
@@ -96,22 +96,22 @@ and don't forget to take a look the [TODO][] and [CHANGELOG][] files.
 The `eclipxe/xlsxexporter` library is copyright © [Carlos C Soto](https://eclipxe.com.mx/)
 and licensed for use under the MIT License (MIT). Please see [LICENSE][] for more information.
 
-[contributing]: https://github.com/eclipxe13/XLSXExporter/blob/master/CONTRIBUTING.md
-[changelog]: https://github.com/eclipxe13/XLSXExporter/blob/master/docs/CHANGELOG.md
-[todo]: https://github.com/eclipxe13/XLSXExporter/blob/master/docs/TODO.md
+[contributing]: https://github.com/eclipxe13/XlsxExporter/blob/master/CONTRIBUTING.md
+[changelog]: https://github.com/eclipxe13/XlsxExporter/blob/master/docs/CHANGELOG.md
+[todo]: https://github.com/eclipxe13/XlsxExporter/blob/master/docs/TODO.md
 
-[source]: https://github.com/eclipxe13/XLSXExporter
-[release]: https://github.com/eclipxe13/XLSXExporter/releases
-[license]: https://github.com/eclipxe13/XLSXExporter/blob/master/LICENSE
-[build]: https://travis-ci.com/eclipxe13/XLSXExporter?branch=master
-[quality]: https://scrutinizer-ci.com/g/eclipxe13/XLSXExporter/
-[coverage]: https://scrutinizer-ci.com/g/eclipxe13/XLSXExporter/code-structure/master
+[source]: https://github.com/eclipxe13/XlsxExporter
+[release]: https://github.com/eclipxe13/XlsxExporter/releases
+[license]: https://github.com/eclipxe13/XlsxExporter/blob/master/LICENSE
+[build]: x
+[quality]: https://scrutinizer-ci.com/g/eclipxe13/XlsxExporter/
+[coverage]: https://scrutinizer-ci.com/g/eclipxe13/XlsxExporter/code-structure/master
 [downloads]: https://packagist.org/packages/eclipxe/xlsxexporter
 
-[badge-source]: http://img.shields.io/badge/source-eclipxe13/XLSXExporter-blue.svg?style=flat-square
-[badge-release]: https://img.shields.io/github/release/eclipxe13/XLSXExporter.svg?style=flat-square
-[badge-license]: https://img.shields.io/github/license/eclipxe13/XLSXExporter.svg?style=flat-square
-[badge-build]: https://img.shields.io/travis/com/eclipxe13/XLSXExporter/master.svg?style=flat-square
-[badge-quality]: https://img.shields.io/scrutinizer/g/eclipxe13/XLSXExporter/master.svg?style=flat-square
-[badge-coverage]: https://img.shields.io/scrutinizer/coverage/g/eclipxe13/XLSXExporter/master.svg?style=flat-square
+[badge-source]: http://img.shields.io/badge/source-eclipxe13/XlsxExporter-blue.svg?style=flat-square
+[badge-release]: https://img.shields.io/github/release/eclipxe13/XlsxExporter.svg?style=flat-square
+[badge-license]: https://img.shields.io/github/license/eclipxe13/XlsxExporter.svg?style=flat-square
+[badge-build]: x
+[badge-quality]: https://img.shields.io/scrutinizer/g/eclipxe13/XlsxExporter/master.svg?style=flat-square
+[badge-coverage]: https://img.shields.io/scrutinizer/coverage/g/eclipxe13/XlsxExporter/master.svg?style=flat-square
 [badge-downloads]: https://img.shields.io/packagist/dt/eclipxe/xlsxexporter.svg?style=flat-square

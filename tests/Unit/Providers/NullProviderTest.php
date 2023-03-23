@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Eclipxe\XLSXExporter\Tests\Unit\Providers;
+namespace Eclipxe\XlsxExporter\Tests\Unit\Providers;
 
-use Eclipxe\XLSXExporter\ProviderInterface;
-use Eclipxe\XLSXExporter\Providers\NullProvider;
-use Eclipxe\XLSXExporter\Tests\TestCase;
+use Eclipxe\XlsxExporter\ProviderInterface;
+use Eclipxe\XlsxExporter\Providers\NullProvider;
+use Eclipxe\XlsxExporter\Tests\TestCase;
 
 final class NullProviderTest extends TestCase
 {

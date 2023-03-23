@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Eclipxe\XLSXExporter\Providers;
+namespace Eclipxe\XlsxExporter\Providers;
 
 use Countable;
-use Eclipxe\XLSXExporter\ProviderInterface;
-use Eclipxe\XLSXExporter\Utils\ProviderGetValue;
+use Eclipxe\XlsxExporter\ProviderInterface;
+use Eclipxe\XlsxExporter\Utils\ProviderGetValue;
 use Iterator;
 
 /**
