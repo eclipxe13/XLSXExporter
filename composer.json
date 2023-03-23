@@ -22,7 +22,7 @@
     "require-dev": {
         "ext-xmlwriter": "*",
         "eclipxe/engineworks-dbal": "^2.3.2",
-        "phpunit/phpunit": "^9.5.20"
+        "phpunit/phpunit": "^9.6.5"
     },
     "autoload": {
         "psr-4": {
