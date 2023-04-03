@@ -97,17 +97,17 @@ and don't forget to take a look the [TODO][] and [CHANGELOG][] files.
 The `eclipxe/xlsxexporter` library is copyright © [Carlos C Soto](https://eclipxe.com.mx/)
 and licensed for use under the MIT License (MIT). Please see [LICENSE][] for more information.
 
-[contributing]: https://github.com/eclipxe13/XlsxExporter/blob/master/CONTRIBUTING.md
-[changelog]: https://github.com/eclipxe13/XlsxExporter/blob/master/docs/CHANGELOG.md
-[todo]: https://github.com/eclipxe13/XlsxExporter/blob/master/docs/TODO.md
+[contributing]: https://github.com/eclipxe13/XlsxExporter/blob/main/CONTRIBUTING.md
+[changelog]: https://github.com/eclipxe13/XlsxExporter/blob/main/docs/CHANGELOG.md
+[todo]: https://github.com/eclipxe13/XlsxExporter/blob/main/docs/TODO.md
 
 [source]: https://github.com/eclipxe13/XlsxExporter
 [php-version]: https://packagist.org/packages/eclipxe/xlsxexporter
 [release]: https://github.com/eclipxe13/XlsxExporter/releases
-[license]: https://github.com/eclipxe13/XlsxExporter/blob/master/LICENSE
+[license]: https://github.com/eclipxe13/XlsxExporter/blob/main/LICENSE
 [build]: https://github.com/eclipxe13/XlsxExporter/actions/workflows/build.yml?query=branch:main
 [quality]: https://scrutinizer-ci.com/g/eclipxe13/XlsxExporter/
-[coverage]: https://scrutinizer-ci.com/g/eclipxe13/XlsxExporter/code-structure/master
+[coverage]: https://scrutinizer-ci.com/g/eclipxe13/XlsxExporter/code-structure/main
 [downloads]: https://packagist.org/packages/eclipxe/xlsxexporter
 
 [badge-source]: http://img.shields.io/badge/source-eclipxe13/XlsxExporter-blue.svg?style=flat-square
@@ -115,6 +115,6 @@ and licensed for use under the MIT License (MIT). Please see [LICENSE][] for mor
 [badge-release]: https://img.shields.io/github/release/eclipxe13/XlsxExporter.svg?style=flat-square
 [badge-license]: https://img.shields.io/github/license/eclipxe13/XlsxExporter.svg?style=flat-square
 [badge-build]: https://img.shields.io/github/actions/workflow/status/eclipxe13/XlsxExporter/build.yml?branch=main&style=flat-square
-[badge-quality]: https://img.shields.io/scrutinizer/g/eclipxe13/XlsxExporter/master.svg?style=flat-square
-[badge-coverage]: https://img.shields.io/scrutinizer/coverage/g/eclipxe13/XlsxExporter/master.svg?style=flat-square
+[badge-quality]: https://img.shields.io/scrutinizer/g/eclipxe13/XlsxExporter/main.svg?style=flat-square
+[badge-coverage]: https://img.shields.io/scrutinizer/coverage/g/eclipxe13/XlsxExporter/main.svg?style=flat-square
 [badge-downloads]: https://img.shields.io/packagist/dt/eclipxe/xlsxexporter.svg?style=flat-square
