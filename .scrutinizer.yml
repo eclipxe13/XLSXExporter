@@ -8,7 +8,7 @@ build:
   image: default-bionic
   dependencies:
     override:
-      - composer update --no-interaction --prefer-dist
+      - composer update --no-interaction --prefer-dist --ignore-platform-req=ext-zip
   nodes:
     analysis: # see https://scrutinizer-ci.com/docs/tools/php/php-scrutinizer/
       project_setup: { override: true }
