@@ -2,7 +2,7 @@
     "name": "eclipxe/xlsxexporter",
     "description": "PHP Office Open XML Spreadsheet (xlsx) exporter",
     "keywords": ["excel", "xlsx", "office-open-xml"],
-    "homepage": "https://github.com/eclipxe13/XLSXExporter",
+    "homepage": "https://github.com/eclipxe13/XlsxExporter",
     "license": "MIT",
     "authors": [
         {
@@ -11,27 +11,64 @@
         }
     ],
     "require": {
-        "php": ">=5.6",
+        "php": ">=7.4",
         "ext-zip": "*",
-        "eclipxe/engineworks-progress-status": "^1.0"
+        "ext-simplexml": "*",
+        "eclipxe/engineworks-progress-status": "^2.0.1"
     },
     "suggest": {
         "eclipxe/engineworks-dbal": "Export recordsets as worksheets in a workbook"
     },
     "require-dev": {
-        "eclipxe/engineworks-dbal": "^1.6",
-        "phpunit/phpunit": "^5.7",
-        "squizlabs/php_codesniffer": "^3.0",
-        "friendsofphp/php-cs-fixer": "^2.3.2"
+        "ext-xmlwriter": "*",
+        "eclipxe/engineworks-dbal": "^2.3.2",
+        "phpunit/phpunit": "^9.6.5"
     },
     "autoload": {
         "psr-4": {
-            "XLSXExporter\\": "src/XLSXExporter/"
+            "Eclipxe\\XlsxExporter\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "XLSXExporterTests\\": "tests/XLSXExporterTests/"
+            "Eclipxe\\XlsxExporter\\Tests\\": "tests/"
         }
+    },
+    "scripts": {
+        "dev:build": [
+            "@dev:fix-style",
+            "@dev:check-style",
+            "@dev:test"
+        ],
+        "dev:check-style": [
+            "@php tools/php-cs-fixer fix --dry-run --verbose",
+            "@php tools/phpcs --colors -sp"
+        ],
+        "dev:fix-style": [
+            "@php tools/php-cs-fixer fix --verbose",
+            "@php tools/phpcbf --colors -sp"
+        ],
+        "dev:test": [
+            "@dev:phpunit",
+            "@dev:phpstan"
+        ],
+        "dev:coverage": [
+            "@php -dzend_extension=xdebug.so -dxdebug.mode=coverage vendor/bin/phpunit --verbose --coverage-html build/coverage/html/"
+        ],
+        "dev:phpunit": [
+            "@php vendor/bin/phpunit --testdox --verbose --stop-on-failure"
+        ],
+        "dev:phpstan": [
+            "@php tools/phpstan analyse --no-progress"
+        ]
+    },
+    "scripts-descriptions": {
+        "dev:build": "DEV: run dev:fix-style, dev:check-style and dev:tests, run before pull request",
+        "dev:check-style": "DEV: search for code style errors using php-cs-fixer and phpcs",
+        "dev:fix-style": "DEV: fix code style errors using php-cs-fixer and phpcbf",
+        "dev:test": "DEV: run dev:phpunit and dev:phpstan",
+        "dev:phpunit": "DEV: run phpunit tests suite",
+        "dev:phpstan": "DEV: run phpstan code analysis",
+        "dev:coverage": "DEV: run phpunit with xdebug and storage coverage in build/coverage/html/"
     }
 }
