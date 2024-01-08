@@ -12,6 +12,7 @@ classes. The library will not export any of these objects outside its own scope.
 This update fixes the GitHub build.
 
 - Update `.php-cs-fixer.dist.php`, change rule `function_typehint_space` for `type_declaration_spaces`.
+- Update license year. Happy 2024!
 
 ## Version 2.0.0
 
