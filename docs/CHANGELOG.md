@@ -7,7 +7,11 @@ classes. The library will not export any of these objects outside its own scope.
 
 ## Unreleased changes
 
-There are no unreleased changes.
+### Maintenance 2024-01-08
+
+This update fixes the GitHub build.
+
+- Update `.php-cs-fixer.dist.php`, change rule `function_typehint_space` for `type_declaration_spaces`.
 
 ## Version 2.0.0
 
