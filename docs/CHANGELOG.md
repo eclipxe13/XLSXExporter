@@ -15,6 +15,7 @@ This update fixes the GitHub build.
 - Update license year. Happy 2024!
 - Update GitHub Workflow `build`:
   - Add PHP 8.3 to `phpunit` job.
+  - Run jobs using PHP 8.3.
 
 ## Version 2.0.0
 
