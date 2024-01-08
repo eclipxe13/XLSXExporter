@@ -16,6 +16,7 @@ This update fixes the GitHub build.
 - Update GitHub Workflow `build`:
   - Add PHP 8.3 to `phpunit` job.
   - Run jobs using PHP 8.3.
+- Update development tools.
 
 ## Version 2.0.0
 
