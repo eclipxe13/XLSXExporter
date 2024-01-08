@@ -13,6 +13,8 @@ This update fixes the GitHub build.
 
 - Update `.php-cs-fixer.dist.php`, change rule `function_typehint_space` for `type_declaration_spaces`.
 - Update license year. Happy 2024!
+- Update GitHub Workflow `build`:
+  - Add PHP 8.3 to `phpunit` job.
 
 ## Version 2.0.0
 
