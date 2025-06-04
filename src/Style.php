@@ -35,7 +35,7 @@ class Style
 {
     protected ?int $styleindex = null;
 
-    /** @var array<string, Styles\StyleInterface> */
+    /** @var array<string, StyleInterface> */
     protected $members = [];
 
     /**
