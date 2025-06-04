@@ -22,7 +22,7 @@ class Column
 
     protected Style $style;
 
-    public function __construct(string $id, string $title = '', string $type = CellTypes::TEXT, Style $style = null)
+    public function __construct(string $id, string $title = '', string $type = CellTypes::TEXT, ?Style $style = null)
     {
         $this->setId($id);
         $this->setType($type);

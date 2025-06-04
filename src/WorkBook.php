@@ -42,10 +42,10 @@ class WorkBook
      * @param ProgressInterface|null $detailedProgress
      */
     public function __construct(
-        WorkSheets $worksheets = null,
-        Style $style = null,
-        ProgressInterface $globalProgress = null,
-        ProgressInterface $detailedProgress = null
+        ?WorkSheets $worksheets = null,
+        ?Style $style = null,
+        ?ProgressInterface $globalProgress = null,
+        ?ProgressInterface $detailedProgress = null
     ) {
         $this->worksheets = $worksheets ?? new WorkSheets();
         $this->style = $style ?? BasicStyles::defaultStyle();
