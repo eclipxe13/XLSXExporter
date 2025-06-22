@@ -56,13 +56,19 @@ class WorkBook
     /** @return mixed */
     public function __get(string $name)
     {
-        // read-only properties
-        $props = ['worksheets', 'style', 'globalProgress', 'detailedProgress'];
-        if (! in_array($name, $props)) {
-            throw new InvalidPropertyNameException($name);
+        if ('worksheets' === $name) {
+            return $this->worksheets;
         }
-        $method = 'get' . ucfirst($name);
-        return $this->$method();
+        if ('style' === $name) {
+            return $this->style;
+        }
+        if ('globalProgress' === $name) {
+            return $this->globalProgress;
+        }
+        if ('detailedProgress' === $name) {
+            return $this->detailedProgress;
+        }
+        throw new InvalidPropertyNameException($name);
     }
 
     public function getWorkSheets(): WorkSheets

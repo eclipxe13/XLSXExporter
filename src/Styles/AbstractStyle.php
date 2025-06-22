@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Eclipxe\XlsxExporter\Styles;
 
 use Eclipxe\XlsxExporter\Exceptions\InvalidPropertyNameException;
+use Eclipxe\XlsxExporter\Exceptions\InvalidPropertyValueException;
 
 /**
  * Abstract implementation of the StyleInterface for internal use
@@ -40,7 +41,8 @@ abstract class AbstractStyle implements StyleInterface
     {
         $array = [];
         foreach ($this->properties() as $key) {
-            $array[$key] = $this->{$key};
+            $value = $this->{$key};
+            $array[$key] = (is_null($value) || is_scalar($value)) ? $value : null;
         }
         return $array;
     }
@@ -52,14 +54,16 @@ abstract class AbstractStyle implements StyleInterface
             throw new InvalidPropertyNameException($name);
         }
 
-        // use getter if method exists
         $method = 'get' . ucfirst($name);
         if (method_exists($this, $method)) {
-            return $this->$method();
+            // use getter if method exists
+            $value = $this->$method();
+        } else {
+            // return data value if method exists
+            $value = $this->data[$name] ?? null;
         }
 
-        // return data value if method exists
-        return $this->data[$name] ?? null;
+        return (is_null($value) || is_scalar($value)) ? $value : null;
     }
 
     /** @param scalar|null $value */
@@ -73,6 +77,10 @@ abstract class AbstractStyle implements StyleInterface
         $method = 'cast' . ucfirst($name);
         if (method_exists($this, $method)) {
             $value = $this->$method($value);
+        }
+
+        if (! is_null($value) && ! is_scalar($value)) {
+            throw new InvalidPropertyValueException(sprintf('Invalid value for property %s', $name), $name, $value);
         }
 
         // use setter if method exists, otherwise just set the value on $data

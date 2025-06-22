@@ -38,11 +38,10 @@ final class StyleTest extends TestCase
     public function testGetterThrowException(): void
     {
         /** @var stdClass $style */
-        $style = new Style();
-
+        $style = new Style(); /** @phpstan-ignore-line */
         $this->expectException(LogicException::class);
         $this->expectExceptionMessage('Invalid property name invalidpropertyname');
-        echo $style->{'invalidpropertyname'};
+        echo $style->{'invalidpropertyname'}; /** @phpstan-ignore-line */
     }
 
     public function testSetterThrowExceptionPropertyName(): void
@@ -51,8 +50,7 @@ final class StyleTest extends TestCase
          * @noinspection PhpObjectFieldsAreOnlyWrittenInspection
          * @var stdClass $style
          */
-        $style = new Style();
-
+        $style = new Style(); /** @phpstan-ignore-line */
         $this->expectException(LogicException::class);
         $this->expectExceptionMessage('Invalid property name invalidpropertyname');
         $style->{'invalidpropertyname'} = 0;
@@ -62,8 +60,7 @@ final class StyleTest extends TestCase
     {
         $style = new Style();
         /** @var Format $notFormatObject */
-        $notFormatObject = new Font();
-
+        $notFormatObject = new Font(); /** @phpstan-ignore-line */
         $this->expectException(LogicException::class);
         $this->expectExceptionMessage('The value must be an instance of \Eclipxe\XlsxExporter\Styles\Format');
         $style->format = $notFormatObject;
@@ -74,7 +71,7 @@ final class StyleTest extends TestCase
         $this->expectException(LogicException::class);
         $this->expectExceptionMessage('Invalid method name invalidMethodName');
         $style = new Style();
-        $style->{'invalidMethodName'}();
+        $style->{'invalidMethodName'}(); /** @phpstan-ignore-line */
     }
 
     public function testMagicCallInvalidMethodGetSet(): void
@@ -82,7 +79,7 @@ final class StyleTest extends TestCase
         $this->expectException(LogicException::class);
         $this->expectExceptionMessage('Invalid setter/getter name someInvalid');
         $style = new Style();
-        $style->{'setSomeInvalid'}();
+        $style->{'setSomeInvalid'}(); /** @phpstan-ignore-line */
     }
 
     public function testMagicCallInvalidMethodSetNoArguments(): void
@@ -90,7 +87,7 @@ final class StyleTest extends TestCase
         $this->expectException(LogicException::class);
         $this->expectExceptionMessage('Invalid setter argument');
         $style = new Style();
-        $style->{'setFormat'}();
+        $style->{'setFormat'}(); /** @phpstan-ignore-line */
     }
 
     public function testMagicCallInvalidMethodSetMoreThanOne(): void
@@ -98,7 +95,7 @@ final class StyleTest extends TestCase
         $this->expectException(LogicException::class);
         $this->expectExceptionMessage('Invalid setter argument');
         $style = new Style();
-        $style->{'setFormat'}(null, null);
+        $style->{'setFormat'}(null, null); /** @phpstan-ignore-line */
     }
 
     /**

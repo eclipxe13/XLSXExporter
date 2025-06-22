@@ -19,12 +19,16 @@ use Eclipxe\XlsxExporter\Utils\OpenXmlColor;
  */
 class Font extends AbstractStyle
 {
+    /** @phpstan-var string */
     public const UNDERLINE_NONE = 'none';
 
+    /** @phpstan-var string */
     public const UNDERLINE_DOUBLE = 'double';
 
+    /** @phpstan-var string */
     public const UNDERLINE_SINGLE = 'single';
 
+    /** @var list<string> */
     private const UNDERLINE_VALUES = [
         self::UNDERLINE_NONE,
         self::UNDERLINE_SINGLE,
@@ -50,16 +54,17 @@ class Font extends AbstractStyle
         // According to http://msdn.microsoft.com/en-us/library/ff531499%28v=office.12%29.aspx
         // Excel requires the child elements to be in the following sequence:
         // b, i, strike, condense, extend, outline, shadow, u, vertAlign, sz, color, name, family, charset, scheme
-        return /** @lang text */ '<font>'
-            . '<b val="' . (($this->bold) ? '1' : '0') . '" />'
-            . '<i val="' . (($this->italic) ? '1' : '0') . '" />'
-            . '<strike val="' . (($this->strike) ? '1' : '0') . '" />'
-            . '<u val="' . ($this->underline ?: static::UNDERLINE_NONE) . '" />'
-            . (($this->size) ? '<sz val="' . $this->size . '"/>' : '')
-            . (($this->color) ? '<color rgb="' . $this->color . '"/>' : '')
-            . (($this->name) ? '<name val="' . $this->name . '"/>' : '')
-            . '</font>'
-        ;
+        return implode('', array_filter([
+            '<font>',
+            sprintf('<b val="%s" />', ($this->bold) ? '1' : '0'),
+            sprintf('<i val="%s" />', ($this->italic) ? '1' : '0'),
+            sprintf('<strike val="%s" />', ($this->strike) ? '1' : '0'),
+            sprintf('<u val="%s" />', $this->underline ?: static::UNDERLINE_NONE),
+            (($this->size) ? sprintf('<sz val="%d"/>', $this->size) : ''),
+            (($this->color) ? sprintf('<color rgb="%s"/>', $this->color) : ''),
+            (($this->name) ? sprintf('<name val="%s"/>', $this->name) : ''),
+            '</font>',
+        ]));
     }
 
     /** @param scalar|null $value */

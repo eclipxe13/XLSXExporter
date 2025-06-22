@@ -16,6 +16,7 @@ use SplFileObject;
  */
 class SharedStrings implements Countable
 {
+    /** @var int<0, max> */
     protected int $count = 0;
 
     /** @var array<string, int> */
