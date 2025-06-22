@@ -21,7 +21,7 @@
     },
     "require-dev": {
         "ext-xmlwriter": "*",
-        "eclipxe/engineworks-dbal": "^2.3.2",
+        "eclipxe/engineworks-dbal": "^2.3.6",
         "phpunit/phpunit": "^9.6.5"
     },
     "autoload": {
