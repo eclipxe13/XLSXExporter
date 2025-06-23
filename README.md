@@ -108,10 +108,10 @@ and licensed for use under the MIT License (MIT). Please see [LICENSE][] for mor
 [release]: https://github.com/eclipxe13/XlsxExporter/releases
 [license]: https://github.com/eclipxe13/XlsxExporter/blob/main/LICENSE
 [build]: https://github.com/eclipxe13/XlsxExporter/actions/workflows/build.yml?query=branch:main
-[reliability]:https://sonarcloud.io/component_measures?id=eclipxe13_xlsxexporter&metric=Reliability
-[maintainability]: https://sonarcloud.io/component_measures?id=eclipxe13_xlsxexporter&metric=Maintainability
-[coverage]: https://sonarcloud.io/component_measures?id=eclipxe13_xlsxexporter&metric=Coverage
-[violations]: https://sonarcloud.io/project/issues?id=eclipxe13_xlsxexporter&resolved=false
+[reliability]:https://sonarcloud.io/component_measures?id=eclipxe13_XLSXExporter&metric=Reliability
+[maintainability]: https://sonarcloud.io/component_measures?id=eclipxe13_XLSXExporter&metric=Maintainability
+[coverage]: https://sonarcloud.io/component_measures?id=eclipxe13_XLSXExporter&metric=Coverage
+[violations]: https://sonarcloud.io/project/issues?id=eclipxe13_XLSXExporter&resolved=false
 [downloads]: https://packagist.org/packages/eclipxe/xlsxexporter
 
 [badge-source]: http://img.shields.io/badge/source-eclipxe13/XlsxExporter-blue?logo=github
@@ -119,8 +119,8 @@ and licensed for use under the MIT License (MIT). Please see [LICENSE][] for mor
 [badge-release]: https://img.shields.io/github/release/eclipxe13/XlsxExporter?logo=git
 [badge-license]: https://img.shields.io/github/license/eclipxe13/XlsxExporter?logo=open-source-initiative
 [badge-build]: https://img.shields.io/github/actions/workflow/status/eclipxe13/XlsxExporter/build.yml?branch=main&logo=github-actions
-[badge-reliability]: https://sonarcloud.io/api/project_badges/measure?project=eclipxe13_xlsxexporter&metric=reliability_rating
-[badge-maintainability]: https://sonarcloud.io/api/project_badges/measure?project=eclipxe13_xlsxexporter&metric=sqale_rating
-[badge-coverage]: https://img.shields.io/sonar/coverage/eclipxe13_xlsxexporter/main?logo=sonarqubecloud&server=https%3A%2F%2Fsonarcloud.io
-[badge-violations]: https://img.shields.io/sonar/violations/eclipxe13_xlsxexporter/main?format=long&logo=sonarqubecloud&server=https%3A%2F%2Fsonarcloud.io
+[badge-reliability]: https://sonarcloud.io/api/project_badges/measure?project=eclipxe13_XLSXExporter&metric=reliability_rating
+[badge-maintainability]: https://sonarcloud.io/api/project_badges/measure?project=eclipxe13_XLSXExporter&metric=sqale_rating
+[badge-coverage]: https://img.shields.io/sonar/coverage/eclipxe13_XLSXExporter/main?logo=sonarqubecloud&server=https%3A%2F%2Fsonarcloud.io
+[badge-violations]: https://img.shields.io/sonar/violations/eclipxe13_XLSXExporter/main?format=long&logo=sonarqubecloud&server=https%3A%2F%2Fsonarcloud.io
 [badge-downloads]: https://img.shields.io/packagist/dt/eclipxe/xlsxexporter?logo=packagist
