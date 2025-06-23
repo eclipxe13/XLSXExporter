@@ -41,9 +41,9 @@ class WorkSheet
      */
     public function __construct(
         string $name,
-        ProviderInterface $provider = null,
-        Columns $columns = null,
-        Style $headerStyle = null
+        ?ProviderInterface $provider = null,
+        ?Columns $columns = null,
+        ?Style $headerStyle = null
     ) {
         $this->setName($name);
         $this->setProvider($provider ?? new NullProvider());
@@ -146,7 +146,7 @@ class WorkSheet
     /**
      * Write the contents of the worksheet, it requires a SharedStrings object
      */
-    public function write(TemporaryFile $file, SharedStrings $strings, ProgressInterface $progress = null): void
+    public function write(TemporaryFile $file, SharedStrings $strings, ?ProgressInterface $progress = null): void
     {
         $writer = new WorkSheetWriter();
         $rowsCount = $this->provider->count();

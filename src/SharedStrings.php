@@ -16,6 +16,7 @@ use SplFileObject;
  */
 class SharedStrings implements Countable
 {
+    /** @var int<0, max> */
     protected int $count = 0;
 
     /** @var array<string, int> */
@@ -38,7 +39,7 @@ class SharedStrings implements Countable
     /**
      * Write the XML content info to a file, the file name will be truncated
      */
-    public function write(TemporaryFile $temporaryFile, ProgressInterface $progress = null): void
+    public function write(TemporaryFile $temporaryFile, ?ProgressInterface $progress = null): void
     {
         $file = new SplFileObject($temporaryFile->getPath(), 'w');
         $this->writeTo($file, $progress);
@@ -47,7 +48,7 @@ class SharedStrings implements Countable
     /**
      * Write the content to a SplFileObject
      */
-    protected function writeTo(SplFileObject $file, ProgressInterface $progress = null): void
+    protected function writeTo(SplFileObject $file, ?ProgressInterface $progress = null): void
     {
         $progress ??= new NullProgress();
         $progress->update('', 1, 1 + $this->count);

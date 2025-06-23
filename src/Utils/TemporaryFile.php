@@ -50,11 +50,13 @@ final class TemporaryFile
         if (false === $file = fopen($this->getPath(), 'r')) {
             throw new TemporaryFileException(sprintf('Can not open file %s', $this->getPath()));
         }
-        /** @var false|int $passthru Is only INT from PHP 8.0 */
-        $passthru = fpassthru($file);
-        fclose($file);
-        if (false === $passthru) {
-            throw new TemporaryFileException(sprintf('Can not passthru %s', $this->getPath()));
+        try {
+            $passthru = fpassthru($file);
+            if (false === $passthru) { /** @phpstan-ignore-line is only INT since PHP 8.0 */
+                throw new TemporaryFileException(sprintf('Can not passthru %s', $this->getPath()));
+            }
+        } finally {
+            fclose($file);
         }
     }
 

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Eclipxe\XlsxExporter;
 
 use Eclipxe\XlsxExporter\Exceptions\InvalidPropertyNameException;
+use Eclipxe\XlsxExporter\Exceptions\InvalidPropertyValueException;
 
 /**
  * @property-read string $id Column identifier
@@ -22,7 +23,7 @@ class Column
 
     protected Style $style;
 
-    public function __construct(string $id, string $title = '', string $type = CellTypes::TEXT, Style $style = null)
+    public function __construct(string $id, string $title = '', string $type = CellTypes::TEXT, ?Style $style = null)
     {
         $this->setId($id);
         $this->setType($type);
@@ -44,12 +45,28 @@ class Column
     /** @param mixed $value */
     public function __set(string $name, $value): void
     {
-        $props = ['type', 'title', 'style'];
-        if (! in_array($name, $props)) {
-            throw new InvalidPropertyNameException($name);
+        if ('type' === $name) {
+            if (! is_string($value)) {
+                throw new InvalidPropertyValueException('Invalid type, expected string', 'type', $value);
+            }
+            $this->setType($value);
+            return;
         }
-        $method = 'set' . ucfirst($name);
-        $this->$method($value);
+        if ('title' === $name) {
+            if (! is_string($value)) {
+                throw new InvalidPropertyValueException('Invalid title, expected string', 'title', $value);
+            }
+            $this->setTitle($value);
+            return;
+        }
+        if ('style' === $name) {
+            if (! $value instanceof Style) {
+                throw new InvalidPropertyValueException(sprintf('Invalid style, expected %s', Style::class), 'style', $value);
+            }
+            $this->setStyle($value);
+            return;
+        }
+        throw new InvalidPropertyNameException($name);
     }
 
     protected function setId(string $id): void

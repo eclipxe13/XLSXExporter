@@ -35,7 +35,7 @@ class ProviderIterator implements ProviderInterface
     public function __construct(Iterator $iterator, int $count = -1)
     {
         $this->iterator = $iterator;
-        if (! is_int($count) || $count < 0) {
+        if ($count < 0) {
             if ($this->iterator instanceof Countable) {
                 $count = $this->iterator->count();
             } else {

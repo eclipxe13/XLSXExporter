@@ -52,8 +52,12 @@ final class StyleSheetTest extends TestCase
         $this->compareFmt('165', '0.0000%', $numFmts->numFmt[5]);
     }
 
-    private function compareFmt(string $numFmtId, string $formatCode, SimpleXMLElement $node): void
+    /** @param mixed $node */
+    private function compareFmt(string $numFmtId, string $formatCode, $node): void
     {
+        if (! $node instanceof SimpleXMLElement) {
+            $this->fail('Call to compareFmt $node should be an instance of SimpleXMLElement.');
+        }
         $this->assertEquals(
             $numFmtId,
             (string) $node['numFmtId'],

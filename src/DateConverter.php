@@ -12,8 +12,10 @@ class DateConverter
 
     public const DATETIME = 'DATETIME';
 
+    /** @phpstan-var int */
     public const PRECISION_TIME = 6;
 
+    /** @phpstan-var int */
     public const PRECISION_POW = 10 ** self::PRECISION_TIME;
 
     public static function tsToExcel(int $timestamp, string $type): string

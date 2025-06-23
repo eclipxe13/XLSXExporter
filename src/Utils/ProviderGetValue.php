@@ -18,12 +18,13 @@ class ProviderGetValue
     {
         $asObject = is_object($values);
         $asArray = is_array($values) || $values instanceof ArrayAccess;
-        if ($asArray) {
-            return $values[$key] ?? null;
+        $value = null;
+        if ($asArray && isset($values[$key])) {
+            $value = $values[$key];
         }
-        if ($asObject) {
-            return $values->{$key} ?? null;
+        if ($asObject && isset($values->{$key})) {
+            $value = $values->{$key};
         }
-        return null;
+        return (is_null($value) || is_scalar($value)) ? $value : null;
     }
 }

@@ -26,7 +26,7 @@ class WorkBookExporter
 
     private ?Style $defaultHeaderStyle;
 
-    public function __construct(Style $defaultStyle = null, Style $defaultHeaderStyle = null)
+    public function __construct(?Style $defaultStyle = null, ?Style $defaultHeaderStyle = null)
     {
         $this->workbook = new WorkBook(null, $defaultStyle);
         $this->defaultHeaderStyle = $defaultHeaderStyle;
@@ -48,7 +48,7 @@ class WorkBookExporter
      * @param array<string, array{title?: string, style?: array<string, array<string, scalar>>}> $headers
      * @param Style|null $defaultHeaderStyle
      */
-    public function attach(Recordset $recordset, string $sheetName, array $headers = [], Style $defaultHeaderStyle = null): void
+    public function attach(Recordset $recordset, string $sheetName, array $headers = [], ?Style $defaultHeaderStyle = null): void
     {
         /** @var array<string, array{name: string, table: string, commontype: string}> $fields */
         $fields = $recordset->getFields();
