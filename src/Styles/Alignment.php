@@ -55,9 +55,9 @@ class Alignment extends AbstractStyle
     public function asXML(): string
     {
         return '<alignment'
-            . (($this->horizontal) ? ' horizontal="' . $this->horizontal . '"' : '')
-            . (($this->vertical) ? ' vertical="' . $this->vertical . '"' : '')
-            . ((null !== $this->wraptext) ? ' wrapText="' . (($this->wraptext) ? '1' : '0') . '"' : '')
+            . (($this->horizontal) ? sprintf(' horizontal="%s"', $this->horizontal) : '')
+            . (($this->vertical) ? sprintf(' vertical="%s"', $this->vertical) : '')
+            . ((null !== $this->wraptext) ? sprintf(' wrapText="%s"', $this->wraptext ? '1' : '0') : '')
             . '/>'
         ;
     }

@@ -32,7 +32,6 @@ class DateConverter
     public static function tsToExcelTime(int $timestamp): string
     {
         $utc = static::utcParts($timestamp);
-        // return number_format((($utc[3] * 3600) + ($utc[4] * 60) + $utc[5]) / 86400, static::PRECISION_TIME, '.', '');
         return number_format(self::roundTime($utc[3], $utc[4], $utc[5]), static::PRECISION_TIME, '.', '');
     }
 

@@ -108,14 +108,14 @@ final class CompleteTest extends TestCase
         // test zip file has contents
         $zipFile = new ZipArchive();
         $this->assertSame(true, $zipFile->open($exportedFilePath), 'Can open exported file as ZIP');
-        $this->assertTrue(false !== $zipFile->locateName('_rels/.rels'));
-        $this->assertTrue(false !== $zipFile->locateName('[Content_Types].xml'));
-        $this->assertTrue(false !== $zipFile->locateName('xl/worksheets/sheet3.xml'));
-        $this->assertTrue(false !== $zipFile->locateName('xl/worksheets/sheet2.xml'));
-        $this->assertTrue(false !== $zipFile->locateName('xl/worksheets/sheet1.xml'));
-        $this->assertTrue(false !== $zipFile->locateName('xl/_rels/workbook.xml.rels'));
-        $this->assertTrue(false !== $zipFile->locateName('xl/workbook.xml'));
-        $this->assertTrue(false !== $zipFile->locateName('xl/styles.xml'));
-        $this->assertTrue(false !== $zipFile->locateName('xl/sharedStrings.xml'));
+        $this->assertNotSame(false, $zipFile->locateName('_rels/.rels'));
+        $this->assertNotSame(false, $zipFile->locateName('[Content_Types].xml'));
+        $this->assertNotSame(false, $zipFile->locateName('xl/worksheets/sheet3.xml'));
+        $this->assertNotSame(false, $zipFile->locateName('xl/worksheets/sheet2.xml'));
+        $this->assertNotSame(false, $zipFile->locateName('xl/worksheets/sheet1.xml'));
+        $this->assertNotSame(false, $zipFile->locateName('xl/_rels/workbook.xml.rels'));
+        $this->assertNotSame(false, $zipFile->locateName('xl/workbook.xml'));
+        $this->assertNotSame(false, $zipFile->locateName('xl/styles.xml'));
+        $this->assertNotSame(false, $zipFile->locateName('xl/sharedStrings.xml'));
     }
 }

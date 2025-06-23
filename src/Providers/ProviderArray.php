@@ -39,7 +39,7 @@ class ProviderArray implements ProviderInterface
 
     public function valid(): bool
     {
-        return ($this->index < $this->count);
+        return $this->index < $this->count;
     }
 
     public function count(): int
