@@ -5,6 +5,10 @@
 [![Latest Version][badge-release]][release]
 [![Software License][badge-license]][license]
 [![Build Status][badge-build]][build]
+[![Reliability][badge-reliability]][reliability]
+[![Maintainability][badge-maintainability]][maintainability]
+[![Code Coverage][badge-coverage]][coverage]
+[![Violations][badge-violations]][violations]
 [![Total Downloads][badge-downloads]][downloads]
 
 PHP Office Open XML Spreadsheet (xlsx) Exporter is a project to write xlsx files using PHP.
@@ -104,11 +108,19 @@ and licensed for use under the MIT License (MIT). Please see [LICENSE][] for mor
 [release]: https://github.com/eclipxe13/XlsxExporter/releases
 [license]: https://github.com/eclipxe13/XlsxExporter/blob/main/LICENSE
 [build]: https://github.com/eclipxe13/XlsxExporter/actions/workflows/build.yml?query=branch:main
+[reliability]:https://sonarcloud.io/component_measures?id=eclipxe13_xlsxexporter&metric=Reliability
+[maintainability]: https://sonarcloud.io/component_measures?id=eclipxe13_xlsxexporter&metric=Maintainability
+[coverage]: https://sonarcloud.io/component_measures?id=eclipxe13_xlsxexporter&metric=Coverage
+[violations]: https://sonarcloud.io/project/issues?id=eclipxe13_xlsxexporter&resolved=false
 [downloads]: https://packagist.org/packages/eclipxe/xlsxexporter
 
-[badge-source]: http://img.shields.io/badge/source-eclipxe13/XlsxExporter-blue.svg?style=flat-square
+[badge-source]: http://img.shields.io/badge/source-eclipxe13/XlsxExporter-blue?logo=github
 [badge-php-version]: https://img.shields.io/packagist/php-v/eclipxe/xlsxexporter?logo=php
-[badge-release]: https://img.shields.io/github/release/eclipxe13/XlsxExporter.svg?style=flat-square
-[badge-license]: https://img.shields.io/github/license/eclipxe13/XlsxExporter.svg?style=flat-square
-[badge-build]: https://img.shields.io/github/actions/workflow/status/eclipxe13/XlsxExporter/build.yml?branch=main&style=flat-square
-[badge-downloads]: https://img.shields.io/packagist/dt/eclipxe/xlsxexporter.svg?style=flat-square
+[badge-release]: https://img.shields.io/github/release/eclipxe13/XlsxExporter?logo=git
+[badge-license]: https://img.shields.io/github/license/eclipxe13/XlsxExporter?logo=open-source-initiative
+[badge-build]: https://img.shields.io/github/actions/workflow/status/eclipxe13/XlsxExporter/build.yml?branch=main&logo=github-actions
+[badge-reliability]: https://sonarcloud.io/api/project_badges/measure?project=eclipxe13_xlsxexporter&metric=reliability_rating
+[badge-maintainability]: https://sonarcloud.io/api/project_badges/measure?project=eclipxe13_xlsxexporter&metric=sqale_rating
+[badge-coverage]: https://img.shields.io/sonar/coverage/eclipxe13_xlsxexporter/main?logo=sonarqubecloud&server=https%3A%2F%2Fsonarcloud.io
+[badge-violations]: https://img.shields.io/sonar/violations/eclipxe13_xlsxexporter/main?format=long&logo=sonarqubecloud&server=https%3A%2F%2Fsonarcloud.io
+[badge-downloads]: https://img.shields.io/packagist/dt/eclipxe/xlsxexporter?logo=packagist

@@ -5,9 +5,24 @@ This library follows [SEMVER 2.0.0](https://semver.org/spec/v2.0.0.html) convent
 Notice: Classes with tag `@internal` are only for internal use, you should not create instances of these
 classes. The library will not export any of these objects outside its own scope.
 
-## Unreleased changes
+## Version 2.0.1 2025-06-22
 
-### Maintenance 2024-01-08
+### Main changes
+
+- Add compatibility with PHP 8.4.
+- Update dependencies `eclipxe/engineworks-progress-status` and `eclipxe/engineworks-dbal`.
+- Update license year to 2025.
+- Update project badges.
+
+### Development changes
+
+- Add PHP 8.4 to test matrix.
+- Run workflow jobs using PHP 8.4.
+- Remove Scrutinizer-CI. Thanks!
+- Add SonarQube Cloud.
+- Update development tools.
+
+## Maintenance 2024-01-08
 
 This update fixes the GitHub build.
 
