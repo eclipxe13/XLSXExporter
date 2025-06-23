@@ -5,8 +5,6 @@
 [![Latest Version][badge-release]][release]
 [![Software License][badge-license]][license]
 [![Build Status][badge-build]][build]
-[![Scrutinizer][badge-quality]][quality]
-[![Coverage Status][badge-coverage]][coverage]
 [![Total Downloads][badge-downloads]][downloads]
 
 PHP Office Open XML Spreadsheet (xlsx) Exporter is a project to write xlsx files using PHP.
@@ -106,8 +104,6 @@ and licensed for use under the MIT License (MIT). Please see [LICENSE][] for mor
 [release]: https://github.com/eclipxe13/XlsxExporter/releases
 [license]: https://github.com/eclipxe13/XlsxExporter/blob/main/LICENSE
 [build]: https://github.com/eclipxe13/XlsxExporter/actions/workflows/build.yml?query=branch:main
-[quality]: https://scrutinizer-ci.com/g/eclipxe13/XlsxExporter/
-[coverage]: https://scrutinizer-ci.com/g/eclipxe13/XlsxExporter/code-structure/main
 [downloads]: https://packagist.org/packages/eclipxe/xlsxexporter
 
 [badge-source]: http://img.shields.io/badge/source-eclipxe13/XlsxExporter-blue.svg?style=flat-square
@@ -115,6 +111,4 @@ and licensed for use under the MIT License (MIT). Please see [LICENSE][] for mor
 [badge-release]: https://img.shields.io/github/release/eclipxe13/XlsxExporter.svg?style=flat-square
 [badge-license]: https://img.shields.io/github/license/eclipxe13/XlsxExporter.svg?style=flat-square
 [badge-build]: https://img.shields.io/github/actions/workflow/status/eclipxe13/XlsxExporter/build.yml?branch=main&style=flat-square
-[badge-quality]: https://img.shields.io/scrutinizer/g/eclipxe13/XlsxExporter/main.svg?style=flat-square
-[badge-coverage]: https://img.shields.io/scrutinizer/coverage/g/eclipxe13/XlsxExporter/main.svg?style=flat-square
 [badge-downloads]: https://img.shields.io/packagist/dt/eclipxe/xlsxexporter.svg?style=flat-square
