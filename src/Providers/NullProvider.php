@@ -18,6 +18,7 @@ class NullProvider implements ProviderInterface
 
     public function next(): void
     {
+        // Null pattern, not implemented.
     }
 
     public function valid(): bool

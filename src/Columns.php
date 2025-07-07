@@ -39,7 +39,7 @@ class Columns implements IteratorAggregate, Countable
 
     public function existsById(string $id): bool
     {
-        return (-1 !== $this->searchById($id));
+        return -1 !== $this->searchById($id);
     }
 
     public function getById(string $id): Column
@@ -78,7 +78,7 @@ class Columns implements IteratorAggregate, Countable
 
     protected function elementMatchId(string $id, Column $item): bool
     {
-        return ($id === $item->getId());
+        return $id === $item->getId();
     }
 
     public function count(): int

@@ -5,7 +5,7 @@ This library follows [SEMVER 2.0.0](https://semver.org/spec/v2.0.0.html) convent
 Notice: Classes with tag `@internal` are only for internal use, you should not create instances of these
 classes. The library will not export any of these objects outside its own scope.
 
-## Version 2.0.1 2025-06-22
+## Version 2.0.1 2025-07-06
 
 ### Main changes
 

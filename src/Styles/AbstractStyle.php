@@ -99,7 +99,7 @@ abstract class AbstractStyle implements StyleInterface
 
     public function hasValues(): bool
     {
-        return ([] !== $this->data);
+        return [] !== $this->data;
     }
 
     public function getIndex(): ?int
